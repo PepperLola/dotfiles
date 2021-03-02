@@ -23,6 +23,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'dense-analysis/ale'
 
+Plug 'andweeb/presence.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -30,6 +32,14 @@ command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>")
 let g:Guifont="FuraCode Nerd Font Mono:n"
 
 luafile $HOME\AppData\Local\nvim\lua\plugin\galaxyline.lua
+
+" Discord Rich Presence Configuration
+let g:presence_auto_update       = 1
+let g:presence_editing_text      = "Editing %s"
+let g:presence_workspace_text    = "Working on %s"
+let g:presence_neovim_image_text = "NeoVim"
+let g:presence_main_image        = "neovim"
+let g:presence_client_id         = "570454192477700108"
 
 inoremap jk <ESC>
 nmap <C-n> :CHADopen <enter>
