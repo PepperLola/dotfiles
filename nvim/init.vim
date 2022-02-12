@@ -53,7 +53,7 @@ let g:presence_neovim_image_text = "NeoVim"
 let g:presence_main_image        = "neovim"
 let g:presence_client_id         = "570454192477700108"
 
-let g:python3_host_prog           = "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
+let g:python3_host_prog           = "~/.config/nvim/env/bin/python3"
 
 set termguicolors
 
