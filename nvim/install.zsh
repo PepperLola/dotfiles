@@ -1,8 +1,18 @@
-echo "\033[1;93m[\033[1;97m*\033[1;93m] Creating nvim ~/.config/nvim directory"
+# Primary Color
+export PC="\033[1;93m"
+# Secondary Color
+export SC="\033[1;97m"
+
+echo "$PC[$SC*$PC] Creating nvim ~/.config/nvim directory"
 mkdir -p ~/.config/nvim
 
 echo "[\033[1;97m*\033[1;93m] Copying nvim config to ~/.config/nvim"
-sudo cp -r ./nvim ~/.config/nvim
+if [[ "$(pwd)" == *nvim ]]; then
+  cp -r ./* ~/.config/nvim
+else
+  cp -r ./nvim ~/.config/nvim
+fi
+
 echo "[\033[1;97m*\033[1;93m] Creating a Python virtual environment"
 python3 -m venv ~/.config/nvim/env
 source ~/.config/nvim/env/bin/activate
