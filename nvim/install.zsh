@@ -1,4 +1,3 @@
-# TODO add colors
 echo "\033[1;93m[\033[1;97m*\033[1;93m] Creating nvim ~/.config/nvim directory"
 mkdir -p ~/.config/nvim
 
@@ -17,8 +16,3 @@ if [ -f ~/.config/nvim/init.vim ]; then
     echo '[\033[1;97m*\033[1;93m] Backing up existing init.vim'
     cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.backup
 fi
-
-echo "[\033[1;97m*\033[1;93m] Copying tmux config"
-cp ./tmux/.tmux.conf ~/
-
-echo "Done!"
