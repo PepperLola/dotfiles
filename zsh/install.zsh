@@ -7,7 +7,6 @@ rm -r $HOME/.zshrc $HOME/aliases
 
 echo "$PC[$SC*$PC] Copying zsh config..."
 if [[ "$(pwd)" == *zsh ]]; then
-  echo "IN ZSH FOLDER"
   cp ./.zshrc $HOME/.zshrc
   cp -r ./* $HOME
 else

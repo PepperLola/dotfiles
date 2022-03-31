@@ -1,3 +1,6 @@
+export EDITOR="nvim"
+export TZ="America/Los_Angeles"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -64,6 +67,23 @@ source $ZSH/oh-my-zsh.sh
 for file in $HOME/aliases/*; do
   source $file
 done
+
+for file in $HOME/funcs/*; do
+  source $file
+done
+
+if [[ `uname` == "Darwin" ]]; then
+  since_updated=$(timebetween "$(cat ~/.last_updated.txt)")
+
+  # seconds in a week
+  sec_in_week=$((60*60*24*7))
+
+  if [ "${since_updated}" -gt "$sec_in_week" ]; then
+    echo "It's been a week since you last updated Homebrew packages! Updating automatically..."
+    currenttime > ~/.last_updated.txt
+    brew update && brew upgrade && brew cleanup
+  fi
+fi
 
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/opt/node/bin"
