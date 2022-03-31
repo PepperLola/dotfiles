@@ -10,7 +10,7 @@ export SC="\033[1;97m"
 for file in ./**; do
   if [ -d "$file" ]; then
     if [ -f "$file/install.zsh" ]; then
-      source "$file/install.zsh"
+      source "$file/install.zsh" 2> /dev/null
     fi
   fi
 done

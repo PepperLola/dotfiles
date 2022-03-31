@@ -1,3 +1,12 @@
+if ! command -v git &> /dev/null; then
+  echo "$PC[$SC*$PC] Git not found, installing..."
+  if [[ `uname` == "Darwin" ]]; then
+    brew install git &> /dev/null
+  elif [[ `uname` == "Linux" ]]; then
+    sudo apt install git &> /dev/null
+  fi
+fi
+
 if [ -f "$HOME/.gitconfig" ]; then
   echo "$PC[$SC*$PC] Found ~/.gitconfig, creating backup..."
   cp $HOME/.gitconfig $HOME/.gitconfig.bk

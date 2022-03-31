@@ -1,6 +1,15 @@
 echo "$PC[$SC*$PC] Creating nvim ~/.config/nvim directory"
 mkdir -p $HOME/.config/nvim
 
+if ! command -v nvim &> /dev/null; then
+  echo "$PC[$SC*$PC] Neovim not found, installing..."
+  if [[ `uname` == "Darwin" ]]; then
+    brew install nvim &> /dev/null
+  elif [[ `uname` == "Linux" ]]; then
+    sudo apt install neovim &> /dev/null
+  fi
+fi
+
 if [ -f $HOME/.config/nvim/init.vim ]; then
     echo "$PC[$SC*$PC] Backing up existing init.vim"
     cp $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.backup
