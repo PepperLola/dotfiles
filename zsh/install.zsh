@@ -1,7 +1,16 @@
 if [ -f "$HOME/.zshrc" ]; then
-  echo "[\033[1;97m*\033[1;93m] Found .zshrc, creating backup..."
+  echo "$PC[$SC*$PC] Found .zshrc, creating backup..."
   cp $HOME/.zshrc $HOME/.zshrc.bk
 fi
 
-echo "[\033[1;97m*\033[1;93m] Copying zsh config..."
-cp -r ./* $HOME
+rm -r $HOME/.zshrc $HOME/aliases
+
+echo "$PC[$SC*$PC] Copying zsh config..."
+if [[ "$(pwd)" == *zsh ]]; then
+  echo "IN ZSH FOLDER"
+  cp ./.zshrc $HOME/.zshrc
+  cp -r ./* $HOME
+else
+  cp ./zsh/.zshrc $HOME/.zshrc
+  cp -r ./zsh/* $HOME
+fi

@@ -1,2 +1,6 @@
-echo "[\033[1;97m*\033[1;93m] Copying tmux config"
-cp ./tmux/.tmux.conf ~/
+echo "$PC[$SC*$PC] Copying tmux config"
+if [[ "$(pwd)" == *tmux ]]; then
+  cp ./.tmux.conf $HOME
+else
+  cp ./tmux/.tmux.conf $HOME
+fi

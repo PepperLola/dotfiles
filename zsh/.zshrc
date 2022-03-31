@@ -61,7 +61,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ./aliases/*.zsh
+for file in $HOME/aliases/*; do
+  source $file
+done
 
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/opt/node/bin"
