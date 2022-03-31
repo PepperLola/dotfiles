@@ -1,3 +1,7 @@
+# Fig pre block. Keep at the top of this file.
+export PATH="${PATH}:${HOME}/.local/bin"
+eval "$(fig init zsh pre)"
+
 export EDITOR="nvim"
 export TZ="America/Los_Angeles"
 
@@ -110,3 +114,6 @@ export PATH="$HOME/Desktop/Misc/Scripts:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Fig post block. Keep at the bottom of this file.
+eval "$(fig init zsh post)"
