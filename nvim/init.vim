@@ -16,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'mg979/vim-visual-multi'
+Plug 'github/copilot.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
 
