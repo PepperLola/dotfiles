@@ -34,6 +34,15 @@ lsp.setup_nvim_cmp({
 	mapping = cmp_mappings
 })
 
+lsp.set_preferences({
+    sign_icons = {
+        error = 'E',
+        warn = 'W',
+        hint = 'H',
+        info = 'I',
+    }
+})
+
 lsp.on_attach(function(client, buffer)
 	local opts = {buffer = buffer, remap = false}
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
