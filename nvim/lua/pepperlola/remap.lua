@@ -48,7 +48,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>gp", function()
     vim.ui.input({ prompt = "Are you sure you want to git push? [y/N] "}, function(input)
         if (input == "y") then
-            vim.cmd({"Git push"})
+            vim.cmd("Git push")
         end
     end)
 end)
