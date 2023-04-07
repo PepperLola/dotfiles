@@ -14,6 +14,10 @@ return require('packer').startup(function(use)
 
     use 'folke/tokyonight.nvim'
     vim.cmd('colorscheme tokyonight-night')
+    use 'ryanoasis/vim-devicons'
+    use 'nvim-tree/nvim-web-devicons'
+
+    use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/playground'
@@ -22,8 +26,6 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
-    use 'ryanoasis/vim-devicons'
-    use 'kyazdani42/nvim-web-devicons'
     use 'airblade/vim-gitgutter'
     use 'scrooloose/nerdcommenter'
     use 'wakatime/vim-wakatime'
