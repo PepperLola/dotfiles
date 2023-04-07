@@ -1,6 +1,10 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+-- Comments
+vim.keymap.set("n", "++", "<plug>NERDCommenterToggle")
+vim.keymap.set("v", "++", "<plug>NERDCommenterToggle")
+
 -- Move blocks of code in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
