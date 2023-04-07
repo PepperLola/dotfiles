@@ -1,5 +1,4 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -36,7 +35,7 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
-    use 'chrisbra/Colorizer'
+    use 'uga-rosa/ccc.nvim'
     use 'tpope/vim-commentary'
     use('prettier/vim-prettier', { run = 'yarn install' })
 
@@ -89,4 +88,23 @@ return require('packer').startup(function(use)
             })
         end
     })
+    use 'echasnovski/mini.nvim'
+    use 'rcarriga/nvim-notify'
+    use {
+        'nvim-neotest/neotest',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim",
+            'nvim-neotest/neotest-python',
+            'nvim-neotest/neotest-plenary',
+            'nvim-neotest/neotest-go',
+        }
+    }
+    use 'folke/neodev.nvim'
+
+    use 'ThePrimeagen/vim-be-good'
+    use 'alec-gibson/nvim-tetris'
+    use 'seandewar/nvimesweeper'
+    use 'jim-fx/sudoku.nvim'
 end)
