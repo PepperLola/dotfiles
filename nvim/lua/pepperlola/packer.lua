@@ -12,7 +12,8 @@ return require('packer').startup(function(use)
     }
 
     use 'folke/tokyonight.nvim'
-    vim.cmd('colorscheme tokyonight-night')
+    use { "catppuccin/nvim", as = "catppuccin" }
+    vim.cmd('colorscheme catppuccin-mocha')
     use 'ryanoasis/vim-devicons'
     use 'nvim-tree/nvim-web-devicons'
 
