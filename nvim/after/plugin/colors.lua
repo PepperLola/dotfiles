@@ -1,4 +1,4 @@
-local var transparentBg = false
+local var transparentBg = true
 
 function SetColors(color)
 	color = color or "tokyonight-night"
