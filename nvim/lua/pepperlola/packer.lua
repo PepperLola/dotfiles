@@ -71,6 +71,19 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
+    use {
+        "ms-jpq/coq_nvim",
+        branch = 'coq'
+    }
+    use {
+        "ms-jpq/coq.artifacts",
+        branch = 'artifacts'
+    }
+    use {
+        'ms-jpq/coq.thirdparty',
+        branch = '3p'
+    }
+    use 'neovim/nvim-lspconfig'
 
     --use 'github/copilot.vim'
     use { "zbirenbaum/copilot.lua",
