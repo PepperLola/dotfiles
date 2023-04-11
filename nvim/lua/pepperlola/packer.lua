@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
         },
         after = "nvim-web-devicons"
     }
+    use "petertriho/nvim-scrollbar"
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/playground'
@@ -44,6 +45,7 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
+    use "jcdickinson/wpm.nvim"
 
     use 'uga-rosa/ccc.nvim'
     use 'tpope/vim-commentary'
