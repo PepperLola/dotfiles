@@ -25,20 +25,20 @@ lsp.ensure_installed({
     'rust_analyzer'
 })
 
---local cmp = require('cmp')
+local cmp = require('cmp')
 
---cmp.setup({
---completion = {
---autocomplete = false
---}
-----sources = {
-----{ name = 'path' },
-----{ name = 'nvim_lsp' },
-----{ name = 'nvim_lua' },
-----{ name = 'buffer',  keyword_length = 3 },
-----{ name = 'luasnip', keyword_length = 3 },
-----{ name = 'neoconf' }
-----}
---})
+cmp.setup({
+    completion = {
+        autocomplete = false
+    }
+    ----sources = {
+    ----{ name = 'path' },
+    ----{ name = 'nvim_lsp' },
+    ----{ name = 'nvim_lua' },
+    ----{ name = 'buffer',  keyword_length = 3 },
+    ----{ name = 'luasnip', keyword_length = 3 },
+    ----{ name = 'neoconf' }
+    ----}
+})
 
 lsp.setup()
