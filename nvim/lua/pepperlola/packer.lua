@@ -18,6 +18,16 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
 
     use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
+    use {
+        "utilyre/barbecue.nvim",
+        name = "barbecue",
+        tag = "*",
+        requires = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons"
+        },
+        after = "nvim-web-devicons"
+    }
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/playground'
@@ -27,7 +37,6 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
     use 'airblade/vim-gitgutter'
-    use 'scrooloose/nerdcommenter'
     use 'wakatime/vim-wakatime'
 
     -- Status line
