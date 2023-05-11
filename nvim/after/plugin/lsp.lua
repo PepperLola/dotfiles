@@ -7,7 +7,7 @@ require('neodev').setup()
 
 --require("luasnip.loaders.from_vscode").lazy_load()
 
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'jdtls', 'kotlin-language-server' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({}))
 end
