@@ -34,7 +34,7 @@ COMPLETION_WAITING_DOTS="%F{yellow}Waiting...%f"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Load plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting brew git)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting brew)
 
 source $ZSH/oh-my-zsh.sh
 
