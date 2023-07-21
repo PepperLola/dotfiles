@@ -37,7 +37,10 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
-    use 'airblade/vim-gitgutter'
+    use {
+        'airblade/vim-gitgutter',
+        branch = 'main'
+    }
     use 'wakatime/vim-wakatime'
 
     -- Status line
@@ -81,18 +84,6 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
-    }
-    use {
-        "ms-jpq/coq_nvim",
-        branch = 'coq'
-    }
-    use {
-        "ms-jpq/coq.artifacts",
-        branch = 'artifacts'
-    }
-    use {
-        'ms-jpq/coq.thirdparty',
-        branch = '3p'
     }
     use 'neovim/nvim-lspconfig'
 
