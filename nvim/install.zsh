@@ -22,6 +22,13 @@ else
   cp -r ./nvim/* $HOME/.config/nvim
 fi
 
+if [[ -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
+  echo "$PC[$SC*$PC] Packer found!"
+else
+  echo "$PC[$SC*$PC] Packer not found. Installing..."
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim &> /dev/null
+fi
+
 echo "$PC[$SC*$PC] Creating a Python virtual environment"
 python3 -m venv $HOME/.config/nvim/env
 source $HOME/.config/nvim/env/bin/activate
