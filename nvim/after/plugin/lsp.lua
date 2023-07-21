@@ -2,6 +2,8 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
+local lspconfig = require('lspconfig')
+
 require('neodev').setup()
 
 --require("luasnip.loaders.from_vscode").lazy_load()
@@ -9,7 +11,7 @@ require('neodev').setup()
 local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'jdtls', 'kotlin_language_server' }
 
 
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.ensure_installed(servers)
 
@@ -35,6 +37,27 @@ lsp.set_preferences({
         info = 'I',
     }
 })
+
+-- Auto Import
+local function organize_imports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
+lspconfig.tsserver.setup {
+    on_attach == on_attach,
+    capabilities = capabilities,
+    commands = {
+        OrganizeImports = {
+            organize_imports,
+            description = "Organize Imports"
+        }
+    }
+}
 
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
