@@ -6,7 +6,7 @@ require('neodev').setup()
 
 --require("luasnip.loaders.from_vscode").lazy_load()
 
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'jdtls', 'kotlin_language_server', 'tsx' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'jdtls', 'kotlin_language_server' }
 
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
