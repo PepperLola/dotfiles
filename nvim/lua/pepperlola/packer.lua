@@ -11,6 +11,11 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    use {
+        'junegunn/fzf.vim',
+        requires = { 'junegunn/fzf', run = ":call fzf#install()" }
+    }
+
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
     vim.cmd('colorscheme catppuccin-mocha')
