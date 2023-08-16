@@ -99,6 +99,8 @@ return require('packer').startup(function(use)
         config = function()
             require("copilot").setup({})
         end, }
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
     use 'eandrju/cellular-automaton.nvim'
     use({
         "kylechui/nvim-surround",
