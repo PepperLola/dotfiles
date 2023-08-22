@@ -55,10 +55,10 @@ map('n', 'ç', '<cmd>BufferClose<CR>', opts)
 -- Magic buffer-picking mode
 map('n', '<C-p>', '<cmd>BufferPick<CR>', opts)
 -- Sort automatically by...
-map('n', '<Space>bb', '<cmd>BufferOrderByBufferNumber<CR>', opts)
-map('n', '<Space>bd', '<cmd>BufferOrderByDirectory<CR>', opts)
-map('n', '<Space>bl', '<cmd>BufferOrderByLanguage<CR>', opts)
-map('n', '<Space>bw', '<cmd>BufferOrderByWindowNumber<CR>', opts)
+map('n', '<leader>bb', '<cmd>BufferOrderByBufferNumber<CR>', opts)
+map('n', '<leader>bd', '<cmd>BufferOrderByDirectory<CR>', opts)
+map('n', '<leader>bl', '<cmd>BufferOrderByLanguage<CR>', opts)
+map('n', '<leader>bw', '<cmd>BufferOrderByWindowNumber<CR>', opts)
 
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)

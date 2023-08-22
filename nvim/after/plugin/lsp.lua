@@ -15,6 +15,16 @@ lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.ensure_installed(servers)
 
+-- Auto Import
+local function optimize_imports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
 local cmp = require('cmp')
 local cmp_select = { behaviour = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -38,26 +48,19 @@ lsp.set_preferences({
     }
 })
 
--- Auto Import
-local function organize_imports()
-    local params = {
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-        title = ""
-    }
-    vim.lsp.buf.execute_command(params)
-end
-
 lspconfig.tsserver.setup {
     on_attach == on_attach,
     capabilities = capabilities,
     commands = {
-        OrganizeImports = {
-            organize_imports,
-            description = "Organize Imports"
+        OptimizeImports = {
+            optimize_imports,
+            description = "Optimize Imports"
         }
     }
 }
+
+vim.keymap.set("n", "<A-o>", optimize_imports)
+vim.keymap.set("n", "ø", optimize_imports)
 
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
