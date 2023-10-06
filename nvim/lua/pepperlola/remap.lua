@@ -60,8 +60,14 @@ vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-form
 -- SPD Handin
 vim.keymap.set("n", "<leader>sh", function()
     vim.fn.jobstart(
-        "racket -e '(require (file \"~/Library/Racket/8.10/collects/spd-handin/client-gui.rkt\")) (new handin-frame\\% [filename \"" ..
-        vim.fn.expand("%:p") .. "\"])'")
+        "racket -e '(require (file \"" ..
+        vim.fn.expand("~/Library/Racket/8.10/collects/spd-handin/client-gui.rkt") ..
+        "\")) (new handin-frame\\% [filename \"" ..
+        vim.fn.expand("%:p") .. "\"])'", {
+            on_stderr = (function(chan, data, name)
+                vim.notify(vim.inspect(data), vim.log.levels.ERROR)
+            end)
+        })
 end)
 
 -- Run file
