@@ -55,3 +55,21 @@ end)
 
 -- clang-format
 vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-format.py")
+
+-- Racket
+-- SPD Handin
+vim.keymap.set("n", "<leader>sh", function()
+    vim.fn.jobstart(
+        "racket -e '(require (file \"~/Library/Racket/8.10/collects/spd-handin/client-gui.rkt\")) (new handin-frame\\% [filename \"" ..
+        vim.fn.expand("%:p") .. "\"])'")
+end)
+
+-- Run file
+vim.keymap.set("n", "<leader>rk", "<cmd>:te racket %:p<CR>")
+
+-- Test file
+vim.keymap.set("n", "<leader>rt", function()
+    local f = io.popen("raco test " .. vim.fn.expand("%:p") .. " | grep pass")
+    vim.notify(f:read("*a"))
+    f:close()
+end)

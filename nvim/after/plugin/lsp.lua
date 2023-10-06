@@ -12,6 +12,7 @@ local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'j
 
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.racket_langserver.setup {}
 
 lsp.ensure_installed(servers)
 
