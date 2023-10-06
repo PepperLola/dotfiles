@@ -79,3 +79,6 @@ vim.keymap.set("n", "<leader>rt", function()
     vim.notify(f:read("*a"))
     f:close()
 end)
+
+-- Run repl including file
+vim.keymap.set("n", "<leader>ri", "<cmd>:vsplit | te racket -it %:p | exec \"normal! A\"<CR>")

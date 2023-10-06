@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
 
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
-    vim.cmd('colorscheme catppuccin-mocha')
+    vim.cmd('colorscheme tokyonight-night')
     use 'ryanoasis/vim-devicons'
     use 'nvim-tree/nvim-web-devicons'
 
@@ -99,8 +99,12 @@ return require('packer').startup(function(use)
         config = function()
             require("copilot").setup({})
         end, }
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
+    })
     use 'eandrju/cellular-automaton.nvim'
     use({
         "kylechui/nvim-surround",

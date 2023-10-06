@@ -2,6 +2,7 @@ vim.opt.updatetime = 200
 
 require("barbecue").setup({
     create_autocmd = false,
+    theme = 'tokyonight'
 })
 
 vim.api.nvim_create_autocmd({
