@@ -1,8 +1,6 @@
 local wpm = require("wpm")
 
 require('lualine').setup({
-    options = {
-    },
     sections = {
         lualine_x = {
             wpm.wpm,
