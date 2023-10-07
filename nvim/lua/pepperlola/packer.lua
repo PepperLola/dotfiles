@@ -16,6 +16,9 @@ return require('packer').startup(function(use)
         requires = { 'junegunn/fzf', run = ":call fzf#install()" }
     }
 
+    use 'benknoble/vim-racket'
+    use 'Olical/conjure'
+
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
     vim.cmd('colorscheme tokyonight-night')
@@ -37,6 +40,7 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/playground'
+    use 'HiPhish/nvim-ts-rainbow2'
 
     use 'ThePrimeagen/harpoon'
     use 'mbbill/undotree'

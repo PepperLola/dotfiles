@@ -81,4 +81,9 @@ vim.keymap.set("n", "<leader>rt", function()
 end)
 
 -- Run repl including file
-vim.keymap.set("n", "<leader>ri", "<cmd>:vsplit | te racket -it %:p | exec \"normal! A\"<CR>")
+vim.keymap.set("n", "<leader>ri",
+    "<cmd>:vsplit | te racket -e '(require (file \"" .. vim.fn.expand("%:p") .. "\"))' -i<CR>")
+
+vim.keymap.set("n", "<leader>rs",
+    ":vsplit | te racket ~/.config/nvim/racket/stepper.rkt " ..
+    vim.fn.expand("%:p") .. " | sed -E \"s/.{2}app //g\" | sed -E \"s/^\\'(.*)\\n//g\"")
