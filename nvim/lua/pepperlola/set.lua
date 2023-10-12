@@ -12,6 +12,8 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.opt.colorcolumn = "80"
+
 -- Undos
 vim.opt.swapfile = false
 vim.opt.backup = false
