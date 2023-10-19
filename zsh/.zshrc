@@ -85,7 +85,8 @@ if [[ `uname` == "Darwin" ]]; then
   fi
 fi
 
-export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:$(brew --prefix)/bin"
+export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
 export PATH="$PATH:/opt/node/bin"
 export PATH="$PATH:$HOME/CEdev/bin"
 export PATH="$PATH:~/tools/john/run"
