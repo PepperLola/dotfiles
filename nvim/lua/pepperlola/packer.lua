@@ -19,6 +19,24 @@ return require('packer').startup(function(use)
     use 'benknoble/vim-racket'
     use 'Olical/conjure'
 
+    use({
+        "epwalsh/obsidian.nvim",
+        tag = "*",
+        requires = {
+            "nvim-lua/plenary.nvim"
+        },
+        config = function()
+            require("obsidian").setup({
+                workspaces = {
+                    {
+                        name = "UBC",
+                        path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/UBC"
+                    },
+                },
+            })
+        end
+    })
+
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
     vim.cmd('colorscheme tokyonight-night')
@@ -121,6 +139,7 @@ return require('packer').startup(function(use)
     })
     use 'echasnovski/mini.nvim'
     use 'rcarriga/nvim-notify'
+    use 'vim-test/vim-test'
     use {
         'nvim-neotest/neotest',
         requires = {
