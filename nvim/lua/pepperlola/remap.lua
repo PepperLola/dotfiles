@@ -75,8 +75,22 @@ vim.keymap.set("n", "<leader>rk", "<cmd>:te racket %:p<CR>")
 
 -- Test file
 vim.keymap.set("n", "<leader>rt", function()
-    local f = io.popen("raco test " .. vim.fn.expand("%:p") .. " | grep pass")
-    vim.notify(f:read("*a"))
+    local f = io.popen("raco test " .. vim.fn.expand("%:p"))
+    local text = f:read("*a")
+    if string.match(text, "pass") then
+        vim.notify(text)
+    else
+        vim.api.nvim_command("botright vsplit RACKET_TEST")
+        local buffer_number = vim.api.nvim_get_current_buf()
+        vim.api.nvim_buf_set_option(buffer_number, "readonly", false)
+        vim.api.nvim_buf_set_lines(buffer_number, -1, -1, true, f:lines())
+        vim.api.nvim_buf_set_option(buffer_number, "readonly", true)
+        vim.api.nvim_buf_set_option(buffer_number, "modified", false)
+
+        local buffer_window = vim.api.nvim_call_function("bufwinid", { buffer_number })
+        local buffer_line_count = vim.api.nvim_buf_line_count(buffer_number)
+        vim.api.nvim_win_set_cursor(buffer_window, { buffer_line_count, 0 })
+    end
     f:close()
 end)
 
