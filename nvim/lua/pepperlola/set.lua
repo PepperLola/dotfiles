@@ -12,7 +12,15 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
-vim.opt.colorcolumn = "80"
+vim.api.nvim_set_option_value("colorcolumn", "", {})
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    pattern = { "*.rkt" },
+    callback = function()
+        vim.opt.colorcolumn = "80"
+    end
+})
+
+vim.opt.conceallevel = 2
 
 -- Undos
 vim.opt.swapfile = false
