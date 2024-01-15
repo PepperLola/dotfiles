@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/playground'
-    use 'HiPhish/nvim-ts-rainbow2'
+    use 'HiPhish/rainbow-delimiters.nvim'
 
     use 'ThePrimeagen/harpoon'
     use 'mbbill/undotree'
