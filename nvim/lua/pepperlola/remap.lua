@@ -26,6 +26,10 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+-- Paste from system clipboard
+vim.keymap.set("n", "<leader>P", "\"*p")
+vim.keymap.set("v", "<leader>P", "\"*p")
+
 -- Delete to void register (no copy)
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
