@@ -28,18 +28,13 @@ if [[ "$(pwd)" == *nvim ]]; then
   CONF_PATH=./
 fi
 
-echo "$PC[$SC*$PC] Installing nvim packages"
-rsync -avq $CONF_PATH/* $HOME/.config/nvim --exclude after && \
-    nvim --headless -c "so|autocmd User PackerComplete quitall" ~/.config/nvim/lua/pepperlola/packer.lua -c "PackerSync" && \
-    rsync -avq $CONF_PATH/after $HOME/.config/nvim
+cp -r "$CONF_PATH" ~/.config/nvim
 
+# echo "$PC[$SC*$PC] Installing nvim packages"
+# rsync -avq $CONF_PATH/* $HOME/.config/nvim --exclude after && \
+#     nvim --headless -c "so|autocmd User PackerComplete quitall" ~/.config/nvim/lua/pepperlola/packer.lua -c "PackerSync" && \
+#     rsync -avq $CONF_PATH/after $HOME/.config/nvim
 
-if [[ -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
-  echo "$PC[$SC*$PC] Packer found!"
-else
-  echo "$PC[$SC*$PC] Packer not found. Installing..."
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim &> /dev/null
-fi
 
 echo "$PC[$SC*$PC] Creating a Python virtual environment"
 python3 -m venv $HOME/.config/nvim/env
