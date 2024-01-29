@@ -6,3 +6,4 @@ vim.keymap.set('n', '<C-g>', function()
 end)
 
 require("telescope").setup()
+require("telescope").load_extension("refactoring")

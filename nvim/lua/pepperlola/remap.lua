@@ -53,6 +53,13 @@ vim.keymap.set("n", "<leader>gp", function()
     end)
 end)
 
+-- refactoring
+vim.keymap.set(
+    {"n", "x"},
+    "<leader>rr",
+    function() require("telescope").extensions.refactoring.refactors() end
+)
+
 -- clang-format
 vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-format.py")
 
