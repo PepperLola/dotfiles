@@ -12,17 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    'nvim-lua/plenary.nvim',
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
+        branch = '0.1.x',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
-
-    {
-        'junegunn/fzf.vim',
-        dependencies = { 'junegunn/fzf', build = ":call fzf#install()" }
-    },
-
+    { 'junegunn/fzf', build = ":call fzf#install()" },
+    'junegunn/fzf.vim',
     {
         "epwalsh/obsidian.nvim",
         dependencies = {
@@ -70,6 +67,7 @@ require("lazy").setup({
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     'nvim-treesitter/playground',
     'HiPhish/rainbow-delimiters.nvim',
+    "antoinemadec/FixCursorHold.nvim",
 
     'ThePrimeagen/harpoon',
     'tpope/vim-fugitive',
@@ -123,6 +121,16 @@ require("lazy").setup({
             { 'williamboman/mason-lspconfig.nvim' },
         },
     },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("refactoring").setup()
+        end,
+    },
 
     -- 'github/copilot.vim'
     {
@@ -147,6 +155,9 @@ require("lazy").setup({
     'echasnovski/mini.nvim',
     'rcarriga/nvim-notify',
     'vim-test/vim-test',
+    'nvim-neotest/neotest-python',
+    'nvim-neotest/neotest-plenary',
+    'nvim-neotest/neotest-go',
     {
         'nvim-neotest/neotest',
         dependencies = {
