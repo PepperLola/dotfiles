@@ -36,6 +36,26 @@ require("lazy").setup({
             })
         end
     },
+    {
+        "nvim-neorg/neorg",
+        build = ":Neorg sync-parsers",
+        dependencies = {"nvim-lua/plenary.nvim"},
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                UBC = "~/Library/Mobile Documents/com~apple~CloudDocs/Notes/UBC",
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
 
     'folke/tokyonight.nvim',
     { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
