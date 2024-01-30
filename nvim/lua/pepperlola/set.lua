@@ -1,5 +1,3 @@
-require("nvim-treesitter.install").prefer_git = true
-
 -- Line Numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
