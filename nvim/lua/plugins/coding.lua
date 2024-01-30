@@ -74,7 +74,7 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'ThePrimeagen/refactoring.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim', 'ThePrimeagen/refactoring.nvim', 'folke/noice.nvim' },
         config = function()
             local builtin = require("telescope.builtin")
             vim.keymap.set('n', '<C-h>', builtin.find_files, {})
@@ -83,6 +83,7 @@ return {
 
             require("telescope").setup()
             require("telescope").load_extension("refactoring")
+            require("telescope").load_extension("noice")
         end,
     },
     { 'junegunn/fzf', build = ":call fzf#install()" },
