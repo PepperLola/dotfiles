@@ -63,7 +63,7 @@ return {
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_lspconfig()
 
-            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'eslint', 'jdtls', 'kotlin_language_server' }
+            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'eslint', 'jdtls', 'kotlin_language_server' }
 
             lsp_zero.on_attach(function(client, bufnr)
                 lsp_zero.default_keymaps({buffer = bufnr})
