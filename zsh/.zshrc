@@ -85,6 +85,7 @@ if [[ `uname` == "Darwin" ]]; then
   fi
 fi
 
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:$(brew --prefix)/bin"
 export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
 export PATH="$PATH:/opt/node/bin"
@@ -106,7 +107,6 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:usr/local/bin:$PATH"
 export PATH="$HOME/Desktop/Misc/Scripts:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
