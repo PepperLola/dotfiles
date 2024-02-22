@@ -93,7 +93,7 @@ export PATH="$PATH:$HOME/CEdev/bin"
 export PATH="$PATH:~/tools/john/run"
 export PATH="$PATH:/opt/homebrew/opt/john-jumbo/share/john"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v11)
+export JAVA_HOME=$(/usr/libexec/java_home -v17)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
