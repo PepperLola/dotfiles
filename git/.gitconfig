@@ -32,3 +32,10 @@
     added = yellow
     changed = green
     untracked = cyan
+
+[include]
+    path = ~/.gitconfig.personal
+[includeIf "gitdir:~/Desktop/School/"]
+    path = ~/.gitconfig.school
+[includeIf "gitdir:~/Desktop/Misc/orbit/"]
+    path = ~/.gitconfig.orbit
