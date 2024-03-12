@@ -98,5 +98,11 @@ return {
         end,
     },
     { 'junegunn/fzf', build = ":call fzf#install()" },
-    'junegunn/fzf.vim',
+     'junegunn/fzf.vim',
+    {
+      "lervag/vimtex",
+      init = function()
+        -- Use init for configuration, don't use the more common "config".
+      end
+    }
 }
