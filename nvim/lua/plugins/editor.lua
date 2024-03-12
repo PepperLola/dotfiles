@@ -22,4 +22,5 @@ return {
         end,
     },
     'tpope/vim-rhubarb',
+    'subnut/nvim-ghost.nvim',
 }
