@@ -5,6 +5,17 @@ return {
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
     },
+    {
+        "chomosuke/typst-preview.nvim",
+        lazy = false,
+        version = "0.1.*",
+        build = function() require "typst-preview".update() end,
+    },
+    {
+        "kaarmu/typst.vim",
+        ft = "typst",
+        lazy = false,
+    },
     -- 'github/copilot.vim'
     {
         "zbirenbaum/copilot.lua",

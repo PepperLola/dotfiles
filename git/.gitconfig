@@ -35,7 +35,9 @@
 
 [include]
     path = ~/.gitconfig.personal
-[includeIf "gitdir:~/Desktop/School/"]
+[includeIf "gitdir:~/Desktop/School/!Notes"]
     path = ~/.gitconfig.school
+[includeIf "gitdir:~/Desktop/School/Notes"]
+    path = ~/.gitconfig.personal
 [includeIf "gitdir:~/Desktop/Misc/orbit/"]
     path = ~/.gitconfig.orbit
