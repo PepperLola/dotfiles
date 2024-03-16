@@ -6,5 +6,15 @@ return {
     'jim-fx/sudoku.nvim',
     'eandrju/cellular-automaton.nvim',
     'wakatime/vim-wakatime',
+    {
+        "michaelrommel/nvim-silicon",
+        lazy = true,
+        cmd = "Silicon",
+        config = function()
+            require("silicon").setup({
+                font = "FiraCode NF=34"
+            })
+        end
+    },
     "antoinemadec/FixCursorHold.nvim",
 }
