@@ -101,7 +101,8 @@ export NVM_DIR="$HOME/.nvm"
 
 export VIRTUAL_ENV_DISABLE_PROMPT=
 export LC_CTYPE=en_US.UTF-8
-#export TERM="xterm-256color"
+export TERM="xterm-256color"
+[[ ! -d $HOME/.tmux/ ]] && export TERM="screen-256color"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
