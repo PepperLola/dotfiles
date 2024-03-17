@@ -34,7 +34,7 @@ COMPLETION_WAITING_DOTS="%F{yellow}Waiting...%f"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Load plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting brew aliases yarn npm rust python)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting brew aliases yarn npm rust python tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,19 +72,6 @@ for file in $HOME/funcs/*; do
   source $file
 done
 
-if [[ `uname` == "Darwin" ]]; then
-  since_updated=$(timebetween "$(cat ~/.last_updated.txt)")
-
-  # seconds in a week
-  sec_in_week=$((60*60*24*7))
-
-  if [ "${since_updated}" -gt "$sec_in_week" ]; then
-    echo "It's been a week since you last updated Homebrew packages! Updating automatically..."
-    currenttime > ~/.last_updated.txt
-    brew update && brew upgrade && brew cleanup
-  fi
-fi
-
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:$(brew --prefix)/bin"
 export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
@@ -104,6 +91,7 @@ export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
 [[ ! -d $HOME/.tmux/ ]] && export TERM="screen-256color"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
+export ZSH_TMUX_AUTOSTART=true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
