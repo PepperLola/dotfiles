@@ -43,6 +43,13 @@ return {
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
                     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
                     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+                }),
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                    { name = "neorg" },
+                }, {
+                    { name = 'buffer' },
                 })
             })
         end,

@@ -26,4 +26,10 @@ return {
     },
     'tpope/vim-rhubarb',
     'subnut/nvim-ghost.nvim',
+    {
+        'rcarriga/nvim-dap-ui',
+        dependencies = { 'mfussenegger/nvim-dap' }
+    },
+    'theHamsta/nvim-dap-virtual-text',
+    'leoluz/nvim-dap-go'
 }

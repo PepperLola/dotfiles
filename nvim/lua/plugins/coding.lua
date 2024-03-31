@@ -68,6 +68,7 @@ return {
             'nvim-neotest/neotest-python',
             'nvim-neotest/neotest-plenary',
             'nvim-neotest/neotest-go',
+            'nvim-neotest/nvim-nio'
         },
         config = function()
             require('neotest').setup {

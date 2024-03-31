@@ -45,13 +45,14 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>gp", function()
-    vim.ui.input({ prompt = "Are you sure you want to git push? [y/N] " }, function(input)
-        if (input == "y") then
-            vim.cmd("Git push")
-        end
-    end)
-end)
+local builtin = require 'telescope.builtin'
+
+-- Neogit
+vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { desc = '[g]it [s]tatus' })
+vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", { desc = '[g]it [c]ommit' })
+vim.keymap.set("n", "<leader>gp", ":Neogit pull<CR>", { desc = '[g]it [p]ull' })
+vim.keymap.set("n", "<leader>gP", ":Neogit push<CR>", { desc = '[g]it [P]ush' })
+vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = '[g]it [b]ranches' })
 
 -- refactoring
 vim.keymap.set(
@@ -108,3 +109,23 @@ vim.keymap.set("n", "<leader>ri",
 vim.keymap.set("n", "<leader>rs",
     ":vsplit | te racket ~/.config/nvim/racket/stepper.rkt " ..
     vim.fn.expand("%:p") .. " | sed -E \"s/.{2}app //g\" | sed -E \"s/^\\'(.*)\\n//g\"")
+
+vim.keymap.set("n", "<leader>nt", function()
+	vim.schedule(function()
+		if vim.opt.conceallevel:get() == 2 then
+			vim.opt.conceallevel = 0
+		elseif vim.opt.conceallevel:get() == 0 then
+			vim.opt.conceallevel = 2
+		end
+	end)
+	vim.cmd.Neorg("toggle-concealer")
+end)
+
+-- Debugger
+vim.api.nvim_set_keymap("n", "<leader>dt", ":lua require'dapui'.toggle()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dc", ":lua require'dap'.continue()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dsi", ":lua require'dap'.step_into()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dso", ":lua require'dap'.step_over()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dsu", ":lua require'dap'.step_out()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dapui').open({reset = true})<CR>", {noremap=true})
