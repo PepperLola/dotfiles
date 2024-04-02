@@ -131,5 +131,5 @@ vim.api.nvim_set_keymap("n", "<leader>dsu", ":lua require'dap'.step_out()<CR>", 
 vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require'dapui'.open({reset = true})<CR>", {noremap=true})
 
 -- Hex editing
-vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r<CR>", {noremap=true})
