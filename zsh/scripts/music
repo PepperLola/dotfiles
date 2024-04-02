@@ -19,15 +19,120 @@ if (( ${#@} != 0 )); then
             exit 1
             ;;
         skip | next)
-            run_command "next track"
+            times=1
+            if (( ${#@} > 1 )); then
+                times=$2
+            fi
+            for i in $(seq 1 $times); do
+                run_command "next track"
+            done
             exit 1
             ;;
         back | prev)
-            run_command "back track"
+            times=1
+            if (( ${#@} > 1 )); then
+                times=$2
+            fi
+            for i in $(seq 1 $times); do
+                run_command "back track"
+            done
             exit 1
             ;;
         previous)
-            run_command "previous track"
+            times=1
+            if (( ${#@} > 1 )); then
+                times=$2
+            fi
+            for i in $(seq 1 $times); do
+                run_command "previous track"
+            done
+            exit 1
+            ;;
+        play)
+            if (( ${#@} < 3 )); then
+                run_command "play"
+            else
+                if [[ $2 == "song" ]]; then
+                    run_command "play the song named \"$3\"" # unsafe but I can't think of another way
+                elif [[ $2 == "playlist" ]]; then
+                    run_command "play the playlist named \"$3\""
+                else
+                    echo "Unknown option $2"
+                fi
+            fi
+            exit 1
+            ;;
+        shuffle)
+            if (( ${#@} < 2 )); then
+                run_command "set shuffle enabled to not shuffle enabled"
+            else
+                case $2 in
+                    off)
+                        run_command "set shuffle enabled to false"
+                        ;;
+                    songs)
+                        run_command "set shuffle enabled to true"
+                        run_command "set shuffle mode to songs"
+                        ;;
+                    albums)
+                        run_command "set shuffle enabled to true"
+                        run_command "set shuffle mode to albums"
+                        ;;
+                    groupings)
+                        run_command "set shuffle enabled to true"
+                        run_command "set shuffle mode to groupings"
+                        ;;
+                    *)
+                        echo "Unknown shuffle option $2"
+                        ;;
+                esac
+            fi
+            exit 1
+            ;;
+        reshuffle)
+            run_command "set shuffle enabled to false"
+            run_command "set shuffle enabled to true"
+            exit 1
+            ;;
+        repeat)
+            if (( ${#@} < 2 )); then
+                # default is all for toggling back on
+                osascript \
+                    -e 'tell application "Music"' \
+                    -e 'if song repeat is all or song repeat is one then' \
+                    -e 'set song repeat to off' \
+                    -e 'else' \
+                    -e 'set song repeat to all' \
+                    -e 'end if' \
+                    -e 'end tell' 
+            else
+                case $2 in
+                    off)
+                        run_command "set song repeat to off"
+                        ;;
+                    all)
+                        run_command "set song repeat to all"
+                        ;;
+                    one)
+                        run_command "set song repeat to one"
+                        ;;
+                    *)
+                        echo "Unknown repeat option $2"
+                        ;;
+                esac
+            fi
+            exit 1
+            ;;
+        volume)
+            if (( ${#@} < 2 )); then
+                run_command "get sound volume"
+            else
+                if (( 0 > $2 || 100 < $2 )); then
+                    echo "Invalid sound volume $2"
+                else
+                    run_command "set sound volume to $2"
+                fi
+            fi
             exit 1
             ;;
     esac
