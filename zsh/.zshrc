@@ -98,6 +98,7 @@ export ZSH_TMUX_AUTOSTART=true
 #export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/Desktop/Misc/Scripts:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$HOME/scripts:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
