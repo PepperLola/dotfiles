@@ -1,9 +1,18 @@
 #!/bin/zsh
-BOX_WIDTH=50
+BOX_WIDTH=50 # odd so controls centered
 tell_cmd="tell application \"Music\" to"
 function run_command() {
     echo "osascript -e '" $tell_cmd $* "'" | zsh
 }
+QUIET=0
+for arg in $@; do
+    case $arg in
+        -q|--quiet)
+            QUIET=1
+            ;;
+    esac
+done
+
 if (( ${#@} != 0 )); then
     case $1 in
         pause)
@@ -12,10 +21,16 @@ if (( ${#@} != 0 )); then
             ;;
         unpause)
             run_command "play"
+            if [ $QUIET = 0 ]; then
+                music
+            fi
             exit 1
             ;;
         playpause)
             run_command "playpause"
+            if [ $QUIET = 0 ]; then
+                music
+            fi
             exit 1
             ;;
         skip | next)
@@ -26,6 +41,9 @@ if (( ${#@} != 0 )); then
             for i in $(seq 1 $times); do
                 run_command "next track"
             done
+            if [ $QUIET = 0 ]; then
+                music
+            fi
             exit 1
             ;;
         back | prev)
@@ -36,6 +54,9 @@ if (( ${#@} != 0 )); then
             for i in $(seq 1 $times); do
                 run_command "back track"
             done
+            if [ $QUIET = 0 ]; then
+                music
+            fi
             exit 1
             ;;
         previous)
@@ -46,6 +67,9 @@ if (( ${#@} != 0 )); then
             for i in $(seq 1 $times); do
                 run_command "previous track"
             done
+            if [ $QUIET = 0 ]; then
+                music
+            fi
             exit 1
             ;;
         play)
@@ -59,6 +83,9 @@ if (( ${#@} != 0 )); then
                 else
                     echo "Unknown option $2"
                 fi
+            fi
+            if [ $QUIET = 0 ]; then
+                music
             fi
             exit 1
             ;;
@@ -186,15 +213,16 @@ function get_player_position() {
 function print_progress_bar() {
     width=$2
     full=$(echo "$width - 2" | /usr/bin/bc)
-    curr=$(echo "scale=2; $1 / 100 * $full" | /usr/bin/bc)
+    curr=$(echo "scale=2; ceil($1 / 100 * $full, 0)" | /usr/bin/bc -l)
     if (( $curr == 0 )); then
-        printf '\033[0;90m━%.0s' $(seq 0 $width)
+        printf '\033[0;90m━%.0s' $(seq 1 $width)
     elif (( $curr == $full )); then
-        printf '\033[0;32m━%.0s' $(seq 0 $width)
+        printf '\033[0;32m━%.0s' $(seq 1 $width)
     else
-        printf '\033[0;32m━%.0s' $(seq 0 $curr)
+        printf '\033[0;32m'
+        printf '━%.0s' $(seq 1 $curr)
         printf '╸\033[0;90m╺'
-        printf '━%.0s' $(seq $(echo "$curr" | /usr/bin/bc) $full)
+        printf '━%.0s' $(seq $(echo "$curr+1" | /usr/bin/bc) $full)
     fi
     printf '\033[0m'
 }
@@ -202,7 +230,22 @@ function draw_box_row() {
     str=$(remove_colors $1)
     w=$(echo "$BOX_WIDTH - ${#str}" | /usr/bin/bc)
     printf "│ $1\033[0m"
-    printf " %.0s" $(seq 0 $(echo "$BOX_WIDTH - ${#str} - 1" | /usr/bin/bc))
+    printf " %.0s" $(seq 0 $(echo "$BOX_WIDTH - ${#str} - 2" | /usr/bin/bc))
+    printf "│\n"
+}
+function draw_controls() {
+    spacing=3
+    half=$(echo "ceil($BOX_WIDTH / 2, 0) - 1 + ($BOX_WIDTH % 2)" | /usr/bin/bc -l)
+    left=$(echo "$half - $spacing - 1" | /usr/bin/bc)
+    right=$(echo "$left + !($BOX_WIDTH % 2)" | /usr/bin/bc)
+    printf "│"
+    printf " %.0s" $(seq 0 $left)
+    printf "󰒮"
+    printf " %.0s" $(seq 2 $spacing)
+    printf ""
+    printf " %.0s" $(seq 2 $spacing)
+    printf "󰒭"
+    printf " %.0s" $(seq 0 $right)
     printf "│\n"
 }
 track_props=$(get_all_track_properties)
@@ -218,7 +261,7 @@ track_name=$(get_name $track_props)
 artist_name=$(get_artist $track_props)
 album_name=$(get_album $track_props)
 printf '╭'
-printf '─%.0s' $(seq 0 $BOX_WIDTH)
+printf '─%.0s' $(seq 1 $BOX_WIDTH)
 printf '╮\n'
 draw_box_row "\033[0;94m󰝚\033[0;35m $track_name"
 draw_box_row "\033[0;94m\033[0;35m $artist_name"
@@ -226,6 +269,7 @@ draw_box_row "\033[0;94m󰀥\033[0;35m $album_name"
 printf "│"
 print_progress_bar $progress $BOX_WIDTH
 printf "│\n"
+draw_controls
 printf '╰'
-printf '─%.0s' $(seq 0 $BOX_WIDTH)
+printf '─%.0s' $(seq 1 $BOX_WIDTH)
 printf '╯\n'
