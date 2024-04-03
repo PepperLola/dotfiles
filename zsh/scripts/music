@@ -4,6 +4,7 @@
 
 QUIET=0
 DEBUG=0
+INTERACTIVE=1
 BOX_WIDTH=50 # odd so controls centered
 BOX_COLOR="\033[0m"
 TITLE_COLOR="\033[0;35m"
@@ -15,7 +16,7 @@ ALBUM_ICON_COLOR="\033[0;94m"
 PLAYED_BAR_COLOR="\033[0;32m"
 UNPLAYED_BAR_COLOR="\033[0;90m"
 PREVIOUS_TRACK_COLOR="\033[0m"
-CONTROL_HIGHLIGHT_COLOR="\033[0;101m"
+CONTROL_HIGHLIGHT_COLOR="\033[4m"
 PLAY_PAUSE_COLOR="\033[0m"
 NEXT_TRACK_COLOR="\033[0m"
 SHUFFLE_ENABLED_COLOR="\033[0;32m"
@@ -45,6 +46,7 @@ function reset_config() {
 
 QUIET=$QUIET # whether to display song information after performing actions like playing, skipping, etc.
 DEBUG=$DEBUG # whether to print out music track and app info from osascript
+INTERACTIVE=$INTERACTIVE # whether to allow controls or just print info
 
 ##### APPEARANCE #####
 
@@ -84,8 +86,7 @@ for arg in $@; do
             ;;
         --reset-config)
             # TODO: make own confirm function
-            reset_config
-            # gum confirm "Are you sure you want to reset your config?" && reset_config
+            gum confirm "Are you sure you want to reset your config?" && reset_config
             ;;
         --edit-config)
             if [ ! -f ~/.config/music/config.conf ]; then
@@ -346,46 +347,64 @@ function draw_controls() {
     else
         printf $SHUFFLE_DISABLED_COLOR
     fi
+    test $SELECTED = "shuffle" && printf $CONTROL_HIGHLIGHT_COLOR
     printf "󰒟\033[0m"
+    test $SELECTED = "shuffle" && printf "\033[0m"
     printf " %.0s" $(seq 0 $left)
+
+    printf $PREVIOUS_TRACK_COLOR
+    test $SELECTED = "prev" && printf $CONTROL_HIGHLIGHT_COLOR
     printf "󰒮"
+    test $SELECTED = "prev" && printf "\033[0m"
+
     printf " %.0s" $(seq 2 $spacing)
+    printf $PLAY_PAUSE_COLOR
+    test $SELECTED = "playpause" && printf $CONTROL_HIGHLIGHT_COLOR
     if [ $(get_player_state $app_props) = "playing" ]; then
         printf "󰏤"
     else
         printf "󰐊"
     fi
+    test $SELECTED = "playpause" && printf "\033[0m"
     printf " %.0s" $(seq 2 $spacing)
+
+    printf $NEXT_TRACK_COLOR
+    test $SELECTED = "next" && printf $CONTROL_HIGHLIGHT_COLOR
     printf "󰒭"
+    test $SELECTED = "next" && printf "\033[0m"
+
     printf " %.0s" $(seq 0 $right)
     repeat_mode=$(get_repeat_mode $app_props)
     if [ $repeat_mode = "off" ]; then
         printf $REPEAT_DISABLED_COLOR
+        # I don't like this but it's okay
+        test $SELECTED = "repeat" && printf $CONTROL_HIGHLIGHT_COLOR
         printf "󰑗"
+        test $SELECTED = "repeat" && printf "\033[0m"
     elif [ $repeat_mode = "all" ]; then
         printf $REPEAT_ENABLED_COLOR
+        test $SELECTED = "repeat" && printf $CONTROL_HIGHLIGHT_COLOR
         printf "󰑖\033[0m"
+        test $SELECTED = "repeat" && printf "\033[0m"
     else
         printf $REPEAT_ENABLED_COLOR
+        test $SELECTED = "repeat" && printf $CONTROL_HIGHLIGHT_COLOR
         printf "󰑘\033[0m"
+        test $SELECTED = "repeat" && printf "\033[0m"
     fi
     printf " %b│\n" $BOX_COLOR
 }
 
-function main() {
-    track_props=$(get_all_track_properties)
-    app_props=$(get_all_application_properties)
-    if [ $DEBUG = 1 ]; then
-        echo "TRACK:" $track_props "\n"
-        echo "APP:" $app_props
-    fi
+function draw_box() {
+    test $INTERACTIVE -eq 1 && printf "\033[1;1H\033[2J"
     # display_cover
     player_pos=$(get_player_position $app_props)
     track_length=$(get_track_length $track_props)
     progress=$(echo "scale=2; $player_pos / $track_length * 100" | /usr/bin/bc)
-    track_name=$(get_name $track_props)
-    artist_name=$(get_artist $track_props)
-    album_name=$(get_album $track_props)
+    max_len=$(echo "$BOX_WIDTH - 4" | /usr/bin/bc)
+    track_name=$(get_name $track_props | cut -c -$max_len)
+    artist_name=$(get_artist $track_props | cut -c -$max_len)
+    album_name=$(get_album $track_props | cut -c -$max_len)
     printf '%b╭' $BOX_COLOR
     printf '─%.0s' $(seq 1 $BOX_WIDTH)
     printf '╮\n'
@@ -399,5 +418,60 @@ function main() {
     printf '%b╰' $BOX_COLOR
     printf '─%.0s' $(seq 1 $BOX_WIDTH)
     printf '╯\n'
+}
+
+function wait_for_selection() {
+    local chosen=0
+    while [ $chosen = 0 ]; do
+        read -rsk 1 action
+        case "$action" in
+            $'\n') chosen=1 ;;
+            "h")
+                case "$SELECTED" in
+                    shuffle) SELECTED="repeat" ;;
+                    prev) SELECTED="shuffle" ;;
+                    playpause) SELECTED="prev" ;;
+                    next) SELECTED="playpause" ;;
+                    repeat) SELECTED="next" ;;
+                esac
+                ;;
+            "l") 
+                case "$SELECTED" in
+                    shuffle) SELECTED="prev" ;;
+                    prev) SELECTED="playpause" ;;
+                    playpause) SELECTED="next" ;;
+                    next) SELECTED="repeat" ;;
+                    repeat) SELECTED="shuffle" ;;
+                esac
+                ;;
+        esac
+        draw_box
+    done
+    return $SELECTED
+}
+
+function main() {
+    track_props=$(get_all_track_properties)
+    app_props=$(get_all_application_properties)
+    if [ $DEBUG = 1 ]; then
+        echo "TRACK:" $track_props "\n"
+        echo "APP:" $app_props
+    fi
+    if [ $INTERACTIVE = 1 ]; then
+        SELECTED="playpause"
+    else
+        SELECTED="none"
+    fi
+    while true; do
+        draw_box $@
+        wait_for_selection
+        case "$SELECTED" in
+            playpause) run_command "playpause" ;;
+            prev) run_command "back track" ;;
+            next) run_command "next track" ;;
+        esac
+        track_props=$(get_all_track_properties)
+        app_props=$(get_all_application_properties)
+    done
 }
 main $@
