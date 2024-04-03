@@ -2,10 +2,10 @@
 
 ############## DEFAULTS ############## 
 
-QUIET=0
+QUIET=1
 DEBUG=0
 INTERACTIVE=1
-BOX_WIDTH=50 # odd so controls centered
+BOX_WIDTH=49 # odd so controls centered
 BOX_COLOR="\033[0m"
 TITLE_COLOR="\033[0;35m"
 TITLE_ICON_COLOR="\033[0;94m"
@@ -73,14 +73,9 @@ SHUFFLE_DISABLED_COLOR=\"$(escape_colors $SHUFFLE_DISABLED_COLOR)\" # color of s
 REPEAT_ENABLED_COLOR=\"$(escape_colors $REPEAT_ENABLED_COLOR)\" # color of repeat icon when enabled
 REPEAT_DISABLED_COLOR=\"$(escape_colors $REPEAT_DISABLED_COLOR)\" # color of repeat icon when disabled""" > ~/.config/music/config.conf
 }
-for arg in $@; do
+# handle config-related arguments
+for arg in $*; do
     case $arg in
-        -q|--quiet)
-            QUIET=1
-            ;;
-        -d|--debug|--print-data)
-            DEBUG=1
-            ;;
         -c|--init-config)
             init_config
             ;;
@@ -94,6 +89,7 @@ for arg in $@; do
             fi
             $EDITOR ~/.config/music/config.conf
             exit 1
+            ;;
     esac
 done
 
@@ -102,6 +98,26 @@ if [ -d ~/.config/music ]; then
         source ~/.config/music/config.conf
     fi
 fi
+
+# handle other args later so they're not overwritten by `source`
+for arg in $@; do
+    case $arg in
+        -q|--quiet)
+            QUIET=1
+            ;;
+        -d|--debug|--print-data)
+            DEBUG=1
+            ;;
+        -n|--non-interactive)
+            # too lazy to figure out -i=0 style parsing
+            INTERACTIVE=0
+            ;;
+        -i|--interactive)
+            INTERACTIVE=1
+            ;;
+    esac
+done
+
 
 if (( ${#@} != 0 )); then
     case $1 in
@@ -457,13 +473,11 @@ function main() {
         echo "TRACK:" $track_props "\n"
         echo "APP:" $app_props
     fi
-    if [ $INTERACTIVE = 1 ]; then
-        SELECTED="playpause"
-    else
-        SELECTED="none"
-    fi
+    if [ $INTERACTIVE = 0 ]; then; CONTROL_HIGHLIGHT_COLOR=""; fi
+    SELECTED="playpause"
     while true; do
         draw_box $@
+        if [ $INTERACTIVE = 0 ]; then; exit 1; fi
         wait_for_selection
         case "$SELECTED" in
             playpause) run_command "playpause" ;;
