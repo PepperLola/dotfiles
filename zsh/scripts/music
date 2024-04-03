@@ -5,10 +5,14 @@ function run_command() {
     echo "osascript -e '" $tell_cmd $* "'" | zsh
 }
 QUIET=0
+DEBUG=0
 for arg in $@; do
     case $arg in
         -q|--quiet)
             QUIET=1
+            ;;
+        -d|--debug|--print-data)
+            DEBUG=1
             ;;
     esac
 done
@@ -210,6 +214,12 @@ function get_track_length() {
 function get_player_position() {
     echo $(echo $1 | awk 'match($0, /, player position:([0-9.]+)/) { print substr($0, RSTART+18, RLENGTH-18) }')
 }
+function get_shuffle_enabled() {
+    echo $(echo $1 | awk 'match($0, /, shuffle enabled:(true|false)/) { print substr($0, RSTART+18, RLENGTH-18) }')
+}
+function get_repeat_mode() {
+    echo $(echo $1 | awk 'match($0, /, song repeat:(off|all|one)/) { print substr($0, RSTART+14, RLENGTH-14) }')
+}
 function print_progress_bar() {
     width=$2
     full=$(echo "$width - 2" | /usr/bin/bc)
@@ -236,9 +246,13 @@ function draw_box_row() {
 function draw_controls() {
     spacing=3
     half=$(echo "ceil($BOX_WIDTH / 2, 0) - 1 + ($BOX_WIDTH % 2)" | /usr/bin/bc -l)
-    left=$(echo "$half - $spacing - 1" | /usr/bin/bc)
+    left=$(echo "$half - $spacing - 3" | /usr/bin/bc)
     right=$(echo "$left + !($BOX_WIDTH % 2)" | /usr/bin/bc)
-    printf "│"
+    printf "│ "
+    if [ $(get_shuffle_enabled $app_props) = "true" ]; then
+        printf "\033[0;32m"
+    fi
+    printf "󰒟\033[0m"
     printf " %.0s" $(seq 0 $left)
     printf "󰒮"
     printf " %.0s" $(seq 2 $spacing)
@@ -246,17 +260,26 @@ function draw_controls() {
     printf " %.0s" $(seq 2 $spacing)
     printf "󰒭"
     printf " %.0s" $(seq 0 $right)
-    printf "│\n"
+    repeat_mode=$(get_repeat_mode $app_props)
+    if [ $repeat_mode = "off" ]; then
+        printf "󰑗"
+    elif [ $repeat_mode = "all" ]; then
+        printf "\033[0;32m󰑖\033[0m"
+    else
+        printf "\033[0;32m󰑘\033[0m"
+    fi
+    printf " │\n"
 }
 track_props=$(get_all_track_properties)
 app_props=$(get_all_application_properties)
-# echo $track_props
-# echo $app_props
+if [ $DEBUG = 1 ]; then
+    echo "TRACK:" $track_props "\n"
+    echo "APP:" $app_props
+fi
 # display_cover
 player_pos=$(get_player_position $app_props)
 track_length=$(get_track_length $track_props)
 progress=$(echo "scale=2; $player_pos / $track_length * 100" | /usr/bin/bc)
-# echo $progress
 track_name=$(get_name $track_props)
 artist_name=$(get_artist $track_props)
 album_name=$(get_album $track_props)
