@@ -1,11 +1,76 @@
 #!/bin/zsh
-BOX_WIDTH=50 # odd so controls centered
-tell_cmd="tell application \"Music\" to"
-function run_command() {
-    echo "osascript -e '" $tell_cmd $* "'" | zsh
-}
+
+############## DEFAULTS ############## 
+
 QUIET=0
 DEBUG=0
+BOX_WIDTH=50 # odd so controls centered
+BOX_COLOR="\033[0m"
+TITLE_COLOR="\033[0;35m"
+TITLE_ICON_COLOR="\033[0;94m"
+ARTIST_COLOR="\033[0;35m"
+ARTIST_ICON_COLOR="\033[0;94m"
+ALBUM_COLOR="\033[0;35m"
+ALBUM_ICON_COLOR="\033[0;94m"
+PLAYED_BAR_COLOR="\033[0;32m"
+UNPLAYED_BAR_COLOR="\033[0;90m"
+PREVIOUS_TRACK_COLOR="\033[0m"
+CONTROL_HIGHLIGHT_COLOR="\033[0;101m"
+PLAY_PAUSE_COLOR="\033[0m"
+NEXT_TRACK_COLOR="\033[0m"
+SHUFFLE_ENABLED_COLOR="\033[0;32m"
+SHUFFLE_DISABLED_COLOR="\033[0;30m"
+REPEAT_ENABLED_COLOR="\033[0;32m"
+REPEAT_DISABLED_COLOR="\033[0;30m"
+
+tell_cmd="tell application \"Music\" to"
+function run_command() {
+    echo "osascript -e '$tell_cmd $*'" | zsh
+}
+function init_config() {
+    if [ ! -d ~/.config/music ]; then
+        mkdir ~/.config/music
+    fi
+    if [ ! -f ~/.config/music/config.conf ]; then
+        touch ~/.config/music/config.conf
+        reset_config
+    fi
+}
+function escape_colors() {
+    echo $1 | sed -r "s/(\[([0-9]{1,3}(;[0-9]{1,3})?)?[m|K])/\\\\\\\\033\1/g"
+}
+function reset_config() {
+    # this is dumb but I don't want to figure out another way
+    echo """##### BEHAVIOUR #####
+
+QUIET=$QUIET # whether to display song information after performing actions like playing, skipping, etc.
+DEBUG=$DEBUG # whether to print out music track and app info from osascript
+
+##### APPEARANCE #####
+
+BOX_WIDTH=\"$BOX_WIDTH\" # width of interior of box
+
+### COLORS ###
+
+# In the form of ANSI Codes
+BOX_COLOR=\"$(escape_colors $BOX_COLOR)\" # color of the box outline
+TITLE_COLOR=\"$(escape_colors $TITLE_COLOR)\" # color of track title
+TITLE_ICON_COLOR=\"$(escape_colors $TITLE_ICON_COLOR)\" # color of track icon
+ARTIST_COLOR=\"$(escape_colors $ARTIST_COLOR)\" # color of artist name
+ARTIST_ICON_COLOR=\"$(escape_colors $ARTIST_ICON_COLOR)\" # color of artist icon
+ALBUM_COLOR=\"$(escape_colors $ALBUM_COLOR)\" # color of album name
+ALBUM_ICON_COLOR=\"$(escape_colors $ALBUM_ICON_COLOR)\" # color of album icon
+PLAYED_BAR_COLOR=\"$(escape_colors $PLAYED_BAR_COLOR)\" # color of played/elapsed part of progress bar
+UNPLAYED_BAR_COLOR=\"$(escape_colors $UNPLAYED_BAR_COLOR)\" # color of unplayed part of progress bar
+CONTROL_HIGHLIGHT_COLOR=\"$(escape_colors $CONTROL_HIGHLIGHT_COLOR)\" # highlight color of selected control in interactive mode
+PREVIOUS_TRACK_COLOR=\"$(escape_colors $PREVIOUS_TRACK_COLOR)\" # color of previous track icon
+PLAY_PAUSE_COLOR=\"$(escape_colors $PLAY_PAUSE_COLOR)\" # color of play/pause icon
+NEXT_TRACK_COLOR=\"$(escape_colors $NEXT_TRACK_COLOR)\" # color of next track icon
+SHUFFLE_ENABLED_COLOR=\"$(escape_colors $SHUFFLE_ENABLED_COLOR)\" # color of shuffle icon when enabled
+SHUFFLE_DISABLED_COLOR=\"$(escape_colors $SHUFFLE_DISABLED_COLOR)\" # color of shuffle icon when disabled
+REPEAT_ENABLED_COLOR=\"$(escape_colors $REPEAT_ENABLED_COLOR)\" # color of repeat icon when enabled
+REPEAT_DISABLED_COLOR=\"$(escape_colors $REPEAT_DISABLED_COLOR)\" # color of repeat icon when disabled""" > ~/.config/music/config.conf
+}
 for arg in $@; do
     case $arg in
         -q|--quiet)
@@ -14,8 +79,28 @@ for arg in $@; do
         -d|--debug|--print-data)
             DEBUG=1
             ;;
+        -c|--init-config)
+            init_config
+            ;;
+        --reset-config)
+            # TODO: make own confirm function
+            reset_config
+            # gum confirm "Are you sure you want to reset your config?" && reset_config
+            ;;
+        --edit-config)
+            if [ ! -f ~/.config/music/config.conf ]; then
+                gum confirm "No config found! Would you like to create one?" && init_config || exit 1
+            fi
+            $EDITOR ~/.config/music/config.conf
+            exit 1
     esac
 done
+
+if [ -d ~/.config/music ]; then
+    if [ -f ~/.config/music/config.conf ]; then
+        source ~/.config/music/config.conf
+    fi
+fi
 
 if (( ${#@} != 0 )); then
     case $1 in
@@ -228,13 +313,17 @@ function print_progress_bar() {
     full=$(echo "$width - 2" | /usr/bin/bc)
     curr=$(echo "scale=2; ceil($1 / 100 * $full, 0)" | /usr/bin/bc -l)
     if (( $curr == 0 )); then
-        printf '\033[0;90m━%.0s' $(seq 1 $width)
+        printf $UNPLAYED_BAR_COLOR
+        printf '━%.0s' $(seq 1 $width)
     elif (( $curr == $full )); then
-        printf '\033[0;32m━%.0s' $(seq 1 $width)
+        printf $PLAYED_BAR_COLOR
+        printf '━%.0s' $(seq 1 $width)
     else
-        printf '\033[0;32m'
+        printf $PLAYED_BAR_COLOR
         printf '━%.0s' $(seq 1 $curr)
-        printf '╸\033[0;90m╺'
+        printf '╸'
+        printf $UNPLAYED_BAR_COLOR
+        printf '╺'
         printf '━%.0s' $(seq $(echo "$curr+1" | /usr/bin/bc) $full)
     fi
     printf '\033[0m'
@@ -242,18 +331,20 @@ function print_progress_bar() {
 function draw_box_row() {
     str=$(remove_colors $1)
     w=$(echo "$BOX_WIDTH - ${#str}" | /usr/bin/bc)
-    printf "│ $1\033[0m"
+    printf "%b│ $1\033[0m" $BOX_COLOR
     printf " %.0s" $(seq 0 $(echo "$BOX_WIDTH - ${#str} - 2" | /usr/bin/bc))
-    printf "│\n"
+    printf "%b│\n" $BOX_COLOR
 }
 function draw_controls() {
     spacing=3
     half=$(echo "ceil($BOX_WIDTH / 2, 0) - 1 + ($BOX_WIDTH % 2)" | /usr/bin/bc -l)
     left=$(echo "$half - $spacing - 3" | /usr/bin/bc)
     right=$(echo "$left + !($BOX_WIDTH % 2)" | /usr/bin/bc)
-    printf "│ "
+    printf "%b│ " $BOX_COLOR
     if [ $(get_shuffle_enabled $app_props) = "true" ]; then
-        printf "\033[0;32m"
+        printf $SHUFFLE_ENABLED_COLOR
+    else
+        printf $SHUFFLE_DISABLED_COLOR
     fi
     printf "󰒟\033[0m"
     printf " %.0s" $(seq 0 $left)
@@ -269,37 +360,44 @@ function draw_controls() {
     printf " %.0s" $(seq 0 $right)
     repeat_mode=$(get_repeat_mode $app_props)
     if [ $repeat_mode = "off" ]; then
+        printf $REPEAT_DISABLED_COLOR
         printf "󰑗"
     elif [ $repeat_mode = "all" ]; then
-        printf "\033[0;32m󰑖\033[0m"
+        printf $REPEAT_ENABLED_COLOR
+        printf "󰑖\033[0m"
     else
-        printf "\033[0;32m󰑘\033[0m"
+        printf $REPEAT_ENABLED_COLOR
+        printf "󰑘\033[0m"
     fi
-    printf " │\n"
+    printf " %b│\n" $BOX_COLOR
 }
-track_props=$(get_all_track_properties)
-app_props=$(get_all_application_properties)
-if [ $DEBUG = 1 ]; then
-    echo "TRACK:" $track_props "\n"
-    echo "APP:" $app_props
-fi
-# display_cover
-player_pos=$(get_player_position $app_props)
-track_length=$(get_track_length $track_props)
-progress=$(echo "scale=2; $player_pos / $track_length * 100" | /usr/bin/bc)
-track_name=$(get_name $track_props)
-artist_name=$(get_artist $track_props)
-album_name=$(get_album $track_props)
-printf '╭'
-printf '─%.0s' $(seq 1 $BOX_WIDTH)
-printf '╮\n'
-draw_box_row "\033[0;94m󰝚\033[0;35m $track_name"
-draw_box_row "\033[0;94m\033[0;35m $artist_name"
-draw_box_row "\033[0;94m󰀥\033[0;35m $album_name"
-printf "│"
-print_progress_bar $progress $BOX_WIDTH
-printf "│\n"
-draw_controls
-printf '╰'
-printf '─%.0s' $(seq 1 $BOX_WIDTH)
-printf '╯\n'
+
+function main() {
+    track_props=$(get_all_track_properties)
+    app_props=$(get_all_application_properties)
+    if [ $DEBUG = 1 ]; then
+        echo "TRACK:" $track_props "\n"
+        echo "APP:" $app_props
+    fi
+    # display_cover
+    player_pos=$(get_player_position $app_props)
+    track_length=$(get_track_length $track_props)
+    progress=$(echo "scale=2; $player_pos / $track_length * 100" | /usr/bin/bc)
+    track_name=$(get_name $track_props)
+    artist_name=$(get_artist $track_props)
+    album_name=$(get_album $track_props)
+    printf '%b╭' $BOX_COLOR
+    printf '─%.0s' $(seq 1 $BOX_WIDTH)
+    printf '╮\n'
+    draw_box_row "$TITLE_ICON_COLOR󰝚 $TITLE_COLOR$track_name"
+    draw_box_row "$ARTIST_ICON_COLOR $ARTIST_COLOR$artist_name"
+    draw_box_row "$ALBUM_ICON_COLOR󰀥 $ALBUM_COLOR$album_name"
+    printf "%b│" $BOX_COLOR
+    print_progress_bar $progress $BOX_WIDTH
+    printf "%b│\n" $BOX_COLOR
+    draw_controls
+    printf '%b╰' $BOX_COLOR
+    printf '─%.0s' $(seq 1 $BOX_WIDTH)
+    printf '╯\n'
+}
+main $@
