@@ -133,3 +133,14 @@ vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require'dapui'.open({reset = tr
 -- Hex editing
 vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r<CR>", {noremap=true})
+
+-- Music
+vim.keymap.set("n", "<leader>mp", function()
+    vim.cmd(":silent exec \"!music playpause\"")
+end)
+vim.keymap.set("n", "<leader>mn", function()
+    vim.cmd(":silent exec \"!music next\"")
+end)
+vim.keymap.set("n", "<leader>mb", function()
+    vim.cmd(":silent exec \"!music prev\"")
+end)
