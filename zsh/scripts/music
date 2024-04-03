@@ -220,6 +220,9 @@ function get_shuffle_enabled() {
 function get_repeat_mode() {
     echo $(echo $1 | awk 'match($0, /, song repeat:(off|all|one)/) { print substr($0, RSTART+14, RLENGTH-14) }')
 }
+function get_player_state() {
+    echo $(echo $1 | awk 'match($0, /, player state:(playing|paused)/) { print substr($0, RSTART+15, RLENGTH-15) }')
+}
 function print_progress_bar() {
     width=$2
     full=$(echo "$width - 2" | /usr/bin/bc)
@@ -256,7 +259,11 @@ function draw_controls() {
     printf " %.0s" $(seq 0 $left)
     printf "󰒮"
     printf " %.0s" $(seq 2 $spacing)
-    printf ""
+    if [ $(get_player_state $app_props) = "playing" ]; then
+        printf "󰏤"
+    else
+        printf "󰐊"
+    fi
     printf " %.0s" $(seq 2 $spacing)
     printf "󰒭"
     printf " %.0s" $(seq 0 $right)
