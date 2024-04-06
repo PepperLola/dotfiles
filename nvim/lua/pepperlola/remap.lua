@@ -45,15 +45,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-local builtin = require 'telescope.builtin'
-
--- Neogit
-vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { desc = '[g]it [s]tatus' })
-vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", { desc = '[g]it [c]ommit' })
-vim.keymap.set("n", "<leader>gp", ":Neogit pull<CR>", { desc = '[g]it [p]ull' })
-vim.keymap.set("n", "<leader>gP", ":Neogit push<CR>", { desc = '[g]it [P]ush' })
-vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = '[g]it [b]ranches' })
-
 -- refactoring
 vim.keymap.set(
     {"n", "x"},

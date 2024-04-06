@@ -22,7 +22,13 @@ return {
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim"
         },
-        config = true
+        config = function()
+		vim.keymap.set("n", "<leader>gs", ":Neogit<CR>", { desc = '[g]it [s]tatus' })
+		vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", { desc = '[g]it [c]ommit' })
+		vim.keymap.set("n", "<leader>gp", ":Neogit pull<CR>", { desc = '[g]it [p]ull' })
+		vim.keymap.set("n", "<leader>gP", ":Neogit push<CR>", { desc = '[g]it [P]ush' })
+		vim.keymap.set("n", "<leader>gb", require('telescope.builtin').git_branches, { desc = '[g]it [b]ranches' })
+	end,
     },
     'tpope/vim-rhubarb',
     'subnut/nvim-ghost.nvim',
