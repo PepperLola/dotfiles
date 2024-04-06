@@ -42,6 +42,73 @@ function init_config() {
 function escape_colors() {
     echo $1 | sed -r "s/(\[([0-9]{1,3}(;[0-9]{1,3})?)?[m|K])/\\\\\\\\033\1/g"
 }
+function remove_colors() {
+    echo $(echo $1 | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g")
+}
+function save_cover() {
+    cover_dir=$(echo ~ | sed "s/\//:/g" | sed "s/://")
+    osascript -ss \
+              -e 'on run argv' \
+              -e 'tell application "Music" to set artworkData to raw data of artwork 1 of current track' \
+              -e 'set imageFile to item 1 of argv & ":cover.jpg"' \
+              -e 'set outFile to open for access file imageFile with write permission' \
+              -e 'write artworkData to outFile' \
+              -e 'close access outFile' \
+              -e 'end run' \
+              -- $cover_dir
+}
+function display_cover() {
+    save_cover
+    ~/.iterm2/imgcat -H 128px ~/cover.jpg
+}
+function get_specific_playlist_info() {
+    echo $(run_command "get $1 of the playlist named \"$2\"")
+}
+function get_specific_playlist_properties() {
+    echo $(get_specific_playlist_info "properties" $1)
+}
+function get_specific_track_info() {
+    echo $(run_command "get $1 of the track named \"$2\"")
+}
+function get_specific_track_properties() {
+    echo $(get_specific_track_info "properties" $1)
+}
+function get_track_info() {
+    echo $(run_command "get $1 of current track")
+}
+function get_all_track_properties() {
+    echo $(get_track_info "properties")
+}
+function get_application_property() {
+    echo $(run_command "get $1")
+}
+function get_all_application_properties() {
+    echo $(get_application_property "properties")
+}
+function get_track_name() {
+    echo $(echo $1 | awk 'match($0, /, name:([^:]*),/) { print substr($0, RSTART+7, RLENGTH-8) }')
+}
+function get_track_artist() {
+    echo $(echo $1 | awk 'match($0, /, artist:([^:]*),/) { print substr($0, RSTART+9, RLENGTH-10) }')
+}
+function get_track_album() {
+    echo $(echo $1 | awk 'match($0, /, album:([^:]*),/) { print substr($0, RSTART+8, RLENGTH-9) }')
+}
+function get_track_length() {
+    echo $(echo $1 | awk 'match($0, /, duration:([0-9.]+)/) { print substr($0, RSTART+11, RLENGTH-11) }')
+}
+function get_player_position() {
+    echo $(echo $1 | awk 'match($0, /, player position:([0-9.]+)/) { print substr($0, RSTART+18, RLENGTH-18) }')
+}
+function get_shuffle_enabled() {
+    echo $(echo $1 | awk 'match($0, /, shuffle enabled:(true|false)/) { print substr($0, RSTART+18, RLENGTH-18) }')
+}
+function get_repeat_mode() {
+    echo $(echo $1 | awk 'match($0, /, song repeat:(off|all|one)/) { print substr($0, RSTART+14, RLENGTH-14) }')
+}
+function get_player_state() {
+    echo $(echo $1 | awk 'match($0, /, player state:(playing|paused|stopped)/) { print substr($0, RSTART+15, RLENGTH-15) }')
+}
 function reset_config() {
     # this is dumb but I don't want to figure out another way
     echo """##### BEHAVIOUR #####
@@ -184,6 +251,30 @@ if (( ${#*} != 0 )); then
             if (( ${#*} < 3 )); then
                 run_command "play"
             else
+                # if [ -f ./tmp ]; then
+                #     rm ./tmp
+                # fi
+                # next_type=$2
+                # for i in $(seq 3 ${#*}); do
+                #     if [ ! $next_type = "none" ]; then
+                #         echo $i, $*[$i]
+                #         name=$*[$i]
+                #         if [ $next_type = "song" ]; then
+                #             track_props=$(get_specific_track_properties $name)
+                #             track_name=$(get_track_name $track_props)
+                #             track_artist=$(get_track_artist $track_props)
+                #             echo "song;;;$track_name;;;$track_artist" >> tmp
+                #         elif [ $next_type = "playlist" ]; then
+                #             playlist_props=$(get_specific_playlist_properties $name)
+                #             playlist_name=$(get_track_name $playlist_props)
+                #             echo "playlist;;;$playlist_name" >> tmp
+                #         fi
+                #         next_type="none"
+                #     else
+                #         next_type=$*[$i]
+                #     fi
+                # done
+                # cat ./tmp | shortcuts run "Queue Track" && rm ./tmp > /dev/null
                 if [[ $2 == "song" ]]; then
                     run_command "play the song named \"$3\"" # unsafe but I can't think of another way
                 elif [[ $2 == "playlist" ]]; then
@@ -272,61 +363,6 @@ if (( ${#*} != 0 )); then
             ;;
     esac
 fi
-function remove_colors() {
-    echo $(echo $1 | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g")
-}
-function save_cover() {
-    cover_dir=$(echo ~ | sed "s/\//:/g" | sed "s/://")
-    osascript -ss \
-              -e 'on run argv' \
-              -e 'tell application "Music" to set artworkData to raw data of artwork 1 of current track' \
-              -e 'set imageFile to item 1 of argv & ":cover.jpg"' \
-              -e 'set outFile to open for access file imageFile with write permission' \
-              -e 'write artworkData to outFile' \
-              -e 'close access outFile' \
-              -e 'end run' \
-              -- $cover_dir
-}
-function display_cover() {
-    save_cover
-    ~/.iterm2/imgcat -H 128px ~/cover.jpg
-}
-function get_track_info() {
-    echo $(run_command "get $1 of current track")
-}
-function get_all_track_properties() {
-    echo $(get_track_info "properties")
-}
-function get_application_property() {
-    echo $(run_command "get $1")
-}
-function get_all_application_properties() {
-    echo $(get_application_property "properties")
-}
-function get_name() {
-    echo $(echo $1 | awk 'match($0, /, name:([^:]*),/) { print substr($0, RSTART+7, RLENGTH-8) }')
-}
-function get_artist() {
-    echo $(echo $1 | awk 'match($0, /, artist:([^:]*),/) { print substr($0, RSTART+9, RLENGTH-10) }')
-}
-function get_album() {
-    echo $(echo $1 | awk 'match($0, /, album:([^:]*),/) { print substr($0, RSTART+8, RLENGTH-9) }')
-}
-function get_track_length() {
-    echo $(echo $1 | awk 'match($0, /, duration:([0-9.]+)/) { print substr($0, RSTART+11, RLENGTH-11) }')
-}
-function get_player_position() {
-    echo $(echo $1 | awk 'match($0, /, player position:([0-9.]+)/) { print substr($0, RSTART+18, RLENGTH-18) }')
-}
-function get_shuffle_enabled() {
-    echo $(echo $1 | awk 'match($0, /, shuffle enabled:(true|false)/) { print substr($0, RSTART+18, RLENGTH-18) }')
-}
-function get_repeat_mode() {
-    echo $(echo $1 | awk 'match($0, /, song repeat:(off|all|one)/) { print substr($0, RSTART+14, RLENGTH-14) }')
-}
-function get_player_state() {
-    echo $(echo $1 | awk 'match($0, /, player state:(playing|paused|stopped)/) { print substr($0, RSTART+15, RLENGTH-15) }')
-}
 function print_progress_bar() {
     width=$2
     full=$(echo "$width - 2" | /usr/bin/bc)
@@ -426,9 +462,9 @@ function draw_box() {
         track_length=$(get_track_length $track_props)
         progress=$(echo "scale=2; $player_pos / $track_length * 100" | /usr/bin/bc)
         max_len=$(echo "$BOX_WIDTH - 4" | /usr/bin/bc)
-        track_name=$(get_name $track_props | cut -c -$max_len)
-        artist_name=$(get_artist $track_props | cut -c -$max_len)
-        album_name=$(get_album $track_props | cut -c -$max_len)
+        track_name=$(get_track_name $track_props | cut -c -$max_len)
+        artist_name=$(get_track_artist $track_props | cut -c -$max_len)
+        album_name=$(get_track_album $track_props | cut -c -$max_len)
         draw_box_row "$TITLE_ICON_COLOR󰝚 $TITLE_COLOR$track_name"
         draw_box_row "$ARTIST_ICON_COLOR $ARTIST_COLOR$artist_name"
         draw_box_row "$ALBUM_ICON_COLOR󰀥 $ALBUM_COLOR$album_name"
