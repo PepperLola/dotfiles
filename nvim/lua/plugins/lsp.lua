@@ -21,6 +21,16 @@ return {
     {
         'L3MON4D3/LuaSnip',
         lazy = true,
+        dependencies = {
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets"
+        },
+        build = "make install_jsregexp",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+            require("luasnip").config.set_config(opts)
+            require("pepperlola.configs.luasnip").setup()
+        end,
     },
     {
         'hrsh7th/nvim-cmp',
@@ -50,7 +60,12 @@ return {
                     { name = "neorg" },
                 }, {
                     { name = 'buffer' },
-                })
+                }),
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
+                },
             })
         end,
     },
