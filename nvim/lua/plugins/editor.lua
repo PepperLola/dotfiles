@@ -40,13 +40,4 @@ return {
     },
     'theHamsta/nvim-dap-virtual-text',
     'leoluz/nvim-dap-go',
-    {
-        'goolord/alpha-nvim',
-        dependencies =  {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("pepperlola.configs.alpha")
-        end,
-    }
 }
