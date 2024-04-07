@@ -56,9 +56,6 @@ return {
             require("refactoring").setup()
         end,
     },
-    { 'nvim-neotest/neotest-python', lazy = true },
-    { 'nvim-neotest/neotest-plenary', lazy = true },
-    { 'nvim-neotest/neotest-go', lazy = true },
     {
         'nvim-neotest/neotest',
         dependencies = {
@@ -68,6 +65,7 @@ return {
             'nvim-neotest/neotest-python',
             'nvim-neotest/neotest-plenary',
             'nvim-neotest/neotest-go',
+            'rcasia/neotest-java',
             'nvim-neotest/nvim-nio'
         },
         config = function()
@@ -78,6 +76,7 @@ return {
                     }),
                     require("neotest-plenary"),
                     require("neotest-go"),
+                    require("neotest-java")
                 }
             }
         end,

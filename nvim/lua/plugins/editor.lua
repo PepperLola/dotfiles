@@ -36,7 +36,8 @@ return {
     'mfussenegger/nvim-dap',
     {
         'rcarriga/nvim-dap-ui',
-        dependencies = { 'mfussenegger/nvim-dap' }
+        dependencies = { 'mfussenegger/nvim-dap' },
+        config = true
     },
     'theHamsta/nvim-dap-virtual-text',
     'leoluz/nvim-dap-go',
