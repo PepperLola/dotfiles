@@ -156,10 +156,14 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons', "jcdickinson/wpm.nvim" },
         config = function()
             local wpm = require("wpm")
+            local music = require("music")
             require('lualine').setup {
                 sections = {
                     lualine_x = {
-                        wpm.wpm, wpm.historic_graph, "encoding", "fileformat", "filetype"
+                        music.track_name, music.artist_name, wpm.wpm, wpm.historic_graph
+                    },
+                    lualine_y = {
+                        "encoding", "fileformat", "filetype"
                     }
                 }
             }

@@ -276,7 +276,7 @@ if (( ${#*} != 0 )); then
                 # done
                 # cat ./tmp | shortcuts run "Queue Track" && rm ./tmp > /dev/null
                 if [[ $2 == "song" ]]; then
-                    run_command "play the song named \"$3\"" # unsafe but I can't think of another way
+                    run_command "play the track named \"$3\"" # unsafe but I can't think of another way
                 elif [[ $2 == "playlist" ]]; then
                     run_command "play the playlist named \"$3\""
                 else
