@@ -160,7 +160,15 @@ return {
             require('lualine').setup {
                 sections = {
                     lualine_x = {
-                        music.track_name, music.artist_name, wpm.wpm, wpm.historic_graph
+                        function()
+                            local progress = music.progress_vertical()
+                            local str = music.track_name() .. ' - ' .. music.artist_name()
+                            if progress ~= nil then
+                                str = progress .. ' ' .. str
+                            end
+                            return str
+                        end,
+                        wpm.wpm, wpm.historic_graph
                     },
                     lualine_y = {
                         "encoding", "fileformat", "filetype"
