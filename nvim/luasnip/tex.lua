@@ -29,28 +29,11 @@ rec_ls = function()
     )
 end
 
-local typst = {
-    s("diagram", {
-        t({ "#diagram(", "\tnode-stroke: 1pt,", "\tedge-stroke: 1pt,", "\t" }),
-        i(0),
-        t({ "", ")" })
-    }),
-}
-
-local tex = {
+return {
     s("ls", {
         t({ "\\begin{itemize}", "\t\\item " }),
         i(1),
         d(2, rec_ls, {}),
         t({ "", "\\end{itemize}" }),
     }),
-}
-
-return {
-    setup = function()
-        ls.filetype_extend("all", { "_" })
-        ls.add_snippets("typ", typst)
-        ls.add_snippets("tex", tex)
-        require('luasnip.loaders.from_vscode').lazy_load()
-    end,
 }

@@ -27,9 +27,9 @@ return {
         },
         build = "make install_jsregexp",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-            require("luasnip").config.set_config(opts)
-            require("pepperlola.configs.luasnip").setup()
+        config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+            require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/luasnip" } })
         end,
     },
     {
@@ -85,7 +85,7 @@ return {
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_lspconfig()
 
-            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'eslint', 'jdtls', 'kotlin_language_server' }
+            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'eslint', 'jdtls', 'kotlin_language_server', 'typst_lsp' }
 
             lsp_zero.on_attach(function(client, bufnr)
                 lsp_zero.default_keymaps({buffer = bufnr})
