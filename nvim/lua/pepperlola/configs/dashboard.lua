@@ -28,6 +28,9 @@ require('dashboard').setup {
             { action = "Telescope oldfiles",                    desc = " Recent Files", icon = " ", key = "r" },
             { action = "Telescope live_grep",                   desc = " Find Text",    icon = " ", key = "g" },
             { action = "qa",                                    desc = " Quit",         icon = " ", key = "q" },
+            { action = "Music playpause",                       desc = "Play/Pause",    icon = "󰐎 ", key = "p" },
+            { action = "Music next",                            desc = "Next Track",    icon = "󰒭 ", key = "n" },
+            { action = "Music back",                            desc = "Prev Track",    icon = "󰒮 ", key = "b" }
         },
         footer = function()
             local stats = require("lazy").stats()
