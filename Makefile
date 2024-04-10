@@ -19,6 +19,7 @@ gitignore_global:=${ROOT}.gitignore_global
 raycast:=${CONFIG_PATH}raycast
 raycast_scripts:=${raycast}${SEP}scripts
 tmux:=${ROOT}.tmux.conf
+tmux_post:=${ROOT}.tmux${SEP}postprocessing
 zshrc:=${ROOT}.zshrc
 zsh_aliases:=${ROOT}aliases
 zsh_funcs:=${ROOT}funcs
@@ -28,7 +29,7 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${zshrc} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -47,6 +48,9 @@ ${raycast_scripts}:
 
 ${tmux}:
 	ln -s ${WD}tmux${SEP}.tmux.conf ${tmux}
+
+${tmux_post}:
+	ln -s ${WD}tmux${SEP}postprocessing ${tmux_post}
 
 ${zshrc}:
 	ln -s ${WD}zsh${SEP}.zshrc ${zshrc}
@@ -78,6 +82,7 @@ clean:
 	unlink ${gitignore_global}
 	unlink ${raycast_scripts}
 	unlink ${tmux}
+	unlink ${tmux_post}
 	unlink ${zshrc}
 	unlink ${zsh_aliases}
 	unlink ${zsh_funcs}

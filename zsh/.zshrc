@@ -103,8 +103,9 @@ export PATH="$HOME/scripts:$PATH"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 iterm2_print_user_vars() {
-    song="$(/usr/local/bin/music | awk 'NR==1{print $0}')"
-    artist="$(/usr/local/bin/music | awk 'NR==2{print $0}')"
+    data=$(/usr/local/bin/music get-raw)
+    song="$(echo $data | awk 'NR==1{print $0}')"
+    artist="$(echo $data | awk 'NR==2{print $0}')"
     iterm2_set_user_var currentSong "$song - $artist"
 }
 
