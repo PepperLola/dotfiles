@@ -1,1 +1,1 @@
-gsed -i 's/{prefix_highlight} #\[/{prefix_highlight} #\(\/usr\/local\/bin\/music get title\) - #\(\/usr\/local\/bin\/music get artist\) #\[/g' ~/.tmux/plugins/tokyonight.nvim/extras/tmux/tokyonight_storm.tmux
+gsed -i 's/{prefix_highlight} #\[/{prefix_highlight} #\(\/usr\/local\/bin\/music get progressVertical\) #\(\/usr\/local\/bin\/music get stateIcon\) #\(\/usr\/local\/bin\/music get title\) - #\(\/usr\/local\/bin\/music get artist\) #\[/g' ~/.tmux/plugins/tokyonight.nvim/extras/tmux/tokyonight_storm.tmux
