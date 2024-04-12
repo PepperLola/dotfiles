@@ -3,7 +3,6 @@
   "LuaSnip": { "branch": "master", "commit": "be7be2ca7f55bb881a7ffc16b2efa5af034ab06b" },
   "barbar.nvim": { "branch": "master", "commit": "dd852401ee902745b67fc09a83d113b3fe82a96f" },
   "barbecue": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
-  "catppuccin": { "branch": "main", "commit": "08c6417bdc3b29e5f8c53e2cfe4067f288d49a54" },
   "ccc.nvim": { "branch": "main", "commit": "1283eef5494c092a047baa34ed3e667f3cb2715e" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "b7d056dab963b5d3f2c560d92937cb51db61cb5b" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
@@ -69,7 +68,6 @@
   "vim-prettier": { "branch": "master", "commit": "7dbdbb12c50a9f4ba72390cce2846248e4368fd0" },
   "vim-prisma": { "branch": "main", "commit": "95c5b25066efb34c75bce78698baa371fe0ee7c2" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
-  "vim-test": { "branch": "master", "commit": "8746ef06631293d7d47a6daccd95b0ed3e135494" },
   "vim-wakatime": { "branch": "master", "commit": "5d11a253dd1ecabd4612a885175216032d814300" },
   "vimtex": { "branch": "master", "commit": "ac0a41b297a70c101df89bc9c8d43341ba00fd4f" },
   "wpm.nvim": { "branch": "main", "commit": "dba1dd57fe744cd0e09c54fb0b2c334eaed777f8" }
