@@ -128,6 +128,7 @@ brew "osx-cross/avr/avr-gcc@9"
 brew "qmk/qmk/qmk"
 brew "shinokada/tera/tera"
 brew "tomoyanonymous/flatcam/flatcam-beta", link: false
+brew "ripgrep"
 cask "ghidra"
 cask "gstreamer-runtime"
 cask "ngrok"
