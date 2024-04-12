@@ -84,7 +84,6 @@ return {
         end,
     },
     'folke/neodev.nvim',
-    'vim-test/vim-test',
     {
         "kylechui/nvim-surround",
         version = "*",

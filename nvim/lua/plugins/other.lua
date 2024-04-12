@@ -3,7 +3,11 @@ return {
     'ThePrimeagen/vim-be-good',
     'alec-gibson/nvim-tetris',
     'seandewar/nvimesweeper',
-    'jim-fx/sudoku.nvim',
+    {
+        'jim-fx/sudoku.nvim',
+        cmd = "Sudoku",
+        opts = {}
+    },
     'eandrju/cellular-automaton.nvim',
     'wakatime/vim-wakatime',
     {
