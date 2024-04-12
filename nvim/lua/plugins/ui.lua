@@ -19,27 +19,23 @@ return {
     },
     {
         'rcarriga/nvim-notify',
-        config = function()
-            require("notify").setup({
-                background_color = "none"
-            })
-        end,
+        opts = {
+            background_color = "none"
+        }
     },
     {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-        config = function()
-            require("noice").setup {
-                presets = {
-                    bottom_search = true,
-                    command_palette = true,
-                    long_message_to_split = true,
-                    inc_rename = false,
-                    lsp_doc_border = false,
-                }
+        opts = {
+            presets = {
+                bottom_search = true,
+                command_palette = true,
+                long_message_to_split = true,
+                inc_rename = false,
+                lsp_doc_border = false,
             }
-        end,
+        }
     },
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {
@@ -147,9 +143,7 @@ return {
     -- Status line
     {
         'jcdickinson/wpm.nvim',
-        config = function()
-            require('wpm').setup()
-        end,
+        opts = {}
     },
     {
         'nvim-lualine/lualine.nvim',

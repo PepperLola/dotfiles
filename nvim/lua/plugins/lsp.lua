@@ -97,7 +97,12 @@ return {
                     lsp_zero.default_setup,
                     lua_ls = function()
                         local lua_opts = lsp_zero.nvim_lua_ls()
-                        require('lspconfig').lua_ls.setup(lua_opts)
+                        local lspconfig = require('lspconfig')
+                        lspconfig.lua_ls.setup(lua_opts)
+                        lspconfig.clangd.setup {
+                            cmd = { "/opt/homebrew/opt/llvm/bin/clangd", "--background-index" },
+                            root_dir = lspconfig.util.root_pattern("compile_commands.json", ".clangd"),
+                        }
                     end,
                 }
             })

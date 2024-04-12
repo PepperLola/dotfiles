@@ -35,15 +35,13 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
-        config = function()
-            require("obsidian").setup({
-                workspaces = {
-                    {
-                        name = "UBC",
-                        path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/UBC"
-                    },
+        opts = {
+            workspaces = {
+                {
+                    name = "UBC",
+                    path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/UBC"
                 },
-            })
-        end
+            },
+        }
     }
 }

@@ -10,11 +10,9 @@ return {
         "michaelrommel/nvim-silicon",
         lazy = true,
         cmd = "Silicon",
-        config = function()
-            require("silicon").setup({
-                font = "FiraCode NF=34"
-            })
-        end
+        opts = {
+            font = "FiraCode NF=34"
+        }
     },
     "antoinemadec/FixCursorHold.nvim",
 }
