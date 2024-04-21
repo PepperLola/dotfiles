@@ -130,6 +130,7 @@ brew "shinokada/tera/tera"
 brew "tomoyanonymous/flatcam/flatcam-beta", link: false
 brew "ripgrep"
 brew "silicon"
+brew "typst"
 cask "ghidra"
 cask "gstreamer-runtime"
 cask "ngrok"
