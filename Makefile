@@ -21,6 +21,7 @@ raycast_scripts:=${raycast}${SEP}scripts
 tmux:=${ROOT}.tmux.conf
 tmux_post:=${ROOT}.tmux${SEP}postprocessing
 zshrc:=${ROOT}.zshrc
+fzf_git:=${ROOT}fzf-git.sh
 zsh_aliases:=${ROOT}aliases
 zsh_funcs:=${ROOT}funcs
 zsh_scripts:=${ROOT}scripts
@@ -29,7 +30,7 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -54,6 +55,9 @@ ${tmux_post}:
 
 ${zshrc}:
 	ln -s ${WD}zsh${SEP}.zshrc ${zshrc}
+
+${fzf_git}:
+	ln -s ${WD}zsh${SEP}fzf-git.sh ${fzf_git}
 
 ${zsh_aliases}:
 	ln -s ${WD}zsh${SEP}aliases ${zsh_aliases}
