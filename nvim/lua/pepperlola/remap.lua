@@ -112,15 +112,6 @@ vim.keymap.set("n", "<leader>nt", function()
 	vim.cmd.Neorg("toggle-concealer")
 end)
 
--- Debugger
-vim.api.nvim_set_keymap("n", "<leader>dt", ":lua require'dapui'.toggle()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dc", ":lua require'dap'.continue()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dsi", ":lua require'dap'.step_into()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dso", ":lua require'dap'.step_over()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dsu", ":lua require'dap'.step_out()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require'dapui'.open({reset = true})<CR>", {noremap=true})
-
 -- Hex editing
 vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r<CR>", {noremap=true})
