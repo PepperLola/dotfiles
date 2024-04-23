@@ -153,18 +153,18 @@ return {
             require('lualine').setup {
                 sections = {
                     lualine_x = {
-                        function()
-                            local progress = music.progress_vertical()
-                            local state_icon = music.state_icon()
-                            local str = music.track_name() .. ' - ' .. music.artist_name()
-                            if state_icon ~= nil then
-                                str = state_icon .. ' ' .. str
-                            end
-                            if progress ~= nil then
-                                str = progress .. ' ' .. str
-                            end
-                            return str
-                        end,
+                        -- function()
+                        --     local progress = music.progress_vertical()
+                        --     local state_icon = music.state_icon()
+                        --     local str = music.track_name() .. ' - ' .. music.artist_name()
+                        --     if state_icon ~= nil then
+                        --         str = state_icon .. ' ' .. str
+                        --     end
+                        --     if progress ~= nil then
+                        --         str = progress .. ' ' .. str
+                        --     end
+                        --     return str
+                        -- end,
                         wpm.wpm, wpm.historic_graph
                     },
                     lualine_y = {

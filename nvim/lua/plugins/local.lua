@@ -2,6 +2,8 @@ return {
     {
         "music.nvim",
         dir = "~/Desktop/Misc/Lua/music.nvim",
-        opts = {},
+        opts = {
+            disable_timer = true
+        },
     }
 }
