@@ -85,12 +85,21 @@ return {
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_lspconfig()
 
-            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'eslint', 'jdtls', 'kotlin_language_server', 'typst_lsp' }
+            local servers = { 'clangd', 'rust_analyzer', 'pyright', 'eslint', 'jdtls', 'kotlin_language_server',
+                'typst_lsp' }
 
             lsp_zero.on_attach(function(client, bufnr)
-                lsp_zero.default_keymaps({buffer = bufnr})
+                lsp_zero.default_keymaps({ buffer = bufnr })
+                vim.api.nvim_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", { noremap = true });
             end)
-            
+
+            lsp_zero.set_sign_icons({
+                error = '',
+                warn = '',
+                hint = '',
+                info = '',
+            })
+
             require('mason-lspconfig').setup({
                 ensure_installed = servers,
                 handlers = {
