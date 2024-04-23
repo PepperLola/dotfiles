@@ -48,3 +48,8 @@ vim.g.maplocalleader = ";"
 -- Split
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- Treesitter folding 
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldenable = false
