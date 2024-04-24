@@ -53,3 +53,10 @@ vim.opt.splitbelow = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.foldenable = false
+
+vim.g.knap_settings = {
+    htmltohtmlviewerlaunch = "live-server --quiet --open=%outputfile% --watch=%outputfile% --wait=800",
+    htmltohtmlviewerrefresh = "none",
+    mdtohtmlviewerlaunch = "live-server --quiet --open=%outputfile% --watch=%outputfile% --wait=800",
+    mdtohtmlviewerrefresh = "none",
+}

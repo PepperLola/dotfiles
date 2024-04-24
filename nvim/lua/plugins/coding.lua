@@ -16,12 +16,17 @@ return {
         ft = "typst",
         lazy = false,
     },
-    -- 'github/copilot.vim'
+    "frabjous/knap",
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        opts = {}
+        "mbbill/undotree",
+        lazy = false, -- needs to be explicitly set, because of the keys property
+        keys = {
+            {
+                "<leader>u",
+                vim.cmd.UndotreeToggle,
+                desc = "Toggle undotree",
+            },
+        },
     },
     { 'prettier/vim-prettier', build = 'yarn install' },
     {
@@ -96,7 +101,7 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim', 'ThePrimeagen/refactoring.nvim', 'folke/noice.nvim' },
         config = function()
             local builtin = require("telescope.builtin")
-            vim.keymap.set('n', '<C-h>', builtin.find_files, {})
+            vim.keymap.set('n', '<C-f>', builtin.find_files, {})
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
             vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
 

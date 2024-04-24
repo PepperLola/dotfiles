@@ -64,7 +64,7 @@ vim.keymap.set(
 )
 
 -- clang-format
-vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-format.py")
+-- vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-format.py")
 
 -- Racket
 -- SPD Handin
