@@ -10,6 +10,8 @@
     gpgsign = true
 [gpg]
     program = gpg
+[rerere]
+    enabled = true
 [color]
     ui = auto
 [color "branch"]
