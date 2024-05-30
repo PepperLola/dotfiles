@@ -19,6 +19,9 @@ tmux:=${ROOT}.tmux.conf
 tmux_post:=${ROOT}.tmux${SEP}postprocessing
 zshrc:=${ROOT}.zshrc
 starship:=${CONFIG_PATH}starship.toml
+sketchybar:=${CONFIG_PATH}sketchybar
+svim:=${CONFIG_PATH}svim
+borders:=${CONFIG_PATH}borders
 fzf_git:=${ROOT}fzf-git.sh
 zsh_aliases:=${ROOT}aliases
 zsh_funcs:=${ROOT}funcs
@@ -28,7 +31,7 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${starship} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -56,6 +59,15 @@ ${zshrc}:
 
 ${starship}:
 	ln -s ${WD}zsh${SEP}starship.toml ${starship}
+
+${sketchybar}:
+	ln -s ${WD}sketchybar ${sketchybar}
+
+${svim}:
+	ln -s ${WD}svim ${svim}
+
+${borders}:
+	ln -s ${WD}borders ${borders}
 
 ${fzf_git}:
 	ln -s ${WD}zsh${SEP}fzf-git.sh ${fzf_git}
