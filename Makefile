@@ -3,12 +3,9 @@ ifeq ($(OS),Windows_NT)
 	CONFIG_PATH:=%APPDATA%\\Local\\
 	SEP:=\\
 else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Darwin)
-		CONFIG_PATH:=~/.config/
-		SEP:=/
-		ROOT:=~/
-	endif
+	CONFIG_PATH:=~/.config/
+	SEP:=/
+	ROOT:=~/
 endif
 
 WD:=$(shell pwd)/
