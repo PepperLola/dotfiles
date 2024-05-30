@@ -21,6 +21,8 @@ COMPLETION_WAITING_DOTS="%F{yellow}Waiting...%f"
 # Define timestamp format
 HIST_STAMPS="mm/dd/yyyy"
 
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
