@@ -72,6 +72,7 @@ local ssid = sbar.add("item", {
     position = "popup." .. wifi_bracket.name,
     icon = {
         font = {
+            family = settings.font.text,
             style = settings.font.style_map["Bold"]
         },
         string = icons.wifi.router,
@@ -80,8 +81,9 @@ local ssid = sbar.add("item", {
     align = "center",
     label = {
         font = {
-            size = 15,
-            style = settings.font.style_map["Bold"]
+            family = settings.font.text,
+            style = settings.font.style_map["Bold"],
+            size = 15
         },
         max_chars = 18,
         string = "????????????",
