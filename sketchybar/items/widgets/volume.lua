@@ -9,7 +9,7 @@ local volume_percent = sbar.add("item", "widgets.volume1", {
     icon = { drawing = false },
     label = {
         string = "??%",
-        padding_left = -1,
+        padding_left = 1,
         font = { family = settings.font.numbers }
     },
 })
@@ -82,7 +82,7 @@ volume_percent:subscribe("volume_change", function(env)
     end
 
     local lead = ""
-    if volume < 10 then
+    if volume < 10 and volume ~= 0 then
         lead = "0"
     end
 
@@ -112,7 +112,6 @@ local function volume_toggle_details(env)
             current_audio_device = result:sub(1, -2)
             sbar.exec("SwitchAudioSource -a -t output", function(available)
                 current = current_audio_device
-                local color = colors.grey
                 local counter = 0
                 for device in string.gmatch(available, '[^\r\n]+') do
                     local color = colors.grey
