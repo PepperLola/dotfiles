@@ -46,6 +46,8 @@ lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 
 [include]
     path = ~/.gitconfig.personal
+[includeIf "gitdir:~/Desktop/Misc/Work/"]
+    path = ~/.gitconfig.work
 [includeIf "gitdir:~/Desktop/School/"]
     path = ~/.gitconfig.school
 [includeIf "gitdir:~/Desktop/School/Notes/"]
