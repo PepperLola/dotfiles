@@ -1,14 +1,23 @@
 return {
-    'nvim-lua/plenary.nvim',
-    'ThePrimeagen/vim-be-good',
-    'alec-gibson/nvim-tetris',
-    'seandewar/nvimesweeper',
+    {
+        'nvim-lua/plenary.nvim',
+        lazy = true
+    },
+    {
+        'seandewar/nvimesweeper',
+        cmd = 'Nvimesweeper',
+        lazy = true
+    },
     {
         'jim-fx/sudoku.nvim',
         cmd = "Sudoku",
         opts = {}
     },
-    'eandrju/cellular-automaton.nvim',
+    {
+        'eandrju/cellular-automaton.nvim',
+        cmd = 'CellularAutomaton',
+        lazy = true
+    },
     'wakatime/vim-wakatime',
     {
         "michaelrommel/nvim-silicon",
@@ -18,5 +27,4 @@ return {
             font = "FiraCode NF=34"
         }
     },
-    "antoinemadec/FixCursorHold.nvim",
 }

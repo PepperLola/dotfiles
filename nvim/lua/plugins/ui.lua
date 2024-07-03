@@ -18,58 +18,12 @@ return {
         end,
     },
     {
-        'rcarriga/nvim-notify',
-        opts = {
-            background_color = "none"
-        }
+        'nvim-tree/nvim-web-devicons',
+        lazy = true
     },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-        opts = {
-            presets = {
-                bottom_search = true,
-                command_palette = true,
-                long_message_to_split = true,
-                inc_rename = false,
-                lsp_doc_border = false,
-            }
-        }
-    },
-    {
-        "utilyre/barbecue.nvim",
-        name = "barbecue",
-        version = "*",
-        dependencies = {
-            "SmiteshP/nvim-navic",
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            vim.opt.updatetime = 200
-
-            require("barbecue").setup({
-                create_autocmd = false,
-                theme = 'tokyonight'
-            })
-
-            vim.api.nvim_create_autocmd({
-                "WinScrolled",
-                "BufWinEnter",
-                "CursorHold",
-                "InsertLeave",
-            }, {
-                group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-                callback = function()
-                    require("barbecue.ui").update()
-                end,
-            })
-        end,
-    },
-    'ryanoasis/vim-devicons',
-    'nvim-tree/nvim-web-devicons',
     {
         'lewis6991/gitsigns.nvim',
+        lazy = true,
         opts = {
             signs = {
                 add = { text = "▎" },
@@ -181,16 +135,22 @@ return {
     {
         'romgrk/barbar.nvim',
         dependencies = {
-            'lewis6991/gitsigns.nvim',
             'nvim-tree/nvim-web-devicons',
         },
         init = function() vim.g.barbar_auto_setup = false end,
         version = '^1.0.0',
         config = function()
+            vim.g.barbar_auto_setup = false
             require('barbar').setup {
                 animation = true,
                 clickable = true,
-                theme = 'tokyonight'
+                theme = 'tokyonight',
+                icons = {
+                    filetype = {
+                        custom_colors = false,
+                        enabled = true,
+                    },
+                },
             }
 
             local map = vim.api.nvim_set_keymap
@@ -235,53 +195,18 @@ return {
             map('n', '<leader>bw', '<cmd>BufferOrderByWindowNumber<CR>', opts)
         end,
     },
-    -- Status line
-    {
-        'jcdickinson/wpm.nvim',
-        opts = {}
-    },
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', "jcdickinson/wpm.nvim" },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            local wpm = require("wpm")
             require('lualine').setup {
                 sections = {
-                    lualine_x = {
-                        wpm.wpm, wpm.historic_graph
-                    },
                     lualine_y = {
                         "encoding", "fileformat", "filetype"
                     }
                 }
             }
         end,
-    },
-    "SmiteshP/nvim-navic",
-    {
-        "folke/trouble.nvim",
-        cmd = { "TroubleToggle", "Trouble" },
-        opts = { use_diagnostic_signs = true },
-        keys = {
-            { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
-            { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-            { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
-            { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
-        },
-    },
-    {
-        "folke/todo-comments.nvim",
-        cmd = { "TodoTrouble", "TodoTelescope" },
-        event = "VeryLazy",
-        config = true,
-        keys = {
-            { "]t",         function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-            { "[t",         function() require("todo-comments").jump_prev() end, desc = "Prev Todo Comment" },
-            { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
-            { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
-            { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
-            { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
-        }
     },
     {
         'nvimdev/dashboard-nvim',

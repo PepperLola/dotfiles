@@ -7,7 +7,7 @@ return {
     },
     {
         "chomosuke/typst-preview.nvim",
-        lazy = false,
+        ft = "typst",
         version = "0.1.*",
         build = function() require "typst-preview".update() end,
     },
@@ -27,7 +27,6 @@ return {
             },
         },
     },
-    { 'prettier/vim-prettier', build = 'yarn install' },
     {
         'tpope/vim-commentary',
         config = function()
@@ -40,39 +39,23 @@ return {
         end,
     },
     {
-        'uga-rosa/ccc.nvim',
-        opts = {
-            highlighter = {
-                auto_enable = true,
-                lsp = true,
-            }
-        }
-    },
-     {
-      "pmizio/typescript-tools.nvim",
-      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-      opts = {},
-    },
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        opts = {}
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
+        end,
     },
     {
         'nvim-neotest/neotest',
         dependencies = {
             'nvim-lua/plenary.nvim',
             "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim",
             'nvim-neotest/neotest-python',
             'nvim-neotest/neotest-plenary',
             'nvim-neotest/neotest-go',
             'rcasia/neotest-java',
             'nvim-neotest/nvim-nio'
         },
+        lazy = true,
         config = function()
             require("neotest").setup {
                 adapters = {
@@ -86,7 +69,16 @@ return {
             }
         end,
     },
-    'folke/neodev.nvim',
+    {
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            }
+        }
+    },
+    { "Bilal2453/luvit-meta", lazy = true },
     {
         "kylechui/nvim-surround",
         version = "*",
@@ -96,24 +88,23 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'ThePrimeagen/refactoring.nvim', 'folke/noice.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim'},
         config = function()
             local builtin = require("telescope.builtin")
             vim.keymap.set('n', '<C-f>', builtin.find_files, {})
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
             vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
 
-            require("telescope").setup()
-            require("telescope").load_extension("refactoring")
-            require("telescope").load_extension("noice")
+            require("telescope").setup{}
         end,
     },
-    { 'junegunn/fzf', build = ":call fzf#install()" },
-     'junegunn/fzf.vim',
+    { 'junegunn/fzf',         build = ":call fzf#install()" },
+    'junegunn/fzf.vim',
     {
-      "lervag/vimtex",
-      init = function()
-        -- Use init for configuration, don't use the more common "config".
-      end
+        "lervag/vimtex",
+        ft = "tex",
+        init = function()
+            -- Use init for configuration, don't use the more common "config".
+        end
     }
 }
