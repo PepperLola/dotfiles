@@ -16,7 +16,6 @@ return {
         ft = "typst",
         lazy = false,
     },
-    "frabjous/knap",
     {
         "mbbill/undotree",
         lazy = false, -- needs to be explicitly set, because of the keys property
@@ -54,7 +53,6 @@ return {
       dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
       opts = {},
     },
-    'prisma/vim-prisma',
     {
         "ThePrimeagen/refactoring.nvim",
         dependencies = {

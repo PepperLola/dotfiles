@@ -70,7 +70,6 @@ return {
     'nvim-tree/nvim-web-devicons',
     {
         'lewis6991/gitsigns.nvim',
-        event = "VeryLazy",
         opts = {
             signs = {
                 add = { text = "▎" },
@@ -79,6 +78,103 @@ return {
                 topdelete = { text = "" },
                 changedelete = { text = "▎" },
                 untracked = { text = "▎" },
+            },
+        },
+        keys = {
+            {
+                "<leader>hs",
+                function()
+                    require("gitsigns").stage_hunk()
+                end,
+                mode = "n",
+                desc = "Stage hunk",
+            },
+            {
+                "<leader>hr",
+                function()
+                    require("gitsigns").reset_hunk()
+                end,
+                mode = "n",
+                desc = "Reset hunk",
+            },
+            {
+                "<leader>hs",
+                function()
+                    require("gitsigns").stage_hunk { vim.fn.line('.'), vim.fn.line('v') }
+                end,
+                mode = "v",
+                desc = "Stage hunk",
+            },
+            {
+                "<leader>hr",
+                function()
+                    require("gitsigns").reset_hunk { vim.fn.line('.'), vim.fn.line('v') }
+                end,
+                mode = "v",
+                desc = "Reset hunk",
+            },
+            {
+                "<leader>hS",
+                function()
+                    require("gitsigns").stage_buffer()
+                end,
+                desc = "Stage buffer",
+            },
+            {
+                "<leader>hu",
+                function()
+                    require("gitsigns").undo_stage_hunk()
+                end,
+                desc = "Undo stage hunk",
+            },
+            {
+                "<leader>hR",
+                function()
+                    require("gitsigns").reset_buffer()
+                end,
+                desc = "Reset buffer",
+            },
+            {
+                "<leader>hp",
+                function()
+                    require("gitsigns").preview_hunk()
+                end,
+                desc = "Preview hunk",
+            },
+            {
+                "<leader>hb",
+                function()
+                    require("gitsigns").blame_line { full = true }
+                end,
+                desc = "Blame line",
+            },
+            {
+                "<leader>tb",
+                function()
+                    require("gitsigns").toggle_current_line_blame()
+                end,
+                desc = "Toggle line blame",
+            },
+            {
+                "<leader>hd",
+                function()
+                    require("gitsigns").diffthis()
+                end,
+                desc = "Diff",
+            },
+            {
+                "<leader>hD",
+                function()
+                    require("gitsigns").diffthis('~')
+                end,
+                desc = "Buffer diff",
+            },
+            {
+                "<leader>td",
+                function()
+                    require("gitsigns").toggle_deleted()
+                end,
+                desc = "Toggle deleted",
             },
         },
     },
@@ -149,22 +245,9 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons', "jcdickinson/wpm.nvim" },
         config = function()
             local wpm = require("wpm")
-            local music = require("music")
             require('lualine').setup {
                 sections = {
                     lualine_x = {
-                        -- function()
-                        --     local progress = music.progress_vertical()
-                        --     local state_icon = music.state_icon()
-                        --     local str = music.track_name() .. ' - ' .. music.artist_name()
-                        --     if state_icon ~= nil then
-                        --         str = state_icon .. ' ' .. str
-                        --     end
-                        --     if progress ~= nil then
-                        --         str = progress .. ' ' .. str
-                        --     end
-                        --     return str
-                        -- end,
                         wpm.wpm, wpm.historic_graph
                     },
                     lualine_y = {
@@ -177,13 +260,13 @@ return {
     "SmiteshP/nvim-navic",
     {
         "folke/trouble.nvim",
-        cmd = {  "TroubleToggle", "Trouble" },
+        cmd = { "TroubleToggle", "Trouble" },
         opts = { use_diagnostic_signs = true },
         keys = {
-            { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+            { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
             { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-            { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-            { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+            { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+            { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
         },
     },
     {
@@ -192,12 +275,12 @@ return {
         event = "VeryLazy",
         config = true,
         keys = {
-            { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-            { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev Todo Comment" },
-            { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-            { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-            { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-            { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+            { "]t",         function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
+            { "[t",         function() require("todo-comments").jump_prev() end, desc = "Prev Todo Comment" },
+            { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
+            { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
+            { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
+            { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
         }
     },
     {

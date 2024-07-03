@@ -113,6 +113,8 @@ return {
                             cmd = { "/opt/homebrew/opt/llvm/bin/clangd", "--background-index" },
                             root_dir = lspconfig.util.root_pattern("compile_commands.json", ".clangd"),
                         }
+                        lspconfig.rust_analyzer.setup {}
+                        lspconfig.pyright.setup {}
                     end,
                 }
             })
