@@ -17,6 +17,7 @@ raycast:=${CONFIG_PATH}raycast
 raycast_scripts:=${raycast}${SEP}scripts
 tmux:=${ROOT}.tmux.conf
 tmux_post:=${ROOT}.tmux${SEP}postprocessing
+kitty:=${CONFIG_PATH}kitty
 zshrc:=${ROOT}.zshrc
 starship:=${CONFIG_PATH}starship.toml
 sketchybar:=${CONFIG_PATH}sketchybar
@@ -31,7 +32,7 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${kitty} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -53,6 +54,9 @@ ${tmux}:
 
 ${tmux_post}:
 	ln -s ${WD}tmux${SEP}postprocessing ${tmux_post}
+
+${kitty}:
+	ln -s ${WD}kitty ${kitty}
 
 ${zshrc}:
 	ln -s ${WD}zsh${SEP}.zshrc ${zshrc}
