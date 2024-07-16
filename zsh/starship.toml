@@ -3,10 +3,6 @@ $directory\
 $git_branch\
 $git_status\
 $git_state\
-$nodejs\
-$rust\
-$golang\
-$typst\
 $character
 """
 
@@ -33,10 +29,10 @@ ssh_only = false
 
 [directory]
 style = "fg:#2ac3de"
-format = "[ $path ]($style)"
+format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
-read_only = " 󰌾"
+read_only = "󰌾 "
 
 [directory.substitutions]
 "Documents" = "󰈙 "
