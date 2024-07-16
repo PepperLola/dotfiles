@@ -31,8 +31,9 @@ vscode:=${ROOT}.vscode
 vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
+yazi:=${CONFIG_PATH}yazi
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${kitty} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${kitty} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -97,17 +98,29 @@ ${skhd}:
 ${yabai}:
 	ln -s ${WD}yabai ${yabai}
 
+${yazi}:
+	ln -s ${WD}yazi ${yazi}
+
 clean:
 	unlink ${nvim}
 	unlink ${gitconfig}
 	unlink ${gitignore_global}
+	unlink ${raycast}
 	unlink ${raycast_scripts}
 	unlink ${tmux}
 	unlink ${tmux_post}
+	unlink ${kitty}
 	unlink ${zshrc}
+	unlink ${starship}
+	unlink ${sketchybar}
+	unlink ${svim}
+	unlink ${borders}
+	unlink ${fzf_git}
 	unlink ${zsh_aliases}
 	unlink ${zsh_funcs}
 	unlink ${zsh_scripts}
+	unlink ${vscode}
 	unlink ${vscode_styles}
 	unlink ${skhd}
 	unlink ${yabai}
+	unlink ${yazi}
