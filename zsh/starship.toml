@@ -29,7 +29,7 @@ ssh_only = false
 
 [directory]
 style = "fg:#2ac3de"
-format = "[ $path]($style)"
+format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 read_only = "󰌾 "
@@ -43,7 +43,7 @@ read_only = "󰌾 "
 [git_branch]
 symbol = ""
 style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#7aa2f7)]($style)'
+format = '[[$symbol $branch ](fg:#7aa2f7)]($style)'
 
 [git_status]
 style = "bg:#394260"
