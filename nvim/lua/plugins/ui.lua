@@ -183,13 +183,7 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            require('lualine').setup {
-                sections = {
-                    lualine_y = {
-                        "encoding", "fileformat", "filetype"
-                    }
-                }
-            }
+            require('lualine').setup {}
         end,
     },
     {
