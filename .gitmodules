@@ -1,3 +1,15 @@
 [submodule "zsh/fzf-git.sh"]
 	path = zsh/fzf-git.sh
 	url = https://github.com/junegunn/fzf-git.sh.git
+[submodule "yazi/plugins/glow.yazi"]
+	path = yazi/plugins/glow.yazi
+	url = https://github.com/Reledia/glow.yazi.git
+[submodule "yazi/plugins/exifaudio.yazi"]
+	path = yazi/plugins/exifaudio.yazi
+	url = https://github.com/Sonico98/exifaudio.yazi.git
+[submodule "yazi/plugins/ouch.yazi"]
+	path = yazi/plugins/ouch.yazi
+	url = https://github.com/ndtoan96/ouch.yazi.git
+[submodule "yazi/plugins/hexyl.yazi"]
+	path = yazi/plugins/hexyl.yazi
+	url = https://github.com/Reledia/hexyl.yazi.git
