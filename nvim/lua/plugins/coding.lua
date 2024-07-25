@@ -88,14 +88,16 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim'},
+        dependencies = { 'nvim-lua/plenary.nvim', 'MaximilianLloyd/ascii.nvim' },
         config = function()
             local builtin = require("telescope.builtin")
             vim.keymap.set('n', '<C-f>', builtin.find_files, {})
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
             vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
 
-            require("telescope").setup{}
+            local telescope = require'telescope'
+            telescope.setup{}
+            telescope.load_extension('ascii')
         end,
     },
     { 'junegunn/fzf',         build = ":call fzf#install()" },

@@ -193,5 +193,6 @@ return {
             require('pepperlola.configs.dashboard')
         end,
         dependencies = { 'nvim-tree/nvim-web-devicons' }
-    }
+    },
+    "MaximilianLloyd/ascii.nvim"
 }
