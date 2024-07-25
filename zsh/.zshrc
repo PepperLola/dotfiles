@@ -25,10 +25,6 @@ export PATH="$PATH:/opt/homebrew/opt/john-jumbo/share/john"
 
 export JAVA_HOME=$(/usr/libexec/java_home -v17)
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export VIRTUAL_ENV_DISABLE_PROMPT=
 export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
@@ -51,21 +47,27 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 # fzf
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
 _fzf_compgen_path() {
-    fd --hidden --exclude .git . "$1"
+    fd --hidden --follow --exclude ".git" . "$1"
 }
 
 _fzf_compgen_dir() {
-    fd --type=d --hidden --exclude .git . "$1"
+    fd --type=d --hidden --follow --exclude ".git" . "$1"
 }
 
 source ~/fzf-git.sh/fzf-git.sh
+
+compinit
+_comp_options+=(globdots) # include hidden files
+
+source <(fnm completions --shell zsh)
+eval "$(fnm env --use-on-cd)"
 
 function iplot {
     cat <<EOF | gnuplot
