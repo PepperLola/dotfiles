@@ -63,6 +63,7 @@ _fzf_compgen_dir() {
 
 source ~/fzf-git.sh/fzf-git.sh
 
+autoload -Uz compinit
 compinit
 _comp_options+=(globdots) # include hidden files
 
