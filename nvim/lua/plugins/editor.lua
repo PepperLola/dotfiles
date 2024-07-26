@@ -45,11 +45,11 @@ return {
             }
         end,
         keys = {
-            {"<leader>gs", ":Neogit<CR>", desc = '[g]it [s]tatus'},
-            {"<leader>gc", ":Neogit commit<CR>", desc = '[g]it [c]ommit'},
-            {"<leader>gp", ":Neogit pull<CR>", desc = '[g]it [p]ull'},
-            {"<leader>gP", ":Neogit push<CR>", desc = '[g]it [P]ush'},
-            {"<leader>gb", require('telescope.builtin').git_branches, desc = '[g]it [b]ranches'},
+            { "<leader>gs", ":Neogit<CR>",                             desc = '[g]it [s]tatus' },
+            { "<leader>gc", ":Neogit commit<CR>",                      desc = '[g]it [c]ommit' },
+            { "<leader>gp", ":Neogit pull<CR>",                        desc = '[g]it [p]ull' },
+            { "<leader>gP", ":Neogit push<CR>",                        desc = '[g]it [P]ush' },
+            { "<leader>gb", require('telescope.builtin').git_branches, desc = '[g]it [b]ranches' },
         }
     },
     'subnut/nvim-ghost.nvim',
@@ -60,8 +60,8 @@ return {
                 'rcarriga/nvim-dap-ui',
                 dependencies = { 'mfussenegger/nvim-dap' },
                 keys = {
-                    { "<leader>du", function() require("dapui").toggle({}) end,  desc = "Dap UI" },
-                    { "<leader>de", function() require("dapui").eval() end,      desc = "Eval",  mode = { "n", "v" } },
+                    { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+                    { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
                 },
                 opts = {},
                 config = function(_, opts)
@@ -131,4 +131,13 @@ return {
     },
     'theHamsta/nvim-dap-virtual-text',
     'leoluz/nvim-dap-go',
+    {
+        'MeanderingProgrammer/markdown.nvim',
+        main = "render-markdown",
+        opts = {},
+        name = 'render-markdown',                                                  -- Only needed if you have another plugin named markdown.nvim
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    }
 }
