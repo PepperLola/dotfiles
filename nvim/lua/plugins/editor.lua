@@ -14,6 +14,11 @@ end
 return {
     'HiPhish/rainbow-delimiters.nvim',
     {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {}
+    },
+    {
         'ThePrimeagen/harpoon',
         config = function()
             local mark = require("harpoon.mark")
