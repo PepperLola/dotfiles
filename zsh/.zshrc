@@ -23,7 +23,7 @@ export PATH="$PATH:$HOME/CEdev/bin"
 export PATH="$PATH:~/tools/john/run"
 export PATH="$PATH:/opt/homebrew/opt/john-jumbo/share/john"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v17)
+export JAVA_HOME=$(/usr/libexec/java_home -v21)
 
 export VIRTUAL_ENV_DISABLE_PROMPT=
 export LC_CTYPE=en_US.UTF-8
