@@ -11,7 +11,7 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                tsserver = {
+                ts_ls = {
                     keys = {
                         {
                             "<leader>co",
