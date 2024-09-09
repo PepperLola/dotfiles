@@ -21,7 +21,7 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "pyright",
-                    "tsserver",
+                    "ts_ls",
                     "eslint",
                     "tailwindcss",
                     "emmet_language_server",
@@ -157,9 +157,6 @@ return {
 
             mason_lspconfig.setup_handlers({
                 function(server_name)
-                    if server_name == "tsserver" then
-                        server_name = "ts_ls"
-                    end
                     lspconfig[server_name].setup({
                         capabilities = capabilities,
                         on_attach = on_attach,
