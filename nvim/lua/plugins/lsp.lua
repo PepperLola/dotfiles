@@ -28,7 +28,7 @@ return {
                     "jsonls",
                     "rust_analyzer",
                     "svelte",
-                    "typst_lsp",
+                    "tinymist",
                     "clangd",
                     "jdtls",
                     "kotlin_language_server",
@@ -151,6 +151,9 @@ return {
 
                 opts.desc = "Restart LSP"
                 keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+                opts.desc = "Format Buffer"
+                keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
             end
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
