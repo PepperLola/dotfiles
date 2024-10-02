@@ -24,4 +24,11 @@ return {
         i(0),
         t({ "", ")" })
     }),
+    s("clicker", {
+        t({ "#clicker(question: [" }),
+        i(1),
+        t({ "], options: (" }),
+        i(2),
+        t({ "), answer: \"" }), i(3), t({ "\")" })
+    }),
 }
