@@ -193,5 +193,13 @@ return {
         end,
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
-    "MaximilianLloyd/ascii.nvim"
+    "MaximilianLloyd/ascii.nvim",
+    {
+        "3rd/image.nvim",
+        config = function()
+            require("image").setup({
+                backend = "kitty"
+            })
+        end
+    }
 }

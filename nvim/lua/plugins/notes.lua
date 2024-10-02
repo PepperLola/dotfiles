@@ -26,6 +26,10 @@ return {
                             Synthesis = "~/Desktop/Misc/Synthesis",
                         }
                     }
+                },
+                ["core.latex.renderer"] = {
+                    conceal = false,
+                    render_on_enter = true
                 }
             }
         }
