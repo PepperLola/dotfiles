@@ -48,6 +48,24 @@ return {
         },
         build = "make install_jsregexp",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        keys = {
+            {
+                "<C-L>",
+                function()
+                    require("luasnip").jump(1)
+                end,
+                mode = { "i", "s" },
+                desc = "Jump forward",
+            },
+            {
+                "<C-J>",
+                function()
+                    require("luasnip").jump(-1)
+                end,
+                mode = { "i", "s" },
+                desc = "Jump backward",
+            },
+        },
         config = function()
             require('luasnip.loaders.from_vscode').lazy_load()
             require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/luasnip" } })
@@ -191,6 +209,14 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
                 filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+            })
+
+            lspconfig.clangd.setup({
+                cmd = { "clangd" },
+                capabilities = capabilities,
+                on_attach = on_attach,
+                filetypes = { "c", "cpp", "cc" },
+                root_dir = require('lspconfig').util.root_pattern("compile_commands.json", ".git")
             })
         end,
     },
