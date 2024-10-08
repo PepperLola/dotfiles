@@ -1,6 +1,8 @@
 alias gcsm="git commit --gpg-sign --message"
 alias gc="gcsm"
 
+alias gusm="git submodule update --recursive --remote --merge"
+
 # git restore unity files I don't want to push
 alias gru="git restore *.csproj engine.sln UserSettings/EditorUserSettings.asset"
 function gemc() {
