@@ -24,6 +24,7 @@ return {
     {
         'lewis6991/gitsigns.nvim',
         lazy = true,
+        event = "BufEnter",
         opts = {
             signs = {
                 add = { text = "▎" },
@@ -33,6 +34,7 @@ return {
                 changedelete = { text = "▎" },
                 untracked = { text = "▎" },
             },
+            signcolumn = true,
         },
         keys = {
             {
