@@ -126,4 +126,11 @@ zcomet load zsh-users/zsh-syntax-highlighting
 
 zcomet compinit
 
+# zsh-autocomplete keybinds
+bindkey '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+
+bindkey -M menuselect '^I' menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+
 # ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
