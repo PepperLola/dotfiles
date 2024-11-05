@@ -46,7 +46,7 @@ return {
                     telescope = true,
                     diffview = true
                 },
-                graph_style = "unicode"
+                graph_style = "kitty"
             }
         end,
         keys = {
