@@ -6,6 +6,10 @@ return {
                 vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
             end
         end,
+        dependencies = {
+            { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+        },
+        build = ":TSUpdate",
     },
     {
         "neovim/nvim-lspconfig",
@@ -65,7 +69,8 @@ return {
         },
         opts = function()
             require("dap-vscode-js").setup({
-                debugger_path = require("mason-registry").get_package("js-debug-adapter"):get_install_path() .. "/js-debug/src/dapDebugServer.js",
+                debugger_path = require("mason-registry").get_package("js-debug-adapter"):get_install_path() ..
+                    "/js-debug/src/dapDebugServer.js",
                 debugger_cmd = { 'js-debug-adapter' },
                 adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
             })
@@ -81,7 +86,7 @@ return {
                     }
                 }
             }
-            for _, language in ipairs({"typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+            for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
                 dap.configurations[language] = {
                     {
                         name = "Launch file",

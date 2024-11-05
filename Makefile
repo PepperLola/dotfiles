@@ -4,6 +4,7 @@ ifeq ($(OS),Windows_NT)
 	SEP:=\\
 else
 	CONFIG_PATH:=~/.config/
+	NU_PATH=~/Library/Application\ Support/nushell/
 	SEP:=/
 	ROOT:=~/
 endif
@@ -32,8 +33,9 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 yazi:=${CONFIG_PATH}yazi
+nu:=${CONFIG_PATH}nushell
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${tmux} ${tmux_post} ${kitty} ${zshrc} ${starship} ${sketchybar} ${svim} ${borders} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi} ${nu}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -101,11 +103,13 @@ ${yabai}:
 ${yazi}:
 	ln -s ${WD}yazi ${yazi}
 
+${nu}:
+	ln -s ${WD}nushell ${nu}
+
 clean:
 	unlink ${nvim}
 	unlink ${gitconfig}
 	unlink ${gitignore_global}
-	unlink ${raycast}
 	unlink ${raycast_scripts}
 	unlink ${tmux}
 	unlink ${tmux_post}
@@ -119,8 +123,8 @@ clean:
 	unlink ${zsh_aliases}
 	unlink ${zsh_funcs}
 	unlink ${zsh_scripts}
-	unlink ${vscode}
 	unlink ${vscode_styles}
 	unlink ${skhd}
 	unlink ${yabai}
 	unlink ${yazi}
+	unlink ${nu}
