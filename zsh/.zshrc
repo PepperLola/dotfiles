@@ -112,6 +112,9 @@ source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
 
 source <(fnm completions --shell zsh)
 source <(rustup completions zsh)
+glow completion zsh > ~/.zfunc/_glow
+poetry completions zsh > ~/.zfunc/_poetry
+fpath+=~/.zfunc
 # source <(rustup completions zsh cargo)
 eval "$(fnm env --use-on-cd)"
 
