@@ -1,2 +1,2 @@
-export alias cr = RUST_BACKTRACE=1 cargo run
+export alias cr = with-env { RUST_BACKTRACE: 1 } { cargo run }
 alias ct = cargo test

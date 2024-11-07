@@ -92,18 +92,19 @@ $env.NU_PLUGIN_DIRS = [
 # which is built into the nushell stdlib:
 use std "path add"
 
-path add ((brew --prefix) + "/bin")
+path add "/opt/homebrew/bin"
+# path add ((brew --prefix) + "/bin")
 path add ((brew --prefix) + "/opt/llvm/bin")
 path add "/opt/node/bin"
 path add ($env.HOME + "/CEDev/bin")
 path add ($env.HOME + "/Desktop/Misc/Scripts")
 path add ($env.HOME + "/go/bin")
 path add ($env.HOME + "/scripts")
+path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
 
 # bun
 path add ($env.HOME + "/.bun/bin")
 
-# path add ($env.CARGO_HOME | path join "bin")
 # path add ($env.HOME | path join ".local" "bin")
 # $env.PATH = ($env.PATH | uniq)
 
