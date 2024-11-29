@@ -34,8 +34,9 @@ skhd:=${CONFIG_PATH}skhd
 yabai:=${CONFIG_PATH}yabai
 yazi:=${CONFIG_PATH}yazi
 nu:=${CONFIG_PATH}nushell
+aerospace:=${CONFIG_PATH}aerospace
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi} ${nu}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi} ${nu} ${aerospace}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -106,6 +107,9 @@ ${yazi}:
 ${nu}:
 	ln -s ${WD}nushell ${nu}
 
+${aerospace}:
+	ln -s ${WD}aerospace ${aerospace}
+
 clean:
 	unlink ${nvim}
 	unlink ${gitconfig}
@@ -128,3 +132,4 @@ clean:
 	unlink ${yabai}
 	unlink ${yazi}
 	unlink ${nu}
+	unlink ${aerospace}
