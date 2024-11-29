@@ -4,6 +4,7 @@ return {
         priority = 1000,
         config = true
     },
+    { "benlubas/neorg-interim-ls" },
     {
         "nvim-neorg/neorg",
         dependencies = {"luarocks.nvim"},
@@ -14,9 +15,20 @@ return {
                 ["core.defaults"] = {},
                 ["core.concealer"] = {},
                 ["core.highlights"] = {},
+                ["external.interim-ls"] = {
+                    config = {
+                        completion_provider = {
+                            enable = true,
+                            documentation = true,
+                            categories = false
+                        }
+                    }
+                },
                 ["core.completion"] = {
                     config = {
-                        engine = "nvim-cmp",
+                        engine = {
+                            module_name = "external.lsp-completion"
+                        }
                     }
                 },
                 ["core.dirman"] = {
