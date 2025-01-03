@@ -103,6 +103,7 @@ path add ($env.HOME + "/Desktop/Misc/Scripts")
 path add ($env.HOME + "/go/bin")
 path add ($env.HOME + "/scripts")
 path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
+path add "/opt/homebrew/anaconda3/bin"
 
 # bun
 path add ($env.HOME + "/.bun/bin")
