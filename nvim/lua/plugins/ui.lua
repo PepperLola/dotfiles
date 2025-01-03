@@ -18,6 +18,16 @@ return {
         end,
     },
     {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify"
+        }
+    },
+    {
         'nvim-tree/nvim-web-devicons',
         lazy = true
     },
@@ -235,14 +245,6 @@ return {
             }
 
         end,
-    },
-    {
-        'nvimdev/dashboard-nvim',
-        event = 'VimEnter',
-        config = function()
-            require('pepperlola.configs.dashboard')
-        end,
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
     "MaximilianLloyd/ascii.nvim",
     {

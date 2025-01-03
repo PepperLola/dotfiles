@@ -115,50 +115,6 @@ return {
         },
         opts_extend = { "sources.completion.enabled_providers" }
     },
-    -- {
-    --     'hrsh7th/nvim-cmp',
-    --     event = 'InsertEnter',
-    --     dependencies = {
-    --         { 'L3MON4D3/LuaSnip', 'onsails/lspkind.nvim', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path' },
-    --     },
-    --     config = function()
-    --         local cmp = require('cmp')
-    --         local luasnip = require('luasnip')
-    --         local lspkind = require('lspkind')
-
-    --         cmp.setup({
-    --             formatting = {
-    --                 format = lspkind.cmp_format({
-    --                     maxwidth = 50,
-    --                     ellipsis_char = '...',
-    --                 })
-    --             },
-    --             mapping = cmp.mapping.preset.insert({
-    --                 ['<C-Space>'] = cmp.mapping.complete(),
-    --                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    --                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    --             }),
-    --             sources = cmp.config.sources({
-    --                 { name = 'nvim_lsp' },
-    --                 { name = 'luasnip' },
-    --                 { name = "neorg" },
-    --                 { name = "lazydev", group_index = 0 },
-    --             }, {
-    --                 { name = 'buffer' },
-    --                 { name = 'path' },
-    --             }),
-    --             snippet = {
-    --                 expand = function(args)
-    --                     luasnip.lsp_expand(args.body)
-    --                 end,
-    --             },
-    --         })
-    --     end,
-    -- },
-    -- {
-    --     'hrsh7th/cmp-nvim-lsp',
-    --     lazy = true,
-    -- },
     {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },

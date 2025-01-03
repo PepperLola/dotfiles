@@ -1,9 +1,5 @@
 return {
     {
-        'nvim-lua/plenary.nvim',
-        lazy = true
-    },
-    {
         'seandewar/nvimesweeper',
         cmd = 'Nvimesweeper',
         lazy = true
