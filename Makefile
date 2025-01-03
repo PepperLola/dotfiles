@@ -16,27 +16,21 @@ gitconfig:=${ROOT}.gitconfig
 gitignore_global:=${ROOT}.gitignore_global
 raycast:=${CONFIG_PATH}raycast
 raycast_scripts:=${raycast}${SEP}scripts
-tmux:=${ROOT}.tmux.conf
-tmux_post:=${ROOT}.tmux${SEP}postprocessing
 kitty:=${CONFIG_PATH}kitty
 zshrc:=${ROOT}.zshrc
 starship:=${CONFIG_PATH}starship.toml
 sketchybar:=${CONFIG_PATH}sketchybar
-svim:=${CONFIG_PATH}svim
-borders:=${CONFIG_PATH}borders
 fzf_git:=${ROOT}fzf-git.sh
 zsh_aliases:=${ROOT}aliases
 zsh_funcs:=${ROOT}funcs
 zsh_scripts:=${ROOT}scripts
 vscode:=${ROOT}.vscode
 vscode_styles:=${ROOT}.vscode${SEP}styles
-skhd:=${CONFIG_PATH}skhd
-yabai:=${CONFIG_PATH}yabai
 yazi:=${CONFIG_PATH}yazi
 nu:=${CONFIG_PATH}nushell
 aerospace:=${CONFIG_PATH}aerospace
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${skhd} ${yabai} ${yazi} ${nu} ${aerospace}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${sketchybar} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${yazi} ${nu} ${aerospace}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -53,12 +47,6 @@ ${raycast}:
 ${raycast_scripts}:
 	ln -s ${WD}raycast${SEP}scripts ${raycast}
 
-${tmux}:
-	ln -s ${WD}tmux${SEP}.tmux.conf ${tmux}
-
-${tmux_post}:
-	ln -s ${WD}tmux${SEP}postprocessing ${tmux_post}
-
 ${kitty}:
 	ln -s ${WD}kitty ${kitty}
 
@@ -70,12 +58,6 @@ ${starship}:
 
 ${sketchybar}:
 	ln -s ${WD}sketchybar ${sketchybar}
-
-${svim}:
-	ln -s ${WD}svim ${svim}
-
-${borders}:
-	ln -s ${WD}borders ${borders}
 
 ${fzf_git}:
 	ln -s ${WD}zsh${SEP}fzf-git.sh ${fzf_git}
@@ -95,12 +77,6 @@ ${vscode}:
 ${vscode_styles}:
 	ln -s ${WD}vscode${SEP}styles ${vscode_styles}
 
-${skhd}:
-	ln -s ${WD}skhd ${skhd}
-
-${yabai}:
-	ln -s ${WD}yabai ${yabai}
-
 ${yazi}:
 	ln -s ${WD}yazi ${yazi}
 
@@ -115,21 +91,15 @@ clean:
 	unlink ${gitconfig}
 	unlink ${gitignore_global}
 	unlink ${raycast_scripts}
-	unlink ${tmux}
-	unlink ${tmux_post}
 	unlink ${kitty}
 	unlink ${zshrc}
 	unlink ${starship}
 	unlink ${sketchybar}
-	unlink ${svim}
-	unlink ${borders}
 	unlink ${fzf_git}
 	unlink ${zsh_aliases}
 	unlink ${zsh_funcs}
 	unlink ${zsh_scripts}
 	unlink ${vscode_styles}
-	unlink ${skhd}
-	unlink ${yabai}
 	unlink ${yazi}
 	unlink ${nu}
 	unlink ${aerospace}
