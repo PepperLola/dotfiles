@@ -17,6 +17,11 @@ vim.keymap.set("n", "<C-Right>", "<cmd>vertlca resize +2<cr>", { desc = "Increas
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Typst keybinds to make visual selection bold/italic/underlined
+vim.keymap.set("v", "<C-b>", "Os#text(weight: \"bold\")[<esc>pa]<esc>")
+vim.keymap.set("v", "<C-i>", "Os#emph[<esc>pa]<esc>")
+vim.keymap.set("v", "<C-u>", "Os#underline[<esc>pa]<esc>")
+
 -- Keep cursor in place when joining lines
 vim.keymap.set("n", "J", "mzJ`z")
 -- Keep cursor in center when jumping half pages
