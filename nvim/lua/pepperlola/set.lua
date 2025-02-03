@@ -2,6 +2,9 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+-- Timeout (for mini.surround vs substitute)
+vim.opt.timeoutlen = 200
+
 -- Indentation
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

@@ -77,12 +77,6 @@ return {
     },
     { "Bilal2453/luvit-meta", lazy = true },
     {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "VeryLazy",
-        opts = {}
-    },
-    {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim', 'MaximilianLloyd/ascii.nvim' },
