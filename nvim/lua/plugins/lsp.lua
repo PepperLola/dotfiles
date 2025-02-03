@@ -53,7 +53,6 @@ return {
         'L3MON4D3/LuaSnip',
         lazy = true,
         dependencies = {
-            "leiserfg/blink_luasnip",
             "rafamadriz/friendly-snippets"
         },
         build = "make install_jsregexp",
@@ -84,8 +83,8 @@ return {
     {
         'saghen/blink.cmp',
         lazy = false,
-        dependencies = { 'L3MON4D3/LuaSnip', 'leiserfg/blink_luasnip', 'rafamadriz/friendly-snippets' },
-        version = 'v0.*',
+        dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+        version = '*',
         opts = {
             -- for some reason uninstalls luasnip and other related plugins??
             -- accept = {
@@ -96,24 +95,11 @@ return {
                 use_nvim_cmp_as_default = true,
                 nerd_font_variant = 'mono'
             },
+            snippets = { preset = "luasnip" },
             sources = {
-                completion = {
-                    enabled_providers = { 'lsp', 'path', 'luasnip', 'snippets', 'buffer' },
-                },
-                providers = {
-                    luasnip = {
-                        name = "luasnip",
-                        module = "blink_luasnip",
-                        score_offset = -3,
-                        opts = {
-                            use_show_condition = false,
-                            show_autosnippets = true,
-                        }
-                    }
-                },
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
-        },
-        opts_extend = { "sources.completion.enabled_providers" }
+        }
     },
     {
         'neovim/nvim-lspconfig',
