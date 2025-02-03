@@ -18,3 +18,11 @@ export def ramdp [] {
     launchctl unload com.github.pepperlola.amdp.plist
     launchctl load com.github.pepperlola.amdp.plist
 }
+
+export def gen_bytes [
+    count: number
+    path: path
+    --no-null (-n)
+] {
+    1..($count) | each {|it| $it mod 256 } | into binary -c | bytes collect | save -f --raw $path
+}
