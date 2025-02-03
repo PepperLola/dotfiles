@@ -48,6 +48,8 @@ format = '[[$symbol $branch ](fg:#7aa2f7)]($style)'
 [git_status]
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#7dcfff)]($style)'
+ignore_submodules = true
+untracked = ""
 
 [git_metrics]
 disabled = false

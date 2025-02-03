@@ -6,6 +6,8 @@
     defaultBranch = main
 [core]
     excludesfile = ~/.gitignore_global
+[feature]
+    manyFiles = true
 [commit]
     gpgsign = true
 [gpg]
