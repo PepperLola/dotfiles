@@ -32,14 +32,14 @@ require('dashboard').setup {
             statusline = false,
         },
         center = {
-            { action = require("telescope.builtin").find_files, desc = " Find File",    icon = " ", key = "f" },
-            { action = "ene | startinsert",                     desc = " New File",     icon = " ", key = "n" },
-            { action = "Telescope oldfiles",                    desc = " Recent Files", icon = " ", key = "r" },
-            { action = "Telescope live_grep",                   desc = " Find Text",    icon = " ", key = "g" },
-            { action = "qa",                                    desc = " Quit",         icon = " ", key = "q" },
-            { action = "Music playpause",                       desc = "Play/Pause",    icon = "󰐎 ", key = "p" },
-            { action = "Music next",                            desc = "Next Track",    icon = "󰒭 ", key = "n" },
-            { action = "Music back",                            desc = "Prev Track",    icon = "󰒮 ", key = "b" }
+            { action = "FzfLua find_files", desc = "Find File",    icon = " ", key = "f" },
+            { action = "ene | startinsert", desc = "New File",     icon = " ", key = "n" },
+            { action = "FzfLua oldfiles",   desc = "Recent Files", icon = " ", key = "r" },
+            { action = "FzfLua live_grep",  desc = "Find Text",    icon = " ", key = "g" },
+            { action = "qa",                desc = "Quit",         icon = " ", key = "q" },
+            { action = "Music playpause",   desc = "Play/Pause",   icon = "󰐎 ", key = "p" },
+            { action = "Music next",        desc = "Next Track",   icon = "󰒭 ", key = "n" },
+            { action = "Music back",        desc = "Prev Track",   icon = "󰒮 ", key = "b" }
         },
         footer = function()
             local stats = require("lazy").stats()

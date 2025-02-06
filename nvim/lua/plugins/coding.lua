@@ -77,21 +77,16 @@ return {
     },
     { "Bilal2453/luvit-meta", lazy = true },
     {
-        'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'MaximilianLloyd/ascii.nvim' },
-        config = function()
-            local builtin = require("telescope.builtin")
-            vim.keymap.set('n', '<C-f>', builtin.find_files, {})
-            vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-            vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
-
-            local telescope = require'telescope'
-            telescope.setup{}
-            telescope.load_extension('ascii')
-        end,
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = { },
+        keys = {
+            { "<C-f>", "<cmd>FzfLua files<CR>", desc = "Find files" },
+            { "<C-p>", "<cmd>FzfLua git_files<CR>", desc = "Git files" },
+            { "<C-g>", "<cmd>FzfLua live_grep<CR>", desc = "Live grep" }
+        }
     },
-    { 'junegunn/fzf',         build = ":call fzf#install()" },
+    { 'junegunn/fzf', build = ":call fzf#install()" },
     'junegunn/fzf.vim',
     {
         "lervag/vimtex",

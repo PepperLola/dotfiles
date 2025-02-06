@@ -23,12 +23,12 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "nvim-telescope/telescope.nvim"
+            "ibhagwan/fzf-lua"
         },
         config = function()
             require("neogit").setup {
                 integrations = {
-                    telescope = true,
+                    fzf_lua = true,
                     diffview = true
                 },
                 graph_style = "kitty"
@@ -39,7 +39,7 @@ return {
             { "<leader>gc", ":Neogit commit<CR>",                      desc = '[g]it [c]ommit' },
             { "<leader>gp", ":Neogit pull<CR>",                        desc = '[g]it [p]ull' },
             { "<leader>gP", ":Neogit push<CR>",                        desc = '[g]it [P]ush' },
-            { "<leader>gb", require('telescope.builtin').git_branches, desc = '[g]it [b]ranches' },
+            { "<leader>gb", ":FzfLua git_branches<CR>", desc = '[g]it [b]ranches' },
         }
     },
     'subnut/nvim-ghost.nvim',
