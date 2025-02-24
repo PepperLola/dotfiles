@@ -102,8 +102,10 @@ path add ($env.HOME + "/CEDev/bin")
 path add ($env.HOME + "/Desktop/Misc/Scripts")
 path add ($env.HOME + "/go/bin")
 path add ($env.HOME + "/scripts")
+path add ($env.HOME + "/.local/bin")
 path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
-path add "/opt/homebrew/anaconda3/bin"
+path add "/usr/local/bin"
+# path add "/opt/homebrew/anaconda3/bin"
 
 # bun
 path add ($env.HOME + "/.bun/bin")
@@ -117,6 +119,7 @@ path add $env.FNM_BIN
 # $env.FNM_MULTISHELL_PATH = $"($env.FNM_DIR)/nodejs"
 path add $"($env.FNM_MULTISHELL_PATH)/bin"
 
+
 # path add ($env.HOME | path join ".local" "bin")
 # $env.PATH = ($env.PATH | uniq)
 
@@ -126,3 +129,9 @@ path add $"($env.FNM_MULTISHELL_PATH)/bin"
 zoxide init nushell | save -f ~/.zoxide.nu
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu | echo
+
+$env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
+mkdir ~/.cache/carapace
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+use fzf.nu *

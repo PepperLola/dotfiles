@@ -27,5 +27,6 @@ export alias gc = gcsm
 export alias gusm = git sugmodule update --recursive --remote --merge
 
 export def gemc [] {
-    # TODO: git edit merge conflict
+    let conflicting_files = git status | rg "both modified: +(\\S+)$" -r "$1" | split row "\n" | each {str trim}
+    # TODO: do something with these files
 }
