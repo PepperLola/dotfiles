@@ -99,7 +99,8 @@ return {
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
-        }
+        },
+        opts_extend = { "sources.default" }
     },
     {
         'neovim/nvim-lspconfig',
