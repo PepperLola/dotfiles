@@ -105,6 +105,7 @@ path add ($env.HOME + "/scripts")
 path add ($env.HOME + "/.local/bin")
 path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
 path add "/usr/local/bin"
+path add "~/.deno/bin"
 # path add "/opt/homebrew/anaconda3/bin"
 
 # bun
@@ -135,3 +136,5 @@ mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 use fzf.nu *
+
+$env.LS_COLORS = (vivid generate tokyonight-storm)

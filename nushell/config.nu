@@ -906,3 +906,4 @@ use ~/.cache/starship/init.nu
 use ~/.config/nushell/aliases/general.nu *
 use ~/.config/nushell/aliases/git.nu *
 use ~/.config/nushell/aliases/rust.nu *
+use ~/.config/nushell/aliases/orbit.nu *
