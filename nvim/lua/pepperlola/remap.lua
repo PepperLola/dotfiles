@@ -1,11 +1,4 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
--- Move between windows with C-dir
--- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
--- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
--- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
--- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize windows with C-arrow
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -50,8 +43,6 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 -- Save vertical changes on escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
@@ -60,9 +51,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- Queue substitution for current word
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- clang-format
--- vim.keymap.set("n", "<C-K>", ":pyf /opt/homebrew/opt/llvm/share/clang/clang-format.py")
 
 -- Racket
 -- SPD Handin
@@ -124,8 +112,3 @@ end)
 -- Hex editing
 vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r<CR>", {noremap=true})
-
--- Music
-vim.keymap.set("n", "<leader>mp", ":Music playpause<CR>")
-vim.keymap.set("n", "<leader>mn", ":Music next<CR>")
-vim.keymap.set("n", "<leader>mb", ":Music prev<CR>")

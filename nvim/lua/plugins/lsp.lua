@@ -86,10 +86,6 @@ return {
         dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
         version = '*',
         opts = {
-            -- for some reason uninstalls luasnip and other related plugins??
-            -- accept = {
-            --     expand_snippet = require("luasnip").lsp_expand,
-            -- },
             keymap = { preset = 'default' },
             appearance = {
                 use_nvim_cmp_as_default = true,

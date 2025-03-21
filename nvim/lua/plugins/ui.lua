@@ -249,10 +249,8 @@ return {
     "MaximilianLloyd/ascii.nvim",
     {
         "3rd/image.nvim",
-        config = function()
-            require("image").setup({
-                backend = "kitty"
-            })
-        end
+        opts = {
+            backend = "kitty"
+        }
     }
 }
