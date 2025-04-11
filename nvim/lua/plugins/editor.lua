@@ -42,7 +42,6 @@ return {
             { "<leader>gb", ":FzfLua git_branches<CR>", desc = '[g]it [b]ranches' },
         }
     },
-    'subnut/nvim-ghost.nvim',
     {
         'mfussenegger/nvim-dap',
         dependencies = {
