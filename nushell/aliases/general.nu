@@ -26,5 +26,5 @@ export def gen_bytes [
     path: path
     --no-null (-n)
 ] {
-    1..($count) | each {|it| $it mod 256 } | into binary -c | bytes collect | save -f --raw $path
+    1..($count * 2) | each {|it| $it mod 256 } | where {|x| $x != 0} | take $count | into binary -c | bytes collect | save -f --raw $path
 }

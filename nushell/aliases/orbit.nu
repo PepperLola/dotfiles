@@ -10,7 +10,7 @@ def get_root [] {
     return (git rev-parse --show-toplevel)
 }
 
-def is_aleasat [root_path: string] -> bool {
+def is_aleasat [root_path: string] {
     let dir = $root_path | path basename
     ($dir == "aleasat-software")
 }
