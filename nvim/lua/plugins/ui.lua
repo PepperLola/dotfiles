@@ -181,7 +181,7 @@ return {
             map('n', '<A-9>', '<cmd>BufferGoto 9<CR>', opts)
             map('n', '<A-0>', '<cmd>BufferLast<CR>', opts)
             map('n', '<A-p>', '<cmd>BufferPin<CR>', opts)
-            map('n', '<A-c>', '<cmd>BufferClose<CR>', opts)
+            map('n', '<A-x>', '<cmd>BufferClose<CR>', opts)
             map('n', '<C-p>', '<cmd>BufferPick<CR>', opts)
             map('n', '<leader>bb', '<cmd>BufferOrderByBufferNumber<CR>', opts)
             map('n', '<leader>bd', '<cmd>BufferOrderByDirectory<CR>', opts)
