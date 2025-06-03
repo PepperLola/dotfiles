@@ -66,3 +66,5 @@ vim.g.knap_settings = {
     mdtohtmlviewerlaunch = "live-server --quiet --open=%outputfile% --watch=%outputfile% --wait=800",
     mdtohtmlviewerrefresh = "none",
 }
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
