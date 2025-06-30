@@ -3,7 +3,7 @@
 # version = "0.99.1"
 
 def create_left_prompt [] {
-    let dir = match (do --ignore-shell-errors { $env.PWD | path relative-to $nu.home-path }) {
+    let dir = match (do --ignore-errors { $env.PWD | path relative-to $nu.home-path }) {
         null => $env.PWD
         '' => '~'
         $relative_pwd => ([~ $relative_pwd] | path join)
@@ -95,6 +95,10 @@ $env.EDITOR = "nvim"
 use std "path add"
 
 path add "/opt/homebrew/bin"
+brew shellenv csh | lines | parse --regex 'setenv (\w+) "?(.+)"?;' | transpose -r | into record | load-env
+
+source ~/eza/completions/nush/eza.nu
+
 # path add ((brew --prefix) + "/bin")
 path add ((brew --prefix) + "/opt/llvm/bin")
 # path add "/opt/node/bin"
