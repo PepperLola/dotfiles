@@ -4,6 +4,46 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "saghen/blink.cmp",
+            {
+                "mason-org/mason-lspconfig.nvim",
+                event = "VeryLazy",
+                opts = {
+                    automatic_enable = true,
+                    ensure_installed = {
+                        "lua_ls",
+                        "ts_ls",
+                        "pyright",
+                        "rust_analyzer",
+                        "gopls",
+                        "tailwindcss",
+                        "svelte",
+                    }
+                },
+                dependencies = {
+                    {
+                        "mason-org/mason.nvim",
+                        opts = {
+                            ui = {
+                                package_installed = "✓",
+                                package_pending = "➜",
+                                package_uninstalled = "✗",
+                            }
+                        }
+                    },
+                    {
+                        "WhoIsSethDaniel/mason-tool-installer.nvim",
+                        opts = {
+                            ensure_installed = {
+                                "prettier",
+                                "stylua",
+                                "isort",
+                                "pylint",
+                                "clangd"
+                            }
+                        }
+                    },
+                },
+            }
         },
         config = function()
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -53,6 +93,16 @@ return {
                 end
             })
 
+            for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+                local default_diagnostic_handler = vim.lsp.handlers[method]
+                vim.lsp.handlers[method] = function(err, result, context, config)
+                    if err ~= nil and (err.code == -32802 or err.code == -32603) then
+                        return
+                    end
+                    return default_diagnostic_handler(err, result, context, config)
+                end
+            end
+
             local signs = {
                 [vim.diagnostic.severity.ERROR] = " ",
                 [vim.diagnostic.severity.WARN]  = " ",
@@ -85,48 +135,6 @@ return {
                             }
                         }
                     }
-                }
-            })
-        end,
-    },
-    {
-        "mason-org/mason.nvim",
-        lazy = false,
-        dependencies = {
-            "mason-org/mason-lspconfig.nvim",
-            "neovim/nvim-lspconfig",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
-        },
-        opts = {
-            ui = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗",
-            }
-        },
-        config = function(_, opts)
-            require("mason").setup(opts)
-
-            require("mason-lspconfig").setup({
-                automatic_enable = true,
-                ensure_installed = {
-                    "lua_ls",
-                    "ts_ls",
-                    "pyright",
-                    "rust_analyzer",
-                    "gopls",
-                    "tailwindcss",
-                    "svelte",
-                }
-            })
-
-            require("mason-tool-installer").setup({
-                ensure_installed = {
-                    "prettier",
-                    "stylua",
-                    "isort",
-                    "pylint",
-                    "clangd"
                 }
             })
         end,

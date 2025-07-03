@@ -1,7 +1,7 @@
 return {
     {
         'saghen/blink.cmp',
-        lazy = false,
+        event = "VeryLazy",
         dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
         version = '*',
         opts = {

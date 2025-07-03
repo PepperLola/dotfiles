@@ -44,10 +44,15 @@ return {
     },
     {
         'mfussenegger/nvim-dap',
+        lazy = true,
         dependencies = {
             {
+                'theHamsta/nvim-dap-virtual-text',
+                lazy = true
+            },
+            {
                 'rcarriga/nvim-dap-ui',
-                dependencies = { 'mfussenegger/nvim-dap' },
+                lazy = true,
                 keys = {
                     { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
                     { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
@@ -70,10 +75,11 @@ return {
             },
             {
                 "jay-babu/mason-nvim-dap.nvim",
-                dependencies = "mason.nvim",
+                lazy = true,
+                dependencies = { "mason.nvim" },
                 cmd = { "DapInstall", "DapUninstall" },
                 opts = {
-                    automatic_installation = true,
+                    automatic_installation = false,
                     handlers = {},
                     ensure_installed = {}
                 }
@@ -118,8 +124,6 @@ return {
             end
         end
     },
-    'theHamsta/nvim-dap-virtual-text',
-    'leoluz/nvim-dap-go',
     {
         'MeanderingProgrammer/markdown.nvim',
         main = "render-markdown",

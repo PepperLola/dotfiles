@@ -17,4 +17,18 @@ require("lazy").setup({
     rocks = {
         enabled = false,
     }
+}, {
+    defaults = { lazy = true },
+    performance = {
+        cache = { enabled = true },
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin"
+            }
+        }
+    }
 })

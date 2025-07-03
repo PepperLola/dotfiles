@@ -1,6 +1,7 @@
 return {
     {
         'folke/tokyonight.nvim',
+        lazy = false,
         config = function()
             local util = require("tokyonight.util")
 
@@ -145,6 +146,7 @@ return {
     },
     {
         'romgrk/barbar.nvim',
+        event = "VeryLazy",
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
@@ -248,6 +250,7 @@ return {
     "MaximilianLloyd/ascii.nvim",
     {
         "3rd/image.nvim",
+        lazy = true,
         opts = {
             backend = "kitty"
         }

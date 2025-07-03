@@ -2,13 +2,13 @@ return {
     {
         "vhyrro/luarocks.nvim",
         priority = 1000,
-        config = true
+        config = true,
+        lazy = true,
     },
     { "benlubas/neorg-interim-ls" },
     {
         "nvim-neorg/neorg",
-        dependencies = {"luarocks.nvim"},
-        lazy = false,
+        lazy = true,
         version = "*",
         opts = {
             load = {

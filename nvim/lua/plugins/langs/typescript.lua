@@ -1,115 +1,115 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = function(_, opts)
-            if type(opts.ensure_installed) == "table" then
-                vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
-            end
-        end,
-        dependencies = {
-            { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
-        },
-        build = ":TSUpdate",
-    },
-    {
-        "neovim/nvim-lspconfig",
-        opts = {
-            servers = {
-                ts_ls = {
-                    keys = {
-                        {
-                            "<leader>co",
-                            function()
-                                vim.lsp.buf.code_action({
-                                    apply = true,
-                                    context = {
-                                        only = { "source.organizeImports.ts" },
-                                        diagnostics = {},
-                                    }
-                                })
-                            end,
-                            desc = "Organize Imports"
-                        },
-                        {
-                            "<leader>cR",
-                            function()
-                                vim.lsp.buf.code_action({
-                                    apply = true,
-                                    context = {
-                                        only = { "source.removeUnused.ts" },
-                                        diagnostics = {},
+    -- {
+    --     "nvim-treesitter/nvim-treesitter",
+    --     opts = function(_, opts)
+    --         if type(opts.ensure_installed) == "table" then
+    --             vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
+    --         end
+    --     end,
+    --     dependencies = {
+    --         { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+    --     },
+    --     build = ":TSUpdate",
+    -- },
+    -- {
+    --     "neovim/nvim-lspconfig",
+    --     opts = {
+    --         servers = {
+    --             ts_ls = {
+    --                 keys = {
+    --                     {
+    --                         "<leader>co",
+    --                         function()
+    --                             vim.lsp.buf.code_action({
+    --                                 apply = true,
+    --                                 context = {
+    --                                     only = { "source.organizeImports.ts" },
+    --                                     diagnostics = {},
+    --                                 }
+    --                             })
+    --                         end,
+    --                         desc = "Organize Imports"
+    --                     },
+    --                     {
+    --                         "<leader>cR",
+    --                         function()
+    --                             vim.lsp.buf.code_action({
+    --                                 apply = true,
+    --                                 context = {
+    --                                     only = { "source.removeUnused.ts" },
+    --                                     diagnostics = {},
 
-                                    },
-                                })
-                            end,
-                            desc = "Remove Unused Imports"
-                        }
-                    },
-                    settings = {
-                        completions = {
-                            completeFunctionCalls = true,
-                        }
-                    }
-                }
-            }
-        }
-    },
-    {
-        "mfussenegger/nvim-dap",
-        optional = true,
-        dependencies = {
-            {
-                "williamboman/mason.nvim",
-                opts = function(_, opts)
-                    opts.ensure_installed = opts.ensure_installed or {}
-                    table.insert(opts.ensure_installed, "js-debug-adapter")
-                end,
-            },
-            'mxsdev/nvim-dap-vscode-js'
-        },
-        opts = function()
-            require("dap-vscode-js").setup({
-                debugger_path = require("mason-registry").get_package("js-debug-adapter"):get_install_path() ..
-                    "/js-debug/src/dapDebugServer.js",
-                debugger_cmd = { 'js-debug-adapter' },
-                adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
-            })
-            local dap = require("dap")
-            dap.adapters["pwa-node"] = {
-                type = "server",
-                host = "localhost",
-                port = "${port}",
-                executable = {
-                    command = "js-debug-adapter",
-                    args = {
-                        "${port}",
-                    }
-                }
-            }
-            for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-                dap.configurations[language] = {
-                    {
-                        name = "Launch file",
-                        type = "pwa-node",
-                        request = "launch",
-                        program = "${file}",
-                        rootPath = "${workspaceFolder}",
-                        cwd = "${workspaceFolder}",
-                        sourceMaps = true,
-                        skipFiles = { "<node_internals>/**" },
-                        protocol = "inspector",
-                        console = "integratedTerminal",
-                    },
-                    {
-                        name = "Attach",
-                        type = "pwa-node",
-                        request = "attach",
-                        rootPath = "${workspaceFolder}",
-                        processId = require("dap.utils").pick_process,
-                        cwd = "${workspaceFolder}",
-                    }
-                }
-            end
-        end,
-    }
+    --                                 },
+    --                             })
+    --                         end,
+    --                         desc = "Remove Unused Imports"
+    --                     }
+    --                 },
+    --                 settings = {
+    --                     completions = {
+    --                         completeFunctionCalls = true,
+    --                     }
+    --                 }
+    --             }
+    --         }
+    --     }
+    -- },
+    -- {
+    --     "mfussenegger/nvim-dap",
+    --     optional = true,
+    --     dependencies = {
+    --         {
+    --             "williamboman/mason.nvim",
+    --             opts = function(_, opts)
+    --                 opts.ensure_installed = opts.ensure_installed or {}
+    --                 table.insert(opts.ensure_installed, "js-debug-adapter")
+    --             end,
+    --         },
+    --         'mxsdev/nvim-dap-vscode-js'
+    --     },
+    --     opts = function()
+    --         require("dap-vscode-js").setup({
+    --             debugger_path = require("mason-registry").get_package("js-debug-adapter"):get_install_path() ..
+    --                 "/js-debug/src/dapDebugServer.js",
+    --             debugger_cmd = { 'js-debug-adapter' },
+    --             adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+    --         })
+    --         local dap = require("dap")
+    --         dap.adapters["pwa-node"] = {
+    --             type = "server",
+    --             host = "localhost",
+    --             port = "${port}",
+    --             executable = {
+    --                 command = "js-debug-adapter",
+    --                 args = {
+    --                     "${port}",
+    --                 }
+    --             }
+    --         }
+    --         for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+    --             dap.configurations[language] = {
+    --                 {
+    --                     name = "Launch file",
+    --                     type = "pwa-node",
+    --                     request = "launch",
+    --                     program = "${file}",
+    --                     rootPath = "${workspaceFolder}",
+    --                     cwd = "${workspaceFolder}",
+    --                     sourceMaps = true,
+    --                     skipFiles = { "<node_internals>/**" },
+    --                     protocol = "inspector",
+    --                     console = "integratedTerminal",
+    --                 },
+    --                 {
+    --                     name = "Attach",
+    --                     type = "pwa-node",
+    --                     request = "attach",
+    --                     rootPath = "${workspaceFolder}",
+    --                     processId = require("dap.utils").pick_process,
+    --                     cwd = "${workspaceFolder}",
+    --                 }
+    --             }
+    --         end
+    --     end,
+    -- }
 }
