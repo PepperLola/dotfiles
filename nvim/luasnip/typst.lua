@@ -29,7 +29,7 @@ return {
         i(1),
         t({ "], options: (" }),
         i(2),
-        t({ "), answer: \"" }), i(3), t({ "\")" })
+        t({ "), answer: \"" }), i(0), t({ "\")" })
     }),
     s("canvas", {
         t({ "#cetz.canvas({", "\timport cetz.draw: *", "", "\t" }),
@@ -42,13 +42,13 @@ return {
         t({ ")[" }),
         i(2),
         t({ "]" }),
-        i(3)
+        i(0)
     }),
     s("bold", {
         t({ "#text(weight: \"bold\")[" }),
         i(1),
         t({ "]" }),
-        i(2)
+        i(0)
     }),
     s("boldcol", {
         t({ "#text(" }),
@@ -56,6 +56,6 @@ return {
         t({ ", weight: \"bold\")[" }),
         i(2),
         t({ "]" }),
-        i(3)
+        i(0)
     })
 }

@@ -1,8 +1,0 @@
-alias n="npm"
-alias ni="npm install"
-alias nid="npm install --save-dev"
-alias nit="npm init"
-alias cra="npx create-react-app"
-alias cna="npx create-next-app"
-alias cnat="npx create-next-app --ts"
-alias tsinit="npx tsc --init"
