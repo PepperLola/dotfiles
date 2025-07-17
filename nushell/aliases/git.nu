@@ -24,9 +24,10 @@ export def ggpull [] {
 export alias gcsm = git commit --gpg-sign --message
 export alias gc = gcsm
 
-export alias gusm = git sugmodule update --recursive --remote --merge
+export alias gusm = git submodule update --recursive --remote --merge
 
 export def gemc [] {
     let conflicting_files = git status | rg "both modified: +(\\S+)$" -r "$1" | split row "\n" | each {str trim}
     # TODO: do something with these files
 }
+
