@@ -8,7 +8,7 @@ return {
     { "benlubas/neorg-interim-ls" },
     {
         "nvim-neorg/neorg",
-        lazy = true,
+        ft = "norg",
         version = "*",
         opts = {
             load = {
