@@ -89,6 +89,25 @@ return {
                     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
                     vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+
+                    vim.keymap.set("n", "<leader>oi", function()
+                        vim.lsp.buf.code_action({
+                            context = {
+                                only = { "source.organizeImports" },
+                                diagnostics = {}
+                            },
+                            apply = true
+                        })
+                    end, opts)
+
+                    vim.keymap.set("n", "<leader>fa", function()
+                        vim.lsp.buf.code_action({
+                            context = {
+                                only = { "source.fixAll" }
+                            },
+                            apply = true
+                        })
+                    end, opts)
                 end
             })
 
