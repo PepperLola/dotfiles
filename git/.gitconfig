@@ -56,3 +56,8 @@ lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold b
     path = ~/.gitconfig.personal
 [includeIf "gitdir:~/Desktop/Misc/orbit/"]
     path = ~/.gitconfig.orbit
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
