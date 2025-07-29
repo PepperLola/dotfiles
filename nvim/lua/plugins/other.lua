@@ -14,7 +14,7 @@ return {
         cmd = 'CellularAutomaton',
         lazy = true
     },
-    'wakatime/vim-wakatime',
+    { 'wakatime/vim-wakatime', lazy = false },
     {
         "michaelrommel/nvim-silicon",
         lazy = true,
