@@ -6,7 +6,6 @@ return {
             "rafamadriz/friendly-snippets"
         },
         build = "make install_jsregexp",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         keys = {
             {
                 "<C-L>",
@@ -28,6 +27,7 @@ return {
         config = function()
             require('luasnip.loaders.from_vscode').lazy_load()
             require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/luasnip" } })
+            require('luasnip').setup({ history = true, update_events = {"TextChanged", "TextChangedI"} })
         end,
     },
 }

@@ -13,6 +13,7 @@ local p = require("luasnip.extras").partial
 local m = require("luasnip.extras").match
 local n = require("luasnip.extras").nonempty
 local dl = require("luasnip.extras").dynamic_lambda
+local rep = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local types = require("luasnip.util.types")
@@ -23,8 +24,6 @@ return {
         t({ "import type React from \"react\"", "", "const " }),
         i(1, "Component"),
         t({ ": React.FC = () => {", "\treturn (", "\t\t<></>", "\t)", "}", "", "export default " }),
-        f(function(args)
-            return args[1][1]
-        end, {1})
+        rep(1)
     }),
 }
