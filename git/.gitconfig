@@ -1,25 +1,35 @@
+
 [user]
     name = PepperLola
     email = PepperLola@users.noreply.github.com
     signingkey = 6513404F35EFBB24
+
 [init]
     defaultBranch = main
+
 [core]
     excludesfile = ~/.gitignore_global
+
 [feature]
     manyFiles = true
+
 [commit]
     gpgsign = true
+
 [gpg]
     program = gpg
+
 [rerere]
     enabled = false
+
 [color]
-    ui = auto
+    ui = true
+
 [color "branch"]
     current = yellow reverse ul
     local = yellow
     remote = green
+
 [color "diff"]
     meta = yellow bold
     commit = green bold
@@ -27,35 +37,61 @@
     old = red bold
     new = green bold
     whitespace = red reverse
+
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = red bold 52
     newNormal = green bold
     newHighlight = green bold 22
+
 [color "status"]
     added = yellow
     changed = green
     untracked = cyan
-[alias]
-lg = lg1
-lg1 = lg1-specific --all
-lg2 = lg2-specific --all
-lg3 = lg3-specific --all
 
-lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
-lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'g = lg1
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
+    features = side-by-side line-numbers decorations
+    commit-decoration-style = bold box
+    commit-style = raw
+    file-style = bold yellow
+    file-decoration-style = none
+
+[merge]
+    conflictStyle = zdiff3
+
+[alias]
+    lg = lg1
+    lg1 = lg1-specific --all
+    lg2 = lg2-specific --all
+    lg3 = lg3-specific --all
+
+    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'g = lg1
 
 [include]
     path = ~/.gitconfig.personal
+
 [includeIf "gitdir:~/Desktop/Misc/Work/"]
     path = ~/.gitconfig.work
+
 [includeIf "gitdir:~/Desktop/School/"]
     path = ~/.gitconfig.school
+
 [includeIf "gitdir:~/Desktop/School/Notes/"]
     path = ~/.gitconfig.personal
+
 [includeIf "gitdir:~/Desktop/Misc/orbit/"]
     path = ~/.gitconfig.orbit
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
