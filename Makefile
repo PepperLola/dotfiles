@@ -54,7 +54,7 @@ ${zshrc}:
 	ln -s ${WD}zsh${SEP}.zshrc ${zshrc}
 
 ${starship}:
-	ln -s ${WD}zsh${SEP}starship.toml ${starship}
+	ln -s ${WD}starship${SEP}starship.toml ${starship}
 
 ${sketchybar}:
 	ln -s ${WD}sketchybar ${sketchybar}
