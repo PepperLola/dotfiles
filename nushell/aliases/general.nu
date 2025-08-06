@@ -31,11 +31,7 @@ export def gen_bytes [
 
 export def nvrg [search: string] {
     let matches = ["[", (rg --json $"($search)" | jq -rc 'select(.type == "match") | "\(.data.path.text) \(.data.line_number)"' | awk '{ printf "{\"filename\": \"%s\", \"lnum\": \"%s\"},", $1, $2 }'), "]"] | str join | from json
-
     let files = ($matches | get filename)
-
-    print ($matches | to json)
-
     nvim -c $"call setqflist\(($matches | to json -r)\)" -c "copen" $"($files | str join)"
 }
 
