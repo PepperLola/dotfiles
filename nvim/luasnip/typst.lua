@@ -57,5 +57,23 @@ return {
         i(2),
         t({ "]" }),
         i(0)
+    }),
+    s("noteheader", {
+        t({ "#import \"../../lecture_conf.typ\": meta",
+            "#import \"../../conf.typ\": clicker",
+            "#meta(name: \"L"
+        }),
+        i(1),
+        t({ "\", date: " }),
+        f(function(args, parent, user_args)
+            local t = {}
+            local date = vim.fn.trim(vim.fn.system([[date +'%F']]))
+            for token in string.gmatch(date, "[^-]+") do
+                table.insert(t, token)
+            end
+            return string.format("datetime(year: %d, month: %d, day: %d)", t[1], t[2], t[3])
+        end, {}),
+        t({ "))", "", "= Lecture " }),
+        rep(1)
     })
 }
