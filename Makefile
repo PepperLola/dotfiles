@@ -29,8 +29,10 @@ vscode_styles:=${ROOT}.vscode${SEP}styles
 yazi:=${CONFIG_PATH}yazi
 nu:=${CONFIG_PATH}nushell
 aerospace:=${CONFIG_PATH}aerospace
+zellij:=${CONFIG_PATH}zellij
+lazygit:=${CONFIG_PATH}lazygit
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${kitty} ${zshrc} ${starship} ${sketchybar} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${yazi} ${nu} ${aerospace}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${zshrc} ${starship} ${sketchybar} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${yazi} ${nu} ${aerospace} ${zellij} ${lazygit}
 
 ${nvim}:
 	ln -s ${WD}nvim ${nvim}
@@ -86,12 +88,17 @@ ${nu}:
 ${aerospace}:
 	ln -s ${WD}aerospace ${aerospace}
 
+${zellij}:
+	ln -s ${WD}zellij ${zellij}
+
+${lazygit}:
+	ln -s ${WD}lazygit ${lazygit}
+
 clean:
 	unlink ${nvim}
 	unlink ${gitconfig}
 	unlink ${gitignore_global}
 	unlink ${raycast_scripts}
-	unlink ${kitty}
 	unlink ${zshrc}
 	unlink ${starship}
 	unlink ${sketchybar}
@@ -103,3 +110,5 @@ clean:
 	unlink ${yazi}
 	unlink ${nu}
 	unlink ${aerospace}
+	unlink ${zellij}
+	unlink ${lazygit}
