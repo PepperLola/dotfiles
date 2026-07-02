@@ -31,68 +31,72 @@ nu:=${CONFIG_PATH}nushell
 aerospace:=${CONFIG_PATH}aerospace
 zellij:=${CONFIG_PATH}zellij
 lazygit:=${CONFIG_PATH}lazygit
+wezterm:=${ROOT}.wezterm.lua
 
-all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${zshrc} ${starship} ${sketchybar} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${yazi} ${nu} ${aerospace} ${zellij} ${lazygit}
+all: ${nvim} ${gitconfig} ${gitignore_global} ${raycast} ${raycast_scripts} ${zshrc} ${starship} ${sketchybar} ${fzf_git} ${zsh_aliases} ${zsh_funcs} ${zsh_scripts} ${vscode} ${vscode_styles} ${yazi} ${nu} ${aerospace} ${zellij} ${lazygit} ${wezterm}
 
 ${nvim}:
-	ln -s ${WD}nvim ${nvim}
+	ln -sfn ${WD}nvim ${nvim}
 
 ${gitconfig}:
-	ln -s ${WD}git${SEP}.gitconfig ${gitconfig}
+	ln -sfn ${WD}git${SEP}.gitconfig ${gitconfig}
 
 ${gitignore_global}:
-	ln -s ${WD}git${SEP}.gitignore_global ${gitignore_global}
+	ln -sfn ${WD}git${SEP}.gitignore_global ${gitignore_global}
 
 ${raycast}:
 	mkdir -p ${raycast}
 
 ${raycast_scripts}:
-	ln -s ${WD}raycast${SEP}scripts ${raycast}
+	ln -sfn ${WD}raycast${SEP}scripts ${raycast}
 
 ${kitty}:
-	ln -s ${WD}kitty ${kitty}
+	ln -sfn ${WD}kitty ${kitty}
 
 ${zshrc}:
-	ln -s ${WD}zsh${SEP}.zshrc ${zshrc}
+	ln -sfn ${WD}zsh${SEP}.zshrc ${zshrc}
 
 ${starship}:
-	ln -s ${WD}starship${SEP}starship.toml ${starship}
+	ln -sfn ${WD}starship${SEP}starship.toml ${starship}
 
 ${sketchybar}:
-	ln -s ${WD}sketchybar ${sketchybar}
+	ln -sfn ${WD}sketchybar ${sketchybar}
 
 ${fzf_git}:
-	ln -s ${WD}zsh${SEP}fzf-git.sh ${fzf_git}
+	ln -sfn ${WD}zsh${SEP}fzf-git.sh ${fzf_git}
 
 ${zsh_aliases}:
-	ln -s ${WD}zsh${SEP}aliases ${zsh_aliases}
+	ln -sfn ${WD}zsh${SEP}aliases ${zsh_aliases}
 
 ${zsh_funcs}:
-	ln -s ${WD}zsh${SEP}funcs ${zsh_funcs}
+	ln -sfn ${WD}zsh${SEP}funcs ${zsh_funcs}
 
 ${zsh_scripts}:
-	ln -s ${WD}zsh${SEP}scripts ${zsh_scripts}
+	ln -sfn ${WD}zsh${SEP}scripts ${zsh_scripts}
 
 ${vscode}:
 	mkdir -p ${vscode}
 
 ${vscode_styles}:
-	ln -s ${WD}vscode${SEP}styles ${vscode_styles}
+	ln -sfn ${WD}vscode${SEP}styles ${vscode_styles}
 
 ${yazi}:
-	ln -s ${WD}yazi ${yazi}
+	ln -sfn ${WD}yazi ${yazi}
 
 ${nu}:
-	ln -s ${WD}nushell ${nu}
+	ln -sfn ${WD}nushell ${nu}
 
 ${aerospace}:
-	ln -s ${WD}aerospace ${aerospace}
+	ln -sfn ${WD}aerospace ${aerospace}
 
 ${zellij}:
-	ln -s ${WD}zellij ${zellij}
+	ln -sfn ${WD}zellij ${zellij}
 
 ${lazygit}:
-	ln -s ${WD}lazygit ${lazygit}
+	ln -sfn ${WD}lazygit ${lazygit}
+
+${wezterm}:
+	ln -sfn ${WD}wezterm${SEP}.wezterm.lua ${wezterm}
 
 clean:
 	unlink ${nvim}
