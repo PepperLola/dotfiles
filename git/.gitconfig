@@ -17,7 +17,7 @@
     gpgsign = true
 
 [gpg]
-    program = gpg
+	program = /opt/homebrew/bin/gpg
 
 [rerere]
     enabled = false
@@ -97,3 +97,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[diff]
+	tool = nvimdiff
