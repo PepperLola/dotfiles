@@ -15,6 +15,9 @@ export alias cd = z
 
 export alias lsusb = system_profiler SPUSBDataType
 
+# ghost windows
+export alias gw = sh -c "aerospace list-windows --all --json | jq -r '.[] | select(.\"window-title\"==\"\") | .\"window-id\"' | xargs -n1 aerospace close --window-id"
+
 export def ramdp [] {
     cd ~/Library/LaunchAgents
     launchctl unload com.github.pepperlola.amdp.plist
@@ -26,7 +29,13 @@ export def gen_bytes [
     path: path
     --no-null (-n)
 ] {
-    1..($count * 2) | each {|it| $it mod 256 } | where {|x| $x != 0} | take $count | into binary -c | bytes collect | save -f --raw $path
+    1..($count * 2) | each {|it| $it mod 256 } | where {|x| $x != 0} | take $count | each {into binary -c} | bytes collect | save -f --raw $path
+}
+
+export def crc [
+    path: path
+] {
+    python3 -c $"import zlib; print\(zlib.crc32\(open\(\"($path)\", \"rb\").read\()) & 0xFFFFFFFF)"
 }
 
 export def nvrg [search: string] {
@@ -41,4 +50,14 @@ export def nvtodo [] {
 
 export def nvgc [] {
     nvrg <<<<
+}
+
+export def start_ssh_agent [] {
+    ^ssh-agent -c
+    | lines
+    | first 2
+    | parse "setenv {name} {value};"
+    | transpose -r
+    | into record
+    | load-env
 }

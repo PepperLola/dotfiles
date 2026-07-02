@@ -1,6 +1,6 @@
 def find_platform [platform?: string] {
     match $platform {
-        "alea-v1" | "launchpad" => $platform,
+        "alea-v1" | "alea-v4" | "launchpad" => $platform,
         _ if (lsusb | rg FT230X | str length) != 0 => "alea-v1",
         _ => "launchpad"
     }

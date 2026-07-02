@@ -135,10 +135,12 @@ zoxide init nushell | save -f ~/.zoxide.nu
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu | echo
 
-$env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+mkdir ($nu.default-config-dir | path join "autoload")
+fzf --nushell | save -f ($nu.default-config-dir | path join "autoload" "_fzf_integration.nu")
 
-use fzf.nu *
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+mkdir $"($nu.cache-dir)"
+carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
+source $"($nu.cache-dir)/carapace.nu"
 
 $env.LS_COLORS = (vivid generate tokyonight-storm)

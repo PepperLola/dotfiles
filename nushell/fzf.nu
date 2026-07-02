@@ -1,5 +1,6 @@
 # Dependencies: `fd`, `bat, `rg`, `nufmt`, `tree`.
 
+
 export-env {
   $env.FZF_ALT_C_COMMAND = "fd --type directory --hidden"
   $env.FZF_ALT_C_OPTS = "--preview 'tree -C {} | head -n 200'"
@@ -69,7 +70,7 @@ const ctrl_t =  {
 
 # Update the $env.config
 export-env {
-  if not ($env.__keybindings_loaded? | default false) {
+  if $env.__keybindings_loaded?  == null {
     $env.__keybindings_loaded = true
     $env.config.keybindings = $env.config.keybindings | append [
       $alt_c
