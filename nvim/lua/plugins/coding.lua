@@ -78,6 +78,11 @@ return {
     },
     { "Bilal2453/luvit-meta", lazy = true },
     {
+        "PepperLola/nvim-paredit",
+        ft = { "racket", "scheme", "commonlisp" },
+        config = true
+    },
+    {
         "ibhagwan/fzf-lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = { },
@@ -95,5 +100,20 @@ return {
         init = function()
             -- Use init for configuration, don't use the more common "config".
         end
+    },
+    {
+        'azratul/live-share.nvim',
+        dependencies = {
+            'jbyuki/instant.nvim',
+        },
+        cmd = { "LiveShareServer", "LiveShareJoin" },
+        config = function()
+            vim.g.instant_username = 'PepperLola'
+            require("live-share").setup({
+                port_internal = 8765,
+                max_attempts = 40,
+                service = "ngrok"
+            })
+        end,
     }
 }

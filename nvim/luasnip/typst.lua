@@ -73,7 +73,7 @@ return {
             end
             return string.format("datetime(year: %d, month: %d, day: %d)", t[1], t[2], t[3])
         end, {}),
-        t({ "))", "", "= Lecture " }),
+        t({ ")", "", "= Lecture " }),
         rep(1)
     })
 }

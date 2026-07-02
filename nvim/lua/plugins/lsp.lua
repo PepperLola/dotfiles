@@ -13,10 +13,11 @@ return {
                         "lua_ls",
                         "biome",
                         "ts_ls",
-                        "pyright",
+                        "basedpyright",
                         "rust_analyzer",
                         "tailwindcss",
-                    }
+                        "jdtls"
+                    },
                 },
                 dependencies = {
                     {
@@ -26,6 +27,10 @@ return {
                                 package_installed = "✓",
                                 package_pending = "➜",
                                 package_uninstalled = "✗",
+                            },
+                            registries = {
+                                'github:Crashdummyy/mason-registry',
+                                'github:mason-org/mason-registry',
                             }
                         }
                     },
@@ -35,8 +40,6 @@ return {
                             ensure_installed = {
                                 "prettier",
                                 "stylua",
-                                "isort",
-                                "pylint",
                                 "clangd"
                             }
                         }

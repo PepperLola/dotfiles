@@ -25,6 +25,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 
 vim.opt.conceallevel = 2
 
+vim.opt.termsync = false
+
 -- Shell
 vim.opt.sh = '/bin/zsh'
 
@@ -49,7 +51,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
--- vim.g.maplocalleader = ";"
+vim.g.maplocalleader = "\\"
 
 -- Split
 vim.opt.splitright = true

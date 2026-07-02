@@ -71,15 +71,25 @@ vim.keymap.set("n", "<leader>rk", "<cmd>:te racket %:p<CR>")
 
 -- Test file
 vim.keymap.set("n", "<leader>rt", function()
-    local f = io.popen("raco test " .. vim.fn.expand("%:p"))
+    local f = io.popen("raco test " .. vim.fn.expand("%:p") .. " 2>&1")
     local text = f:read("*a")
+    f:close()
+    f = io.popen("raco test " .. vim.fn.expand("%:p") .. " 2>&1")
+    local lines = {}
+    for line in f:lines() do
+        table.insert(lines, line)
+    end
+    f:close()
+
     if string.match(text, "pass") then
         vim.notify(text)
     else
         vim.api.nvim_command("botright vsplit RACKET_TEST")
         local buffer_number = vim.api.nvim_get_current_buf()
+
         vim.api.nvim_buf_set_option(buffer_number, "readonly", false)
-        vim.api.nvim_buf_set_lines(buffer_number, -1, -1, true, f:lines())
+        vim.api.nvim_buf_set_lines(buffer_number, 0, -1, true, lines)
+
         vim.api.nvim_buf_set_option(buffer_number, "readonly", true)
         vim.api.nvim_buf_set_option(buffer_number, "modified", false)
 
@@ -87,13 +97,13 @@ vim.keymap.set("n", "<leader>rt", function()
         local buffer_line_count = vim.api.nvim_buf_line_count(buffer_number)
         vim.api.nvim_win_set_cursor(buffer_window, { buffer_line_count, 0 })
     end
-    f:close()
 end)
 
 -- Run repl including file
 vim.keymap.set("n", "<leader>ri",
     "<cmd>:vsplit | te racket -e '(require (file \"" .. vim.fn.expand("%:p") .. "\"))' -i<CR>")
 
+-- Run stepper
 vim.keymap.set("n", "<leader>rs",
     ":vsplit | te racket ~/.config/nvim/racket/stepper.rkt " ..
     vim.fn.expand("%:p") .. " | sed -E \"s/.{2}app //g\" | sed -E \"s/^\\'(.*)\\n//g\"")

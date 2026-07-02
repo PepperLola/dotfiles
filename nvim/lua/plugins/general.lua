@@ -3,10 +3,32 @@ return {
         'nvim-lua/plenary.nvim',
         lazy = true
     },
+    -- {
+    --     "knubie/vim-kitty-navigator",
+    --     lazy = false,
+    --     build = "cp ./*.py ~/.config/kitty/"
+    -- },
+    -- {
+    --     "hiasr/vim-zellij-navigator.nvim",
+    --     config = function()
+    --         require('vim-zellij-navigator').setup()
+    --     end,
+    -- },
     {
-        "knubie/vim-kitty-navigator",
+        'mrjones2014/smart-splits.nvim',
         lazy = false,
-        build = "cp ./*.py ~/.config/kitty/"
+        build = './kitty/install-kittens.bash',
+        config = function()
+            local splits = require('smart-splits')
+            splits.setup({
+                multiplexer_integration = "zellij"
+            })
+
+            vim.keymap.set("n", "<C-h>", splits.move_cursor_left)
+            vim.keymap.set("n", "<C-j>", splits.move_cursor_down)
+            vim.keymap.set("n", "<C-k>", splits.move_cursor_up)
+            vim.keymap.set("n", "<C-l>", splits.move_cursor_right)
+        end,
     },
     {
         "folke/snacks.nvim",
