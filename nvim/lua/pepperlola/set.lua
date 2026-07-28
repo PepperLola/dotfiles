@@ -70,3 +70,5 @@ vim.g.knap_settings = {
 }
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+vim.o.exrc = true
