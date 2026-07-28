@@ -9,6 +9,8 @@
 
 [core]
     excludesfile = ~/.gitignore_global
+    fsmonitor = true
+    untrackedCache = true
 
 [feature]
     manyFiles = true
@@ -21,6 +23,9 @@
 
 [rerere]
     enabled = false
+
+[worktree]
+    useRelativePaths = true
 
 [color]
     ui = true
