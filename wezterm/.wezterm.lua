@@ -44,6 +44,18 @@ local function activate_key_table(key, mods, name)
     }
 end
 
+-- SMART SPLITS
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+
+smart_splits.apply_to_config(config, {
+    direction_keys = { 'h', 'j', 'k', 'l' },
+    modifiers = {
+        move = 'CTRL',
+        resize = 'META',
+    },
+    log_level = 'info'
+})
+
 -- KEYS
 config.keys = {
     activate_key_table('p', 'CTRL', 'pane'),

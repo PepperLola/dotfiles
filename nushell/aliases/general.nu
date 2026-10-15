@@ -61,3 +61,8 @@ export def start_ssh_agent [] {
     | into record
     | load-env
 }
+
+export def --wrapped erl [...rest] {
+    let lib = ("~/Desktop/School/CPSC418/lib" | path expand)
+    ^/opt/homebrew/bin/erl -pa $lib ...$rest
+}

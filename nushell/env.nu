@@ -95,7 +95,14 @@ $env.EDITOR = "nvim"
 use std "path add"
 
 path add "/opt/homebrew/bin"
-brew shellenv csh | lines | parse --regex 'setenv (\w+) "?(.+)"?;' | transpose -r | into record | load-env
+brew shellenv csh
+| lines
+| parse --regex 'setenv (\w+) "?(.+?)"?;'
+| transpose -r
+| into record
+| items { |k, v| if ($k | str starts-with "HOMEBREW_") { {$k: $v} } else { {} } }
+| reduce --fold {} { |it, acc| $acc | merge $it }
+| load-env
 
 source ~/eza/completions/nush/eza.nu
 
@@ -110,6 +117,8 @@ path add ($env.HOME + "/.local/bin")
 path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
 path add "/usr/local/bin"
 path add "~/.deno/bin"
+path add "/usr/local/texlive/2026/bin/universal-darwin"
+path add "/opt/homebrew/opt/binutils/bin"
 # path add "/bin"
 # path add "/usr/bin"
 # path add "/nix/var/nix/profiles/default/bin"
