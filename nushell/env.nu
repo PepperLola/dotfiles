@@ -110,6 +110,9 @@ path add ($env.HOME + "/.local/bin")
 path add "~/.cargo/bin" # TODO: use CARGO_HOME var or something
 path add "/usr/local/bin"
 path add "~/.deno/bin"
+# path add "/bin"
+# path add "/usr/bin"
+# path add "/nix/var/nix/profiles/default/bin"
 # path add "/opt/homebrew/anaconda3/bin"
 
 # bun

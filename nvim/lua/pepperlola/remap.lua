@@ -122,3 +122,6 @@ end)
 -- Hex editing
 vim.api.nvim_set_keymap("n", "<leader>he", ":%!xxd<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>hr", ":%!xxd -r<CR>", {noremap=true})
+
+vim.api.nvim_set_keymap("n", "<leader>/", ":execute 'match Search /\\V' . escape(expand('<cword>'), '\\/') . '/'<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>q/", ":execute 'vimgrep /' . escape(expand('<cword>'), '\\/') . '/j %'<CR>:copen<CR>", {noremap=true})

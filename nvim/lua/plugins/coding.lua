@@ -22,25 +22,12 @@ return {
         },
     },
     {
-        'tpope/vim-commentary',
-        config = function()
-            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-                pattern = { "*.m", "*.mm" },
-                callback = function()
-                    vim.opt_local.commentstring = "// %s"
-                end,
-            })
-        end,
-    },
-    {
         'tpope/vim-sleuth'
     },
     {
-        'norcalli/nvim-colorizer.lua',
+        'catgoose/nvim-colorizer.lua',
         event = { 'BufNewFile', 'BufRead' },
-        config = function()
-            require 'colorizer'.setup()
-        end,
+        opts = {}
     },
     {
         'nvim-neotest/neotest',

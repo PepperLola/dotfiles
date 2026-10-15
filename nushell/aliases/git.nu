@@ -72,7 +72,7 @@ export def gcwt [] {
             print $"(ansi yellow_bold)Found merged worktree:(ansi reset) ($p.stem) at ($full_path)"
             let response = (input "Remove this worktree? [y/N]: ")
 
-            if ($response | str downcase | str trim) == "y" {
+            if ($response | str lowercase | str trim) == "y" {
                 try {
                     print $"Attempting standard removal of ($p.stem)..."
                     git worktree remove $full_path
@@ -81,7 +81,7 @@ export def gcwt [] {
                     print $"(ansi red_bold)Standard removal failed.(ansi reset) Worktree may contain submodules or uncommitted changes."
                     let force_response = (input "Force removal of this worktree with '-f'? [y/N]: ")
 
-                    if ($force_response | str downcase | str trim) == "y" {
+                    if ($force_response | str lowercase | str trim) == "y" {
                         try {
                             git worktree remove -f $full_path
                             print $"(ansi green)Successfully force-removed ($p.stem).(ansi reset)"

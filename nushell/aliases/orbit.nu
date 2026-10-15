@@ -86,7 +86,8 @@ export def flash [
     let build_path = [$fw_path, "build", $p, $target, $flash_slot, "ALEA_OBC.elf"] | path join
     # 0 = "Entire Flash", 1 = "Necessary Sectors Only (for Program Load)"
     let erase_selection = if $erase_all { 0 } else { 1 }
-    dslite --verbose --flash --run --config=$"($config_path)" --setting FlashEraseSelection=($erase_selection) $"($build_path)"
+    # dslite.sh evals its args, re-splitting on spaces; embed quotes so paths survive
+    dslite --verbose --flash --run $"--config=\"($config_path)\"" --setting FlashEraseSelection=($erase_selection) $"\"($build_path)\""
 }
 
 # build slot images (non-standalone, comms over radio) and flash them in one dslite call,
@@ -121,8 +122,9 @@ export def flash_ota_stack [platform?: string, --comms-over-serial (-c)] {
     }
     # default FlashEraseSelection=0 is "Entire Flash", which would wipe previously loaded slots;
     # 1 = "Necessary Sectors Only (for Program Load)". dslite.sh wrapper evals args unquoted,
-    # so must use numeric index, not string value
-    dslite --verbose --flash --run --config=$"($config_path)" --setting FlashEraseSelection=1 ...$elf_paths
+    # so must use numeric index, not string value; embed quotes so paths with spaces survive
+    let quoted_elf_paths = $elf_paths | each {|p| $"\"($p)\"" }
+    dslite --verbose --flash --run $"--config=\"($config_path)\"" --setting FlashEraseSelection=1 ...$quoted_elf_paths
 }
 
 export def build [
