@@ -32,9 +32,6 @@ def fw_docker_build [...args: string] {
     let rel = ($git_root | path relative-to $mount)
     let workdir = if $rel == "" { "/usr/local/src/repo" } else { ["/usr/local/src/repo", $rel] | path join }
 
-    # dual mount: space-free path for the build scripts (unquoted vars), host path so
-    # absolute worktree gitdir links resolve; safe.directory=* since docker_git.sh
-    # only marks /usr/local/src/repo
     (docker run --rm -i --platform linux/amd64
         -e $"HOST_UID=(^id -u)"
         -e $"HOST_GID=(^id -g)"
@@ -90,8 +87,6 @@ export def flash [
     dslite --verbose --flash --run $"--config=\"($config_path)\"" --setting FlashEraseSelection=($erase_selection) $"\"($build_path)\""
 }
 
-# build slot images (non-standalone, comms over radio) and flash them in one dslite call,
-# so board runs full startup->boot->ext chain for OTA update testing
 export def flash_ota_stack [platform?: string, --comms-over-serial (-c)] {
     let git_root = (get_root)
     if not (is_aleasat (get_mount_root)) {
@@ -120,9 +115,7 @@ export def flash_ota_stack [platform?: string, --comms-over-serial (-c)] {
     let elf_paths = $images | each {|image|
         [$fw_path, "build", $p, ($image | first), ($image | last), "ALEA_OBC.elf"] | path join
     }
-    # default FlashEraseSelection=0 is "Entire Flash", which would wipe previously loaded slots;
-    # 1 = "Necessary Sectors Only (for Program Load)". dslite.sh wrapper evals args unquoted,
-    # so must use numeric index, not string value; embed quotes so paths with spaces survive
+
     let quoted_elf_paths = $elf_paths | each {|p| $"\"($p)\"" }
     dslite --verbose --flash --run $"--config=\"($config_path)\"" --setting FlashEraseSelection=1 ...$quoted_elf_paths
 }
