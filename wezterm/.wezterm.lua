@@ -44,26 +44,10 @@ local function activate_key_table(key, mods, name)
     }
 end
 
--- SMART SPLITS
-local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
-
-smart_splits.apply_to_config(config, {
-    direction_keys = { 'h', 'j', 'k', 'l' },
-    modifiers = {
-        move = 'CTRL',
-        resize = 'META',
-    },
-    log_level = 'info'
-})
-
 -- KEYS
 config.keys = {
     activate_key_table('p', 'CTRL', 'pane'),
     activate_key_table('r', 'CTRL', 'resize'),
-    { key = 'h', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Left' },
-    { key = 'j', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Down' },
-    { key = 'k', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Up' },
-    { key = 'l', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Right' },
 }
 
 -- KEY TABLES
@@ -81,5 +65,19 @@ config.key_tables = {
         resize_pane('l', 'Right'),
     }
 }
+
+-- SMART SPLITS
+local smart_splits = wezterm.plugin.require('https://github.com/smart-splits-nvim/backend-wezterm')
+
+smart_splits.apply_to_config(config, {
+    direction_keys = { 'h', 'j', 'k', 'l' },
+    modifiers = {
+        move = 'CTRL',
+        resize = 'META',
+    },
+    at_edge = 'stop',
+    block_nav_on_zoom = false,
+    log_level = 'info'
+})
 
 return config

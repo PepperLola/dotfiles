@@ -4,19 +4,44 @@ return {
         lazy = true
     },
     {
-        'mrjones2014/smart-splits.nvim',
+        'smart-splits-nvim/smart-splits.nvim',
+        version = '^3.0.0',
         lazy = false,
-        config = function()
-            local splits = require('smart-splits')
-            splits.setup({
-                multiplexer_integration = "wezterm"
-            })
-
-            vim.keymap.set("n", "<C-h>", splits.move_cursor_left)
-            vim.keymap.set("n", "<C-j>", splits.move_cursor_down)
-            vim.keymap.set("n", "<C-k>", splits.move_cursor_up)
-            vim.keymap.set("n", "<C-l>", splits.move_cursor_right)
-        end,
+        opts = {
+            mux = {
+                backend = "smart-splits-backend-wezterm",
+            },
+        },
+        dependencies = {
+            {
+                "smart-splits-nvim/backend-wezterm",
+                opts = {
+                    cli_path = 'wezterm',
+                },
+            },
+        },
+        keys = {
+            -- resizing splits, these accept a count, so `10<A-h>` resizes by 10 * config.resize.amount
+            {'<A-h>', function() require('smart-splits').resize_left() end},
+            {'<A-j>', function() require('smart-splits').resize_down() end},
+            {'<A-k>', function() require('smart-splits').resize_up() end},
+            {'<A-l>', function() require('smart-splits').resize_right() end},
+            -- moving between splits
+            {'<C-h>', function() require('smart-splits').move_cursor_left() end},
+            {'<C-j>', function() require('smart-splits').move_cursor_down() end},
+            {'<C-k>', function() require('smart-splits').move_cursor_up() end},
+            {'<C-l>', function() require('smart-splits').move_cursor_right() end},
+            -- swapping buffers between windows
+            {'<leader><leader>h', function() require('smart-splits').swap_buf_left() end},
+            {'<leader><leader>j', function() require('smart-splits').swap_buf_down() end},
+            {'<leader><leader>k', function() require('smart-splits').swap_buf_up() end},
+            {'<leader><leader>l', function() require('smart-splits').swap_buf_right() end},
+            -- Resize windows with C-arrow
+            {"<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" }},
+            {"<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" }},
+            {"<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" }},
+            {"<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" }},
+        }
     },
     {
         "folke/snacks.nvim",
